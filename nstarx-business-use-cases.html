@@ -1028,6 +1028,111 @@
             max-width: 100%;
         }
 
+        /* Diagram Caption Styles */
+        .diagram-caption {
+            margin-top: 1rem;
+            border: 1px solid var(--gray-light);
+            border-radius: 0.75rem;
+            overflow: hidden;
+        }
+
+        .caption-toggle {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--primary);
+            transition: all 0.2s ease;
+        }
+
+        .caption-toggle:hover {
+            background: linear-gradient(135deg, #e0f2fe 0%, #dbeafe 100%);
+        }
+
+        .caption-toggle .expand-icon {
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .caption-toggle.active .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .caption-content {
+            display: none;
+            padding: 1.25rem;
+            background: white;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        .caption-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .caption-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .caption-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .caption-section {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+            border-left: 3px solid var(--primary);
+        }
+
+        .caption-section h6 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .caption-section h6 .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        .caption-section p {
+            margin: 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #475569;
+        }
+
+        .caption-section.actors { border-left-color: #7c3aed; }
+        .caption-section.actors h6 { color: #7c3aed; }
+
+        .caption-section.data { border-left-color: #0891b2; }
+        .caption-section.data h6 { color: #0891b2; }
+
+        .caption-section.model { border-left-color: #059669; }
+        .caption-section.model h6 { color: #059669; }
+
+        .caption-section.description { border-left-color: #ea580c; }
+        .caption-section.description h6 { color: #ea580c; }
+
         .mermaid {
             display: flex;
             justify-content: center;
@@ -1645,6 +1750,33 @@ NStarX Central Server.Privacy Controller -> Hospital C AI Zone.Local Model C: {s
 
 NStarX Central Server.Secure Aggregator -> NStarX Central Server.Monitoring Dashboard
                             </div>
+                            <div class="diagram-caption">
+                                <button class="caption-toggle" onclick="toggleCaption(this)">
+                                    <span class="material-symbols-outlined">info</span>
+                                    Business Context - Understanding the Data Flow
+                                    <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                </button>
+                                <div class="caption-content">
+                                    <div class="caption-grid">
+                                        <div class="caption-section actors">
+                                            <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                            <p><strong>Hospitals A, B, C:</strong> Healthcare providers with sensitive patient data. <strong>NStarX Central Server:</strong> Orchestration hub that coordinates learning without accessing raw data. <strong>Data Scientists:</strong> Monitor model performance via dashboard.</p>
+                                        </div>
+                                        <div class="caption-section data">
+                                            <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                            <p>Patient data stays local at each hospital. Only encrypted model updates (gradients) flow to the central server. The global model improvements flow back to hospitals, creating a continuous learning loop without exposing any patient information.</p>
+                                        </div>
+                                        <div class="caption-section model">
+                                            <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                            <p><strong>Federated Learning</strong> with differential privacy ensures patient data never leaves hospital premises. Local models train on-site, and only mathematical updates are aggregated centrally to improve the global model.</p>
+                                        </div>
+                                        <div class="caption-section description">
+                                            <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                            <p>Each hospital trains AI models locally on their patient data. Instead of sharing raw data, they share only model improvements. The central server combines these improvements to create a better global model, which is then distributed back to all hospitals - enabling collaborative AI without compromising privacy.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="platform-components">
@@ -1870,6 +2002,33 @@ Agentic AI.Citation Agent -> Clinical Interface.Chat Interface: {style.stroke-da
 Agentic AI.Citation Agent -> Clinical Interface.Clinical Dashboard: {style.stroke-dash: 3}
 Agentic AI.Citation Agent -> Clinical Interface.Alert System: {style.stroke-dash: 3}
                         </div>
+                        <div class="diagram-caption">
+                            <button class="caption-toggle" onclick="toggleCaption(this)">
+                                <span class="material-symbols-outlined">info</span>
+                                Business Context - Understanding the Data Flow
+                                <span class="material-symbols-outlined expand-icon">expand_more</span>
+                            </button>
+                            <div class="caption-content">
+                                <div class="caption-grid">
+                                    <div class="caption-section actors">
+                                        <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                        <p><strong>Physicians:</strong> Query the system for clinical guidance. <strong>Clinical Staff:</strong> Receive alerts and recommendations. <strong>Medical Librarians:</strong> Maintain knowledge sources. <strong>IT/Compliance:</strong> Ensure data governance and audit trails.</p>
+                                    </div>
+                                    <div class="caption-section data">
+                                        <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                        <p>Medical literature, guidelines, EHR data, and drug databases are ingested and chunked. Embeddings are stored in vector databases. When a clinician asks a question, relevant context is retrieved and AI agents generate evidence-based recommendations with citations.</p>
+                                    </div>
+                                    <div class="caption-section model">
+                                        <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                        <p><strong>RAG (Retrieval-Augmented Generation)</strong> combines vector search with LLMs. Specialized agents handle diagnosis, treatment planning, drug interactions, and citation verification to ensure accurate, evidence-based responses.</p>
+                                    </div>
+                                    <div class="caption-section description">
+                                        <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                        <p>Clinicians interact through a chat interface, asking questions about patient cases. The system retrieves relevant medical knowledge, processes it through specialized AI agents, and delivers recommendations with source citations. Alerts notify staff of critical findings like drug interactions.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="platform-components">
@@ -1976,6 +2135,33 @@ NStarX.Mapper -> Review.Queue: Low {style.stroke-dash: 3}
 Review.Queue -> Review.Feedback
 Review.Feedback -> NStarX.LLM: {style.stroke-dash: 3}
 Output.Claims -> Output.EDI
+                        </div>
+                        <div class="diagram-caption">
+                            <button class="caption-toggle" onclick="toggleCaption(this)">
+                                <span class="material-symbols-outlined">info</span>
+                                Business Context - Understanding the Data Flow
+                                <span class="material-symbols-outlined expand-icon">expand_more</span>
+                            </button>
+                            <div class="caption-content">
+                                <div class="caption-grid">
+                                    <div class="caption-section actors">
+                                        <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                        <p><strong>Clinical Staff:</strong> Generate medical notes and reports. <strong>Medical Coders:</strong> Review low-confidence cases in the queue. <strong>Billing Department:</strong> Receive coded claims for submission. <strong>Payers:</strong> Receive EDI submissions for reimbursement.</p>
+                                    </div>
+                                    <div class="caption-section data">
+                                        <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                        <p>Clinical documents (notes, reports) enter the pipeline. OCR digitizes paper documents. NER extracts medical entities. LLM interprets context. Code mapper assigns ICD/CPT codes. High-confidence claims go directly to EDI; low-confidence cases route to human review.</p>
+                                    </div>
+                                    <div class="caption-section model">
+                                        <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                        <p><strong>Multi-stage AI Pipeline:</strong> OCR for document digitization, Named Entity Recognition (NER) for medical term extraction, Large Language Model (LLM) for contextual understanding, and a specialized code mapping model trained on historical coding patterns.</p>
+                                    </div>
+                                    <div class="caption-section description">
+                                        <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                        <p>Medical documents flow through an intelligent pipeline that reads, understands, and codes them automatically. The system learns from human feedback on low-confidence cases, continuously improving accuracy. This reduces coding backlogs, minimizes claim denials, and accelerates revenue cycle.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -2133,6 +2319,33 @@ Federated Consortium.Global QSAR Model -> Drug Discovery Apps.Toxicity Predictio
 Federated Consortium.Global QSAR Model -> Drug Discovery Apps.Efficacy Prediction: {style.stroke-dash: 3}
 Federated Consortium.Global QSAR Model -> Drug Discovery Apps.ADME Properties: {style.stroke-dash: 3}
 Federated Consortium.Global QSAR Model -> Drug Discovery Apps.Virtual Screening: {style.stroke-dash: 3}
+                        </div>
+                        <div class="diagram-caption">
+                            <button class="caption-toggle" onclick="toggleCaption(this)">
+                                <span class="material-symbols-outlined">info</span>
+                                Business Context - Understanding the Data Flow
+                                <span class="material-symbols-outlined expand-icon">expand_more</span>
+                            </button>
+                            <div class="caption-content">
+                                <div class="caption-grid">
+                                    <div class="caption-section actors">
+                                        <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                        <p><strong>Pharma Companies A, B, C:</strong> Competitors collaborating without sharing proprietary compound data. <strong>NStarX Orchestrator:</strong> Manages federated training and model aggregation. <strong>Research Scientists:</strong> Use predictions for drug candidate screening.</p>
+                                    </div>
+                                    <div class="caption-section data">
+                                        <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                        <p>Each pharma company's compound libraries remain private. Local models train on proprietary data. Only encrypted model parameters flow to the consortium. The aggregated global model is distributed back, enabling predictions on toxicity, efficacy, and ADME properties.</p>
+                                    </div>
+                                    <div class="caption-section model">
+                                        <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                        <p><strong>Federated QSAR Models</strong> (Quantitative Structure-Activity Relationship) predict molecular properties. Privacy layers ensure no compound structures are exposed. The global model benefits from diverse training data across all participants.</p>
+                                    </div>
+                                    <div class="caption-section description">
+                                        <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                        <p>Competing pharmaceutical companies collaborate on AI model training without revealing proprietary compounds. Each trains locally, shares only model improvements, and receives a superior global model. This accelerates drug discovery while protecting billion-dollar IP investments.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -2304,6 +2517,33 @@ Real-time Detection.Risk Scoring -> Real-time Detection.Alert Engine
 Real-time Detection.Alert Engine -> Real-time Detection.Case Management
 Banking Consortium NStarX.Secure Aggregator -> Banking Consortium NStarX.Consortium Dashboard
                             </div>
+                            <div class="diagram-caption">
+                                <button class="caption-toggle" onclick="toggleCaption(this)">
+                                    <span class="material-symbols-outlined">info</span>
+                                    Business Context - Understanding the Data Flow
+                                    <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                </button>
+                                <div class="caption-content">
+                                    <div class="caption-grid">
+                                        <div class="caption-section actors">
+                                            <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                            <p><strong>Banks A, B, C:</strong> Financial institutions sharing fraud intelligence without exposing customer data. <strong>Fraud Analysts:</strong> Investigate alerts and manage cases. <strong>Compliance Officers:</strong> Ensure regulatory adherence. <strong>Risk Management:</strong> Monitor consortium-wide fraud metrics.</p>
+                                        </div>
+                                        <div class="caption-section data">
+                                            <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                            <p>Transaction data stays within each bank. Local models train on proprietary data and send only encrypted model updates to the consortium. The global model learns cross-bank fraud patterns and distributes improvements back. Real-time inference scores transactions instantly.</p>
+                                        </div>
+                                        <div class="caption-section model">
+                                            <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                            <p><strong>Federated Learning</strong> enables collaborative fraud detection without data sharing. Each bank's model learns from others' patterns through secure aggregation. Real-time inference provides sub-100ms fraud scoring on every transaction.</p>
+                                        </div>
+                                        <div class="caption-section description">
+                                            <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                            <p>Competing banks join forces against fraud without compromising customer privacy. Each bank trains locally, shares model improvements securely, and receives a superior global model that sees patterns no single bank could detect alone. This consortium approach catches sophisticated fraud rings operating across institutions.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="platform-components">
@@ -2463,6 +2703,33 @@ NStarX Platform.Compliance Check -> Advisor Tools.Recommendations: {style.stroke
 NStarX Platform.Compliance Check -> Advisor Tools.Reports: {style.stroke-dash: 3}
 NStarX Platform.Compliance Check -> Advisor Tools.Alerts: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Wealth Advisors:</strong> Use AI-generated insights for client meetings. <strong>High-Net-Worth Clients:</strong> Receive personalized recommendations. <strong>Compliance Team:</strong> Reviews AI outputs before client delivery. <strong>Research Analysts:</strong> Maintain knowledge base content.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>CRM data provides client profiles and preferences. Real-time market feeds inform investment decisions. Research documents are indexed for RAG retrieval. AI agents analyze data and generate recommendations that pass through compliance before reaching advisors.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Multi-Agent System</strong> with RAG orchestrates specialized AI agents. LLM Gateway manages model routing. Built-in compliance checking ensures all recommendations meet regulatory requirements before delivery.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Advisors receive AI-powered insights that combine client data, market intelligence, and research. The system generates personalized recommendations, portfolio reports, and proactive alerts. All outputs are automatically checked for compliance, freeing advisors to focus on client relationships.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2552,6 +2819,33 @@ NStarX AI Workflow.Decision Engine -> Results.Approval: {style.stroke-dash: 3}
 NStarX AI Workflow.Decision Engine -> Results.Review Queue: {style.stroke-dash: 3}
 NStarX AI Workflow.Decision Engine -> Results.Denial with Reason: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Loan Applicants:</strong> Submit applications and supporting documents. <strong>Loan Officers:</strong> Review edge cases in the review queue. <strong>Underwriters:</strong> Handle complex decisions. <strong>Compliance Team:</strong> Ensure fair lending practices.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Applications, income documents (pay stubs, tax returns), and identity documents enter the pipeline. OCR digitizes documents, AI extracts key data points, verification checks against external sources, risk scoring evaluates creditworthiness, and the decision engine routes to approval, review, or denial.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>AI Workflow Pipeline</strong> with fine-tuned LLMs for document extraction. Risk scoring models evaluate credit risk. Decision engine applies business rules while maintaining explainability for regulatory compliance.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Loan applications are processed end-to-end by AI. Documents are automatically read and verified. Risk is scored consistently. Clear approvals and denials are processed instantly, while borderline cases go to human review. The result: faster decisions, lower costs, and happier customers.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2638,6 +2932,33 @@ NStarX Platform.Compliance Agents -> NStarX Platform.Gap Analyzer
 NStarX Platform.Gap Analyzer -> Outputs.Gap Reports: {style.stroke-dash: 3}
 NStarX Platform.Gap Analyzer -> Outputs.Recommendations: {style.stroke-dash: 3}
 NStarX Platform.Gap Analyzer -> Outputs.Risk Alerts: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Compliance Officers:</strong> Monitor regulatory changes and gaps. <strong>Risk Managers:</strong> Act on risk alerts. <strong>Legal Team:</strong> Interpret regulatory requirements. <strong>Business Units:</strong> Implement recommended controls.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Regulatory feeds (SEC, FINRA, CFPB) are continuously ingested. Internal policies and existing controls are indexed. AI agents analyze new requirements against current state. Gap analyzer identifies compliance gaps and generates actionable recommendations.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>RAG-powered Compliance Agents</strong> understand regulatory language and map requirements to internal controls. Gap analysis engine compares requirements against existing policies. Alert system prioritizes risks by impact.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>The system continuously monitors regulatory changes across jurisdictions. When new requirements emerge, AI agents analyze their impact on current operations, identify gaps, and generate specific recommendations. Compliance teams focus on action rather than manual tracking, reducing regulatory risk and fines.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -2747,6 +3068,33 @@ Edge AI Zones.Edge Node 2 -> Network Actions.QoS Adjustment: {style.stroke-dash:
 Edge AI Zones.Edge Node N -> Network Actions.Load Balancing: {style.stroke-dash: 3}
 NStarX Central.Model Aggregator -> NStarX Central.Monitoring
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Network Operations Center:</strong> Monitors global network performance. <strong>Edge Nodes:</strong> Process local traffic patterns. <strong>Field Engineers:</strong> Respond to network issues. <strong>Subscribers:</strong> Experience improved service quality.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Edge nodes collect real-time network metrics locally. Local models analyze traffic patterns and send encrypted updates to central server. Global model improvements flow back to edges, enabling predictive actions like bandwidth allocation and load balancing.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Federated Learning at the Edge</strong> enables real-time network optimization without centralizing sensitive traffic data. Each edge node trains locally and contributes to a global model that improves network-wide performance.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Telecom networks generate massive traffic data. Instead of centralizing this data, AI runs at the edge, making split-second optimization decisions. The federated approach ensures privacy while enabling network-wide learning that predicts congestion and proactively adjusts resources.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2838,6 +3186,33 @@ NStarX Platform.Billing Agent -> Resolution.Auto-Resolve: {style.stroke-dash: 3}
 NStarX Platform.Tech Support Agent -> Resolution.Escalate: {style.stroke-dash: 3}
 NStarX Platform.Sales Agent -> Resolution.Offer
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Customers:</strong> Contact support via voice, chat, or email. <strong>AI Agents:</strong> Billing, Tech Support, and Sales specialists handle inquiries. <strong>Human Agents:</strong> Handle escalated complex cases. <strong>Service Managers:</strong> Monitor resolution metrics.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Customer inquiries from all channels are routed by intent to specialized AI agents. The RAG engine provides each agent with relevant product knowledge and customer history. Agents resolve issues automatically or escalate to humans with full context.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Multi-Agent System</strong> with specialized agents for billing, technical support, and sales. Intent router classifies requests. RAG provides contextual knowledge. LLM Gateway ensures consistent, helpful responses.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Customers reach out through their preferred channel. AI instantly understands their intent and routes to the right specialist agent. Each agent has access to account history and product knowledge, resolving most issues instantly. Complex cases escalate to humans with full context, reducing repeat calls.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -2925,6 +3300,33 @@ NStarX Platform.Risk Scoring -> Retention Actions.Personalized Offer: {style.str
 NStarX Platform.Risk Scoring -> Retention Actions.Proactive Call: {style.stroke-dash: 3}
 NStarX Platform.Risk Scoring -> Retention Actions.Plan Upgrade: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>At-Risk Subscribers:</strong> Identified before they decide to leave. <strong>Retention Team:</strong> Executes targeted campaigns. <strong>Marketing:</strong> Designs personalized offers. <strong>Data Scientists:</strong> Refine churn prediction models.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Usage patterns, billing history, and service call records flow into Spark ETL. Features are engineered and stored. The churn model scores each customer's risk. High-risk customers trigger automated retention actions through personalized offers, proactive calls, or upgrade suggestions.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Predictive Churn Model</strong> trained on historical data identifies at-risk customers 60 days before churn. Feature store enables rapid model iteration. Risk scoring prioritizes retention efforts for maximum impact.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>The system analyzes every subscriber's behavior to detect early churn signals. When risk rises, automated retention campaigns launch with personalized offers tailored to each customer's preferences and history. Proactive outreach happens before customers even think about leaving.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3011,6 +3413,33 @@ NStarX Orchestrator.Demand Predictor -> NStarX Orchestrator.Resource Optimizer
 NStarX Orchestrator.Resource Optimizer -> 5G Infrastructure.RAN Resources: {style.stroke-dash: 3}
 NStarX Orchestrator.Resource Optimizer -> 5G Infrastructure.Core Network: {style.stroke-dash: 3}
 NStarX Orchestrator.Resource Optimizer -> 5G Infrastructure.Edge Compute: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Enterprise Customers:</strong> Require guaranteed SLAs for their network slices. <strong>Network Operations:</strong> Monitor slice performance and resource utilization. <strong>Slice Agents:</strong> Autonomous AI managing each slice. <strong>Infrastructure:</strong> 5G RAN, core, and edge resources.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Network slices (IoT, AR/VR, Enterprise) report status to slice agents. SLA monitor tracks performance against guarantees. Demand predictor forecasts resource needs. Resource optimizer dynamically allocates RAN, core, and edge compute resources across slices.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Autonomous Slice Agents</strong> manage lifecycle of each network slice. Demand prediction models forecast resource needs. SLA compliance algorithms ensure service guarantees. Resource optimization balances efficiency with performance.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>5G network slicing delivers differentiated services for different use cases. AI agents autonomously manage each slice, predicting demand and reallocating resources in real-time. When an AR/VR application needs more bandwidth, resources shift instantly while maintaining SLAs for all other slices.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3115,6 +3544,33 @@ NStarX Edge AI Zone.Classification -> Quality Actions.Pass: {style.stroke-dash: 
 NStarX Edge AI Zone.Classification -> Quality Actions.Reject: {style.stroke-dash: 3}
 NStarX Edge AI Zone.Classification -> Quality Actions.Alert: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Production Line:</strong> High-speed cameras and sensors capture product images. <strong>Quality Engineers:</strong> Review alerts and refine defect criteria. <strong>Line Operators:</strong> Receive real-time pass/reject decisions. <strong>Plant Manager:</strong> Monitors quality metrics.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Cameras capture images at production speed. Edge AI preprocesses and analyzes images locally. Vision models detect defects, classification determines severity. Products are instantly routed to pass, reject, or alert queues for human review.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Computer Vision at the Edge</strong> enables real-time defect detection. Vision models trained on historical defect images identify anomalies. Edge deployment ensures sub-second inference without network latency.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Every product is photographed on the production line. AI running at the edge analyzes each image in milliseconds, detecting even microscopic defects invisible to the human eye. Defective products are automatically rejected or flagged, ensuring only quality products reach customers.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3205,6 +3661,33 @@ NStarX Platform.Failure Prediction Model -> NStarX Platform.Alert Engine
 NStarX Platform.Alert Engine -> Maintenance Actions.Work Orders: {style.stroke-dash: 3}
 NStarX Platform.Alert Engine -> Maintenance Actions.Parts Ordering: {style.stroke-dash: 3}
 NStarX Platform.Alert Engine -> Maintenance Actions.Schedule Maintenance: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Equipment:</strong> Sensors continuously monitor machine health. <strong>Maintenance Teams:</strong> Receive work orders and schedule repairs. <strong>Plant Engineers:</strong> Refine prediction models. <strong>Procurement:</strong> Auto-order parts based on predictions.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Vibration, temperature, and operating data stream from equipment sensors. Spark processes data in real-time. Federated learning models train across facilities without sharing proprietary data. Predictions trigger maintenance actions before failures occur.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Federated Failure Prediction</strong> models learn from equipment across multiple facilities. Real-time streaming enables early warning detection. Alert engine prioritizes and routes maintenance actions automatically.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Equipment tells us when it's about to fail before it actually does. Sensors detect subtle changes in vibration and temperature that precede failures. AI predicts when maintenance is needed, automatically creating work orders and ordering parts. No more surprise breakdowns or unnecessary scheduled maintenance.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3297,6 +3780,33 @@ NStarX Platform.Converge App -> Output Actions.Guided Resolution: {style.stroke-
 NStarX Platform.Converge App -> Output Actions.Work Orders: {style.stroke-dash: 3}
 NStarX Platform.Converge App -> Output Actions.Escalation: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Plant Operators:</strong> Access instant answers through mobile app. <strong>Maintenance Technicians:</strong> Receive guided troubleshooting steps. <strong>Subject Matter Experts:</strong> Contribute tribal knowledge to the system. <strong>Plant Engineers:</strong> Handle escalated complex issues.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Equipment manuals, maintenance history, and tribal knowledge are indexed in the RAG engine. Operators ask questions through the Converge app. The troubleshooting agent retrieves relevant context and generates step-by-step guidance or creates work orders.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>RAG-powered Troubleshooting Agent</strong> combines equipment documentation with LLM reasoning. The system understands context, provides relevant answers, and can generate work orders or escalate to humans when needed.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Operators no longer dig through 500-page manuals. They simply ask questions through a mobile app. AI finds relevant information from documentation and past solutions, provides step-by-step guidance, and can automatically create work orders. Resolution time drops from hours to minutes.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3387,6 +3897,33 @@ NStarX Platform.ML Models -> NStarX Platform.Ensemble Engine
 NStarX Platform.Ensemble Engine -> Planning Output.Demand Forecast
 Planning Output.Demand Forecast -> Planning Output.Inventory Plan: {style.stroke-dash: 3}
 Planning Output.Demand Forecast -> Planning Output.Order Recommendations: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Supply Chain Planners:</strong> Use forecasts to optimize inventory. <strong>Procurement:</strong> Act on order recommendations. <strong>Finance:</strong> Benefit from improved working capital. <strong>Sales:</strong> Reduce stockouts and lost sales.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Historical sales and market signals are processed by Spark. LLM analyzes external data (news, social media) for demand signals. Multiple ML models feed into an ensemble engine that produces accurate forecasts, driving inventory plans and order recommendations.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Ensemble Forecasting</strong> combines traditional ML models with LLM analysis of unstructured data. This hybrid approach captures both historical patterns and emerging signals that traditional models miss.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>The system combines historical data with real-world signals to predict demand more accurately. Traditional ML captures patterns while LLMs analyze news and social media for early warning signs. The result: less excess inventory, fewer stockouts, and millions freed in working capital.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3495,6 +4032,33 @@ NStarX Platform.LLM Gateway -> Commerce Output.Product Recommendations
 Commerce Output.Product Recommendations -> Commerce Output.Cart Updates: {style.stroke-dash: 3}
 Commerce Output.Cart Updates -> Commerce Output.Checkout: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Customers:</strong> Interact with the AI shopping assistant via chat, voice, or app. <strong>E-commerce Team:</strong> Manages product catalog and promotions. <strong>Merchandisers:</strong> Set up product recommendations and cross-sell rules. <strong>Data Scientists:</strong> Fine-tune personalization models.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Customer queries and preferences flow into the platform. The shopping agent uses RAG to search product catalogs with natural language understanding. The personalization engine matches products to customer history, and the LLM gateway generates conversational responses with product recommendations.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>RAG + LLM:</strong> Retrieval-augmented generation finds relevant products from massive catalogs. <strong>Personalization Engine:</strong> Collaborative filtering and deep learning models predict customer preferences based on browsing history, purchases, and similar customers.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>A customer asks "show me winter jackets under $200 that go with my recent boots purchase." The AI assistant understands the context, searches the product catalog, applies personalization based on style preferences, and returns curated recommendations. Customers can add items to cart and checkout directly from the conversation.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3585,6 +4149,33 @@ NStarX Platform.Price Optimizer -> NStarX Platform.Business Rules
 NStarX Platform.Business Rules -> Price Actions.Web Prices: {style.stroke-dash: 3}
 NStarX Platform.Business Rules -> Price Actions.Store Prices: {style.stroke-dash: 3}
 NStarX Platform.Business Rules -> Price Actions.Promotions: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Pricing Analysts:</strong> Define business rules and margin thresholds. <strong>Category Managers:</strong> Set competitive positioning strategies. <strong>Finance Team:</strong> Monitor margin impact and profitability. <strong>E-commerce Operations:</strong> Execute price changes across channels.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Real-time competitor prices, demand signals (sales velocity, cart additions), and inventory levels feed into the ETL pipeline. The pricing model calculates optimal prices considering elasticity, and business rules ensure compliance with margin floors and competitive positioning.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Price Elasticity Model:</strong> Predicts demand response to price changes using historical data. <strong>Competitive Positioning:</strong> ML algorithms determine optimal price points relative to competitors. <strong>Business Rules Engine:</strong> Ensures prices meet margin and compliance requirements.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Every hour, the system scrapes competitor prices and combines them with internal demand signals. The pricing model calculates the optimal price for each SKU that maximizes revenue while maintaining target margins. Approved prices automatically publish to web, in-store systems, and promotional calendars.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3677,6 +4268,33 @@ NStarX Platform.Order Engine -> Inventory Actions.Auto Reorder: {style.stroke-da
 NStarX Platform.Order Engine -> Inventory Actions.Shelf Allocation: {style.stroke-dash: 3}
 NStarX Platform.Order Engine -> Inventory Actions.Markdown Timing: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Store Managers:</strong> Receive automated inventory recommendations and override when needed. <strong>Supply Chain Team:</strong> Manages central distribution and replenishment. <strong>Merchandisers:</strong> Plan seasonal allocations and shelf layouts. <strong>Loss Prevention:</strong> Monitors shrinkage patterns.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Each store location sends sales data, POS transactions, and stock counts to the platform. Federated learning trains local models without sharing raw data. The inventory agent aggregates insights and feeds predictions to the order engine for automated actions.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Federated Learning:</strong> Trains demand prediction models locally at each store while preserving data privacy. <strong>Inventory Agent:</strong> AI agent that orchestrates reorder decisions, shelf allocation, and markdown timing using store-specific patterns.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Each store's POS system generates local demand patterns. Federated learning creates store-specific models without centralizing sensitive data. The AI inventory agent determines when to reorder, how to allocate shelf space, and when to markdown slow-moving items—all tailored to each location's unique customer behavior.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3767,6 +4385,33 @@ NStarX Platform.SEO Optimizer -> NStarX Platform.Quality Validator
 NStarX Platform.Quality Validator -> Content Output.Product Descriptions: {style.stroke-dash: 3}
 NStarX Platform.Quality Validator -> Content Output.Product Titles: {style.stroke-dash: 3}
 NStarX Platform.Quality Validator -> Content Output.Product Attributes: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Content Writers:</strong> Review and approve AI-generated content. <strong>Brand Managers:</strong> Define brand voice guidelines and templates. <strong>SEO Team:</strong> Set optimization rules and monitor rankings. <strong>Product Managers:</strong> Provide technical specifications and accuracy reviews.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Product specifications, images, and category hierarchies are ingested. Brand voice guidelines stored in RAG provide consistent tone. The LLM generates content which flows through SEO optimization and quality validation before publishing to product catalogs.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>LLM Gateway:</strong> Large language model generates product descriptions, titles, and attributes. <strong>Brand Voice RAG:</strong> Retrieval-augmented generation ensures brand consistency. <strong>SEO Optimizer:</strong> ML model optimizes content for search engines while maintaining readability.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>When new products enter the catalog, the system automatically generates SEO-optimized descriptions using brand guidelines. Product specs and images are analyzed to create accurate, compelling content. Quality validators ensure accuracy before publishing. Content writers can review and approve at scale, handling thousands of SKUs efficiently.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -3877,6 +4522,33 @@ NStarX Platform.Control System -> Grid Actions.Demand Response: {style.stroke-da
 NStarX Platform.Control System -> Grid Actions.Storage Dispatch: {style.stroke-dash: 3}
 NStarX Platform.Control System -> Grid Actions.Load Routing: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Grid Operators:</strong> Monitor system performance and respond to emergencies. <strong>Energy Traders:</strong> Optimize power purchasing and selling. <strong>Utility Managers:</strong> Ensure reliability and regulatory compliance. <strong>Renewable Asset Owners:</strong> Feed generation into the grid.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Smart meters provide real-time consumption data. Grid sensors monitor voltage, frequency, and equipment health. Renewable sources report generation levels. Federated learning processes this data locally to predict loads while the optimizer calculates optimal power routing.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Federated Learning:</strong> Trains load prediction models across distributed grid assets without centralizing sensitive consumption data. <strong>Grid Optimizer:</strong> ML model that balances supply and demand in real-time, factoring in cost, reliability, and carbon intensity.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Millions of smart meters and sensors feed data to the platform. Federated learning creates accurate load predictions while preserving customer privacy. The grid optimizer coordinates demand response programs, dispatches battery storage, and routes power to balance the grid in real-time, preventing outages and reducing costs.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -3966,6 +4638,33 @@ NStarX Platform.Grid Optimizer -> Energy Output.Generation Forecast: {style.stro
 NStarX Platform.Grid Optimizer -> Energy Output.Storage Dispatch: {style.stroke-dash: 3}
 NStarX Platform.Grid Optimizer -> Energy Output.Demand Response: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Renewable Operations:</strong> Manage solar and wind farms. <strong>Grid Operators:</strong> Balance supply with demand in real-time. <strong>Energy Traders:</strong> Buy and sell power based on forecasts. <strong>Battery Storage Operators:</strong> Charge and discharge based on predictions.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Weather data (wind speed, solar irradiance, temperature), satellite imagery of cloud cover, and historical generation patterns feed into ML models. Forecast agents combine these signals to predict renewable output 24-72 hours ahead, enabling proactive grid balancing.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Ensemble ML Models:</strong> Combine weather models, satellite analysis, and time-series forecasting for accurate predictions. <strong>Agentic AI:</strong> Autonomous agents coordinate grid responses—dispatching storage, triggering demand response, and adjusting generation schedules.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>The system continuously ingests weather forecasts and satellite data to predict solar and wind generation. AI agents autonomously coordinate responses—charging batteries when surplus is expected, triggering demand response before shortfalls, and optimizing the grid mix. This reduces curtailment and enables higher renewable penetration.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -4054,6 +4753,33 @@ NStarX Platform.LLM Diagnostics -> NStarX Platform.Mobile App
 NStarX Platform.Mobile App -> Field Output.Guided Diagnosis: {style.stroke-dash: 3}
 NStarX Platform.Mobile App -> Field Output.Parts Identification: {style.stroke-dash: 3}
 NStarX Platform.Mobile App -> Field Output.Repair Instructions: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Field Technicians:</strong> Access AI assistant via mobile app during service calls. <strong>Dispatch Center:</strong> Assigns work orders and monitors job completion. <strong>Subject Matter Experts:</strong> Contribute knowledge to the system. <strong>Asset Managers:</strong> Track equipment health and maintenance schedules.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Equipment documentation (manuals, schematics, specs), repair history (past issues and solutions), and expert knowledge (tribal knowledge, best practices) are indexed for RAG retrieval. Technician queries trigger contextual search and AI-guided diagnosis.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>RAG Engine:</strong> Retrieves relevant documentation based on equipment type and symptoms. <strong>LLM Diagnostics:</strong> Analyzes symptoms to suggest probable causes and repair procedures. Conversational interface allows technicians to ask follow-up questions.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>A technician arrives at a site with an equipment fault. They describe the symptoms to the mobile app, which retrieves relevant documentation and past repairs. The AI diagnoses the issue, identifies required parts, and provides step-by-step repair instructions. This improves first-time fix rates and reduces repeat visits.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -4145,6 +4871,33 @@ NStarX Platform.Carbon Agent -> NStarX Platform.Report Generator
 NStarX Platform.Report Generator -> Reporting Output.Emissions Dashboard: {style.stroke-dash: 3}
 NStarX Platform.Report Generator -> Reporting Output.Compliance Reports: {style.stroke-dash: 3}
 NStarX Platform.Carbon Agent -> Reporting Output.Reduction Recommendations: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Sustainability Team:</strong> Tracks emissions and reports to regulators. <strong>Operations Managers:</strong> Implement reduction initiatives. <strong>Finance Team:</strong> Manages carbon credits and offsets. <strong>External Auditors:</strong> Verify emissions reporting for compliance.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Scope 1 data comes from direct operations (fuel, refrigerants). Scope 2 tracks energy purchases. Scope 3 collects supply chain emissions from vendors. All data flows through automated collection to GHG calculators using standardized protocols (GHG Protocol, ISO 14064).</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>GHG Calculator:</strong> Applies emission factors and protocols to calculate carbon footprint. <strong>Carbon Agent:</strong> AI agent that analyzes patterns, identifies reduction opportunities, and recommends decarbonization actions based on cost-effectiveness and impact.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Emissions data is automatically collected from operational systems, utility bills, and supply chain partners. The GHG calculator converts activities into CO2 equivalents. The carbon agent identifies hotspots and recommends reduction strategies. Compliance reports are generated automatically for regulators and sustainability disclosures.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -4252,6 +5005,33 @@ NStarX Platform.Agency Coordinator -> Government Agencies.Agency 1: {style.strok
 NStarX Platform.Agency Coordinator -> Government Agencies.Agency 2: {style.stroke-dash: 3}
 NStarX Platform.Agency Coordinator -> Government Agencies.Agency N: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Citizens:</strong> Submit service requests through digital portal. <strong>Case Workers:</strong> Process applications with AI assistance. <strong>Agency Staff:</strong> Handle specialized services (DMV, Social Services, Permits). <strong>IT Administrators:</strong> Manage platform integration and security.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Citizens submit service requests and supporting documents through a unified portal. The RAG engine understands citizen needs and retrieves relevant services. Forms are pre-filled using existing citizen data. The service agent routes requests to appropriate agencies.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Services RAG:</strong> Natural language understanding to match citizen needs with available services. <strong>Service Agent:</strong> AI agent that navigates complex eligibility rules and routes requests. <strong>Form Pre-fill:</strong> Extracts data from documents to reduce citizen burden.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>A citizen describes their need in plain language ("I need help paying utility bills"). The AI identifies relevant programs, checks eligibility, pre-fills application forms, and coordinates submission to multiple agencies. The citizen gets unified status tracking instead of navigating separate agency websites.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -4342,6 +5122,33 @@ NStarX Platform.Global Model -> NStarX Platform.Fraud Detector
 NStarX Platform.Fraud Detector -> Detection Output.Fraud Alerts: {style.stroke-dash: 3}
 NStarX Platform.Fraud Detector -> Detection Output.Risk Scores: {style.stroke-dash: 3}
 NStarX Platform.Fraud Detector -> Detection Output.Investigation Reports: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Program Integrity Teams:</strong> Investigate suspected fraud cases. <strong>Agency Data Stewards:</strong> Manage data privacy and sharing agreements. <strong>Auditors:</strong> Review fraud detection effectiveness. <strong>Law Enforcement:</strong> Pursue criminal fraud cases with evidence packages.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Each agency (Tax, Benefits, Health) trains local fraud detection models without sharing raw citizen data. Federated learning aggregates model updates while differential privacy protects individual records. The global model detects cross-program fraud patterns.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Federated Learning:</strong> Enables collaborative model training across agencies without data sharing. <strong>Differential Privacy:</strong> Mathematically guarantees individual privacy in aggregated data. <strong>Fraud Detector:</strong> Identifies anomalous patterns indicating fraud schemes.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Separate agencies maintain their data locally while contributing to a shared fraud detection model. When someone claims benefits in one program while hiding income reported to another, the federated model can detect this pattern without any agency seeing another's data. Alerts trigger investigations while protecting citizen privacy.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -4434,6 +5241,33 @@ NStarX Platform.Impact Scorer -> Analysis Output.Impact Assessment: {style.strok
 NStarX Platform.Impact Scorer -> Analysis Output.Stakeholder Effects: {style.stroke-dash: 3}
 NStarX Platform.Impact Scorer -> Analysis Output.Policy Recommendations: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Policy Analysts:</strong> Draft and evaluate proposed legislation. <strong>Legislators:</strong> Make decisions based on impact assessments. <strong>Economists:</strong> Provide economic modeling expertise. <strong>Stakeholder Groups:</strong> Provide input on affected populations.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Policy drafts are analyzed by LLMs for scope and implications. Historical data on similar policies is processed via Spark. Economic models simulate various scenarios. The impact scorer combines these inputs to produce comprehensive assessments.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>LLM Analysis:</strong> Understands policy language and identifies affected areas. <strong>Scenario Simulator:</strong> Models different implementation scenarios and their outcomes. <strong>Impact Scorer:</strong> Quantifies economic, social, and environmental impacts across stakeholder groups.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Legislators submit a policy draft. The AI analyzes the policy language, retrieves outcomes from similar historical policies, and runs economic simulations. The system produces impact reports showing effects on different populations, budget implications, and potential unintended consequences—helping policymakers make informed decisions.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -4524,6 +5358,33 @@ NStarX Platform.Resource Optimizer -> Response Teams.Fire Department: {style.str
 NStarX Platform.Resource Optimizer -> Response Teams.Medical Services: {style.stroke-dash: 3}
 NStarX Platform.Resource Optimizer -> Response Teams.Police: {style.stroke-dash: 3}
 NStarX Platform.Resource Optimizer -> Response Teams.Utilities: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Emergency Dispatchers:</strong> Receive incident reports and coordinate response. <strong>First Responders:</strong> Fire, police, and medical teams receive coordinated instructions. <strong>Emergency Managers:</strong> Oversee multi-agency response. <strong>Utility Crews:</strong> Restore critical infrastructure.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Incident reports and location data trigger the response agent. Protocol RAG retrieves relevant emergency procedures. The agency coordinator determines which teams are needed. Resource optimizer assigns available units based on proximity, capacity, and incident severity.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Response Agent:</strong> AI agent that classifies incident severity and determines required resources. <strong>Protocol RAG:</strong> Retrieves applicable emergency protocols and procedures. <strong>Resource Optimizer:</strong> Optimally allocates resources across multiple concurrent emergencies.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>When a major incident occurs, the AI agent immediately classifies it and retrieves relevant protocols. It coordinates across fire, medical, police, and utilities—assigning the right resources to the right locations. Responders receive unified instructions rather than siloed communications, reducing response times and improving coordination.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -4632,6 +5493,33 @@ NStarX Platform.Fleet Coordinator -> Fleet Output.Optimized Routes: {style.strok
 NStarX Platform.Fleet Coordinator -> Fleet Output.Driver Dispatch: {style.stroke-dash: 3}
 NStarX Platform.Fleet Coordinator -> Fleet Output.Live Tracking: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Fleet Managers:</strong> Oversee vehicle assignments and driver schedules. <strong>Dispatchers:</strong> Assign deliveries and handle exceptions. <strong>Drivers:</strong> Receive optimized routes and turn-by-turn navigation. <strong>Customers:</strong> Track deliveries in real-time and receive ETAs.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Real-time traffic data, weather conditions, and delivery orders feed into the route agent. The optimizer calculates the best routes considering vehicle capacity, time windows, and driver hours. Fleet coordinator assigns drivers and enables live tracking for customers.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Route Agent:</strong> AI agent that processes real-time conditions and adjusts routes dynamically. <strong>Route Optimizer:</strong> Solves vehicle routing problems (VRP) with time windows, capacity, and regulatory constraints. Uses reinforcement learning to improve over time.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>As delivery orders come in, the AI creates optimized routes for the fleet. Routes adapt in real-time to traffic, weather, and new orders. Drivers receive updated navigation, and customers get accurate ETAs. The system continuously learns from delivery performance to improve future routing decisions.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -4722,6 +5610,33 @@ NStarX Platform.Pick Optimizer -> NStarX Platform.Robot Coordinator
 NStarX Platform.Robot Coordinator -> Operations Output.Pick Paths: {style.stroke-dash: 3}
 NStarX Platform.Robot Coordinator -> Operations Output.Resource Allocation: {style.stroke-dash: 3}
 NStarX Platform.Demand Predictor -> Operations Output.Inventory Slotting: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Warehouse Managers:</strong> Oversee operations and approve AI recommendations. <strong>Pickers:</strong> Receive optimized pick paths and productivity targets. <strong>Robot Operators:</strong> Monitor automated systems and handle exceptions. <strong>Inventory Planners:</strong> Manage stock levels and slotting strategies.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Each warehouse contributes operational data to federated learning. Pick patterns, demand history, and layout configurations train local models. The global model optimizes pick paths and predicts demand. Robot coordinators receive instructions for autonomous picking and putaway.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Federated Learning:</strong> Trains across warehouses while keeping operational data local. <strong>Pick Optimizer:</strong> Calculates shortest paths considering warehouse layout and batch sizes. <strong>Demand Predictor:</strong> Forecasts SKU demand for optimal inventory slotting.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>The system learns picking patterns from all warehouses without centralizing sensitive operational data. Each warehouse gets customized pick paths that minimize travel time. Robots are coordinated to work alongside humans efficiently. Demand predictions ensure fast-moving items are slotted in prime locations.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -4814,6 +5729,33 @@ NStarX Platform.Control Tower -> Visibility Output.End-to-End Visibility: {style
 NStarX Platform.Control Tower -> Visibility Output.Disruption Alerts: {style.stroke-dash: 3}
 NStarX Platform.Control Tower -> Visibility Output.Mitigation Plans: {style.stroke-dash: 3}
                                 </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Supply Chain Planners:</strong> Monitor end-to-end flow and manage disruptions. <strong>Procurement Team:</strong> Manages supplier relationships and alternative sourcing. <strong>Logistics Coordinators:</strong> Track shipments and coordinate carriers. <strong>Executives:</strong> Get visibility into supply chain risks and performance.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Supplier data (capacity, lead times), shipping data (tracking, delays), and ERP systems (orders, inventory) feed into the platform. The supply chain agent monitors for anomalies while RAG enables natural language queries. The control tower aggregates everything for unified visibility.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Supply Chain Agent:</strong> AI agent that monitors events and triggers alerts. <strong>Disruption Predictor:</strong> ML model that forecasts disruptions from supplier, geopolitical, and weather signals. <strong>Supply Chain RAG:</strong> Natural language queries across supply chain documents and data.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>The control tower ingests data from hundreds of suppliers and carriers. AI agents monitor for early warning signs—delayed shipments, supplier issues, port congestion. When disruptions are predicted, the system automatically generates mitigation plans like alternative suppliers or expedited shipping, allowing proactive rather than reactive management.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -4904,6 +5846,33 @@ NStarX Platform.Tariff Classifier -> NStarX Platform.Compliance Validator
 NStarX Platform.Compliance Validator -> Customs Output.Customs Declaration: {style.stroke-dash: 3}
 NStarX Platform.Compliance Validator -> Customs Output.Clearance Status: {style.stroke-dash: 3}
 NStarX Platform.Compliance Validator -> Customs Output.Audit Trail: {style.stroke-dash: 3}
+                                </div>
+                                <div class="diagram-caption">
+                                    <button class="caption-toggle" onclick="toggleCaption(this)">
+                                        <span class="material-symbols-outlined">info</span>
+                                        Business Context - Understanding the Data Flow
+                                        <span class="material-symbols-outlined expand-icon">expand_more</span>
+                                    </button>
+                                    <div class="caption-content">
+                                        <div class="caption-grid">
+                                            <div class="caption-section actors">
+                                                <h6><span class="material-symbols-outlined">groups</span> Key Actors</h6>
+                                                <p><strong>Customs Brokers:</strong> Prepare and submit customs declarations. <strong>Trade Compliance Officers:</strong> Ensure regulatory compliance across markets. <strong>Import/Export Managers:</strong> Oversee international shipments. <strong>Government Agencies:</strong> Receive and process customs declarations.</p>
+                                            </div>
+                                            <div class="caption-section data">
+                                                <h6><span class="material-symbols-outlined">database</span> Data Flow</h6>
+                                                <p>Commercial invoices, bills of lading, and certificates of origin are scanned and OCR'd. LLMs extract relevant fields (product codes, quantities, values). The tariff classifier assigns HS codes, and compliance validator checks against import/export regulations and trade agreements.</p>
+                                            </div>
+                                            <div class="caption-section model">
+                                                <h6><span class="material-symbols-outlined">psychology</span> AI/ML Model</h6>
+                                                <p><strong>Document OCR:</strong> Extracts text from scanned trade documents. <strong>LLM Extractor:</strong> Understands document structure and extracts fields with semantic understanding. <strong>Tariff Classifier:</strong> ML model trained on HS code classifications for accurate duty calculation.</p>
+                                            </div>
+                                            <div class="caption-section description">
+                                                <h6><span class="material-symbols-outlined">description</span> How It Works</h6>
+                                                <p>Trade documents are uploaded and automatically processed by AI. The system extracts all required information, classifies products into correct tariff codes, and validates compliance with customs regulations. Declarations are auto-generated with complete audit trails. Shipments that would have waited days now clear in hours.</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -5277,6 +6246,13 @@ NStarX Platform.Compliance Validator -> Customs Output.Audit Trail: {style.strok
                 });
             }, 100);
         }
+    }
+
+    // Toggle diagram caption visibility
+    function toggleCaption(button) {
+        button.classList.toggle('active');
+        const content = button.nextElementSibling;
+        content.classList.toggle('show');
     }
 
     // Open architecture modal popup

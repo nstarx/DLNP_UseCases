@@ -7,8 +7,7 @@
     <!-- Google Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
-    <!-- Mermaid.js for diagrams -->
-    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <!-- D2 diagrams rendered via Kroki.io service -->
     <style>
         :root {
             --primary: #1e40af;
@@ -606,6 +605,296 @@
             color: white;
         }
 
+        /* Solution Architecture Button */
+        .solution-architecture {
+            margin-top: 1.5rem;
+            border-top: 2px dashed var(--gray-light);
+            padding-top: 1.5rem;
+        }
+
+        .architecture-toggle {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .architecture-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+        }
+
+        .architecture-toggle .material-symbols-outlined {
+            font-size: 18px;
+        }
+
+        /* Architecture Modal Popup */
+        .arch-modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .arch-modal-overlay.active {
+            display: flex;
+        }
+
+        .arch-modal {
+            background: white;
+            border-radius: 1rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .arch-modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .arch-modal-header h3 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .arch-modal-close {
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .arch-modal-close:hover {
+            background: rgba(255,255,255,0.3);
+            transform: rotate(90deg);
+        }
+
+        .arch-modal-body {
+            padding: 1.5rem;
+        }
+
+        .arch-modal .inline-components {
+            background: linear-gradient(135deg, #1e3a8a, #4c1d95);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .arch-modal .inline-components h6 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .arch-modal .inline-component-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .arch-modal .inline-component-item {
+            background: rgba(255,255,255,0.1);
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .arch-modal .inline-component-item .material-symbols-outlined {
+            font-size: 20px;
+            color: var(--accent);
+        }
+
+        .arch-modal .inline-diagram {
+            background: #f8fafc;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            border: 1px solid var(--gray-light);
+        }
+
+        .arch-modal .inline-diagram h6 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .arch-modal .mermaid {
+            display: flex;
+            justify-content: center;
+            min-height: 200px;
+            width: 100%;
+        }
+
+        .arch-modal .mermaid svg {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .arch-modal .diagram-legend,
+        .diagram-legend {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            background: #e2e8f0;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+
+        .diagram-legend strong {
+            color: #1e40af;
+        }
+
+        @media (max-width: 768px) {
+            .arch-modal-overlay {
+                padding: 1rem;
+            }
+            .arch-modal .inline-component-list {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .arch-modal .inline-component-list {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Hide inline content - now using modal */
+        .architecture-content {
+            display: none !important;
+            transition: transform 0.3s;
+        }
+
+        .architecture-toggle.active .material-symbols-outlined {
+            transform: rotate(180deg);
+        }
+
+        .architecture-content {
+            display: none;
+            margin-top: 1rem;
+        }
+
+        .architecture-content.show {
+            display: block;
+        }
+
+        .inline-components {
+            background: linear-gradient(135deg, #1e3a8a, #4c1d95);
+            color: white;
+            border-radius: 0.75rem;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .inline-components h6 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .inline-component-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+
+        .inline-component-item {
+            background: rgba(255,255,255,0.1);
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .inline-component-item .material-symbols-outlined {
+            font-size: 16px;
+            color: var(--accent);
+        }
+
+        .inline-diagram {
+            background: white;
+            border-radius: 0.75rem;
+            padding: 1rem;
+            border: 1px solid var(--gray-light);
+        }
+
+        .inline-diagram h6 {
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .inline-diagram .mermaid {
+            font-size: 12px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 2rem; }
@@ -1043,22 +1332,6 @@
             color: var(--success);
         }
 
-        /* Data Flow Section */
-        .data-flow-section {
-            background: #f8fafc;
-            border-radius: 1rem;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
-        }
-
-        .data-flow-section h5 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
         /* Responsive for comparison */
         @media (max-width: 768px) {
             .comparison-container {
@@ -1116,67 +1389,6 @@
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Implementation Timeline */
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-            margin: 1.5rem 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(to bottom, var(--primary), var(--accent));
-            border-radius: 3px;
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 1.5rem;
-            padding-left: 1.5rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 0;
-            width: 16px;
-            height: 16px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 3px solid white;
-            box-shadow: 0 0 0 3px var(--primary-light);
-            transform: translateX(calc(50% - 1.5px));
-        }
-
-        .timeline-item h6 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 0.95rem;
-        }
-
-        .timeline-item p {
-            color: var(--gray);
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .timeline-item .phase-tag {
-            display: inline-block;
-            padding: 0.2rem 0.6rem;
-            background: var(--primary-light);
-            color: white;
-            border-radius: 1rem;
-            font-size: 0.7rem;
-            font-weight: 600;
-            margin-left: 0.5rem;
         }
     </style>
 </head>
@@ -1297,12 +1509,6 @@
                         <button class="detail-tab active" onclick="switchTab(this, 'hc1-architecture')">
                             <span class="material-symbols-outlined">architecture</span> Architecture
                         </button>
-                        <button class="detail-tab" onclick="switchTab(this, 'hc1-flow')">
-                            <span class="material-symbols-outlined">account_tree</span> Data Flow
-                        </button>
-                        <button class="detail-tab" onclick="switchTab(this, 'hc1-implementation')">
-                            <span class="material-symbols-outlined">build</span> Implementation
-                        </button>
                         <button class="detail-tab" onclick="switchTab(this, 'hc1-simulator')">
                             <span class="material-symbols-outlined">calculate</span> ROI Simulator
                         </button>
@@ -1338,57 +1544,57 @@
 
                         <div class="diagram-container">
                             <h5><span class="material-symbols-outlined">schema</span> Federated Learning Architecture</h5>
-                            <div class="mermaid">
-flowchart TB
-    subgraph Central["NStarX Central Server"]
-        AG[Secure Aggregator]
-        GM[Global Model]
-        PC[Privacy Controller]
-        MON[Monitoring Dashboard]
-    end
+                            <div class="d2-diagram">
+direction: down
 
-    subgraph H1["Hospital A - AI Zone"]
-        D1[(Patient Data)]
-        LM1[Local Model]
-        DP1[Differential Privacy]
-    end
+NStarX Central Server: {
+    style.fill: "#dbeafe"
+    Secure Aggregator
+    Global Model
+    Privacy Controller
+    Monitoring Dashboard
+}
 
-    subgraph H2["Hospital B - AI Zone"]
-        D2[(Patient Data)]
-        LM2[Local Model]
-        DP2[Differential Privacy]
-    end
+Hospital A AI Zone: {
+    style.fill: "#d1fae5"
+    Patient Data A.shape: cylinder
+    Local Model A
+    Differential Privacy A
+}
 
-    subgraph H3["Hospital C - AI Zone"]
-        D3[(Patient Data)]
-        LM3[Local Model]
-        DP3[Differential Privacy]
-    end
+Hospital B AI Zone: {
+    style.fill: "#d1fae5"
+    Patient Data B.shape: cylinder
+    Local Model B
+    Differential Privacy B
+}
 
-    D1 --> LM1
-    D2 --> LM2
-    D3 --> LM3
+Hospital C AI Zone: {
+    style.fill: "#d1fae5"
+    Patient Data C.shape: cylinder
+    Local Model C
+    Differential Privacy C
+}
 
-    LM1 --> DP1
-    LM2 --> DP2
-    LM3 --> DP3
+Hospital A AI Zone.Patient Data A -> Hospital A AI Zone.Local Model A
+Hospital B AI Zone.Patient Data B -> Hospital B AI Zone.Local Model B
+Hospital C AI Zone.Patient Data C -> Hospital C AI Zone.Local Model C
 
-    DP1 -->|Encrypted Gradients| AG
-    DP2 -->|Encrypted Gradients| AG
-    DP3 -->|Encrypted Gradients| AG
+Hospital A AI Zone.Local Model A -> Hospital A AI Zone.Differential Privacy A
+Hospital B AI Zone.Local Model B -> Hospital B AI Zone.Differential Privacy B
+Hospital C AI Zone.Local Model C -> Hospital C AI Zone.Differential Privacy C
 
-    AG --> GM
-    GM --> PC
-    PC -->|Updated Model| LM1
-    PC -->|Updated Model| LM2
-    PC -->|Updated Model| LM3
+Hospital A AI Zone.Differential Privacy A -> NStarX Central Server.Secure Aggregator: {style.stroke-dash: 3}
+Hospital B AI Zone.Differential Privacy B -> NStarX Central Server.Secure Aggregator: {style.stroke-dash: 3}
+Hospital C AI Zone.Differential Privacy C -> NStarX Central Server.Secure Aggregator: {style.stroke-dash: 3}
 
-    AG --> MON
+NStarX Central Server.Secure Aggregator -> NStarX Central Server.Global Model
+NStarX Central Server.Global Model -> NStarX Central Server.Privacy Controller
+NStarX Central Server.Privacy Controller -> Hospital A AI Zone.Local Model A: {style.stroke-dash: 3}
+NStarX Central Server.Privacy Controller -> Hospital B AI Zone.Local Model B: {style.stroke-dash: 3}
+NStarX Central Server.Privacy Controller -> Hospital C AI Zone.Local Model C: {style.stroke-dash: 3}
 
-    style Central fill:#1e40af,color:#fff
-    style H1 fill:#059669,color:#fff
-    style H2 fill:#059669,color:#fff
-    style H3 fill:#059669,color:#fff
+NStarX Central Server.Secure Aggregator -> NStarX Central Server.Monitoring Dashboard
                             </div>
                         </div>
 
@@ -1419,132 +1625,6 @@ flowchart TB
                                     <h6><span class="material-symbols-outlined">assignment</span> Compliance Auditor</h6>
                                     <p>Automated audit logs and compliance reports for HIPAA, GDPR, and institutional policies</p>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Data Flow Tab -->
-                    <div class="tab-content" id="hc1-flow">
-                        <div class="diagram-container">
-                            <h5><span class="material-symbols-outlined">conversion_path</span> End-to-End Data Flow</h5>
-                            <div class="mermaid">
-sequenceDiagram
-    participant H as Hospital EHR
-    participant AZ as AI Zone (Local)
-    participant DP as Privacy Layer
-    participant CS as Central Server
-    participant GM as Global Model
-
-    Note over H,GM: Training Round Initialization
-    CS->>AZ: Distribute current global model
-
-    Note over H,GM: Local Training Phase
-    H->>AZ: Stream patient records (encrypted)
-    AZ->>AZ: Preprocess & validate data
-    AZ->>AZ: Train local model (5 epochs)
-    AZ->>DP: Submit local gradients
-
-    Note over H,GM: Privacy Protection
-    DP->>DP: Apply differential privacy (ε=1.0)
-    DP->>DP: Clip gradient norms
-    DP->>CS: Send encrypted gradients
-
-    Note over H,GM: Secure Aggregation
-    CS->>CS: Wait for all hospitals
-    CS->>CS: Aggregate (FedAvg)
-    CS->>GM: Update global model
-
-    Note over H,GM: Model Distribution
-    GM->>AZ: Push updated model
-    AZ->>AZ: Evaluate on local test set
-    AZ->>CS: Report metrics (non-sensitive)
-                            </div>
-                        </div>
-
-                        <div class="transformation-section">
-                            <h5><span class="material-symbols-outlined">timeline</span> Processing Pipeline Stages</h5>
-                            <div class="transformation-steps">
-                                <div class="transform-step">
-                                    <div class="step-number">1</div>
-                                    <h6>Data Ingestion</h6>
-                                    <p>EHR data streamed via FHIR APIs to local AI Zone. Patient identifiers removed at source.</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number">2</div>
-                                    <h6>Feature Engineering</h6>
-                                    <p>Standardized clinical features extracted (vitals, labs, diagnoses, medications) using ML pipelines.</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number">3</div>
-                                    <h6>Local Training</h6>
-                                    <p>Deep learning model trained on local data. Weights stored in encrypted format.</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number">4</div>
-                                    <h6>Privacy Application</h6>
-                                    <p>Differential privacy noise added. Gradient clipping ensures bounded sensitivity.</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number">5</div>
-                                    <h6>Secure Transmission</h6>
-                                    <p>Encrypted gradients sent to central server via mTLS. Zero knowledge of individual contributions.</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number">6</div>
-                                    <h6>Global Aggregation</h6>
-                                    <p>FedAvg algorithm combines updates. New global model tested and distributed.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Implementation Tab -->
-                    <div class="tab-content" id="hc1-implementation">
-                        <div class="diagram-container">
-                            <h5><span class="material-symbols-outlined">rocket_launch</span> Implementation Roadmap</h5>
-                            <div class="mermaid">
-gantt
-    title Multi-Hospital Federated Learning Implementation
-    dateFormat  YYYY-MM-DD
-    section Discovery
-    Requirements & Compliance Review    :a1, 2024-01-01, 14d
-    Data Assessment & Schema Mapping    :a2, after a1, 14d
-    section Infrastructure
-    AI Zone Setup (Per Hospital)        :b1, after a2, 21d
-    Network & Security Configuration    :b2, after a2, 14d
-    section Development
-    FL Pipeline Development             :c1, after b1, 28d
-    Privacy Controls Implementation     :c2, after b1, 21d
-    Monitoring Dashboard Setup          :c3, after c1, 14d
-    section Testing
-    Integration Testing                 :d1, after c3, 14d
-    Privacy Audit & Certification       :d2, after d1, 14d
-    section Deployment
-    Pilot with 3 Hospitals              :e1, after d2, 30d
-    Full Rollout                        :e2, after e1, 30d
-                            </div>
-                        </div>
-
-                        <div class="timeline">
-                            <div class="timeline-item">
-                                <h6>Phase 1: Foundation <span class="phase-tag">Weeks 1-4</span></h6>
-                                <p>Deploy NStarX AI Zones at each participating hospital. Configure network policies, establish secure communication channels, and implement RBAC for healthcare staff roles.</p>
-                            </div>
-                            <div class="timeline-item">
-                                <h6>Phase 2: Data Pipeline <span class="phase-tag">Weeks 5-8</span></h6>
-                                <p>Build FHIR-compliant data connectors. Implement feature extraction pipelines using Spark Jobs. Configure data validation and quality checks.</p>
-                            </div>
-                            <div class="timeline-item">
-                                <h6>Phase 3: FL Setup <span class="phase-tag">Weeks 9-12</span></h6>
-                                <p>Deploy Federated Learning framework. Configure privacy parameters (ε, δ). Set up secure aggregation protocols and model versioning.</p>
-                            </div>
-                            <div class="timeline-item">
-                                <h6>Phase 4: Training & Validation <span class="phase-tag">Weeks 13-16</span></h6>
-                                <p>Execute training rounds with pilot hospitals. Validate model performance. Fine-tune hyperparameters and privacy budgets.</p>
-                            </div>
-                            <div class="timeline-item">
-                                <h6>Phase 5: Production <span class="phase-tag">Weeks 17-20</span></h6>
-                                <p>Roll out to all hospitals. Implement continuous learning. Set up alerting and performance monitoring dashboards.</p>
                             </div>
                         </div>
                     </div>
@@ -1663,71 +1743,77 @@ gantt
                 <div class="use-case-detail" id="healthcare-detail-2" style="grid-column: 1 / -1;">
                     <div class="diagram-container">
                         <h5><span class="material-symbols-outlined">schema</span> RAG-Powered Clinical Decision Support Architecture</h5>
-                        <div class="mermaid">
-flowchart LR
-    subgraph Sources["Knowledge Sources"]
-        PUB[(PubMed)]
-        CG[(Clinical Guidelines)]
-        EHR[(Patient EHR)]
-        DRUG[(Drug Database)]
-    end
+                        <div class="d2-diagram">
+direction: right
 
-    subgraph Ingestion["Data Pipeline"]
-        ING[Document Ingestion]
-        CHUNK[Chunking & Parsing]
-        EMB[Embedding Generation]
-    end
+Knowledge Sources: {
+    style.fill: "#d1fae5"
+    PubMed.shape: cylinder
+    Clinical Guidelines.shape: cylinder
+    Patient EHR.shape: cylinder
+    Drug Database.shape: cylinder
+}
 
-    subgraph Storage["Vector Store"]
-        VS[(Vector Database)]
-        META[(Metadata Index)]
-    end
+Data Pipeline: {
+    style.fill: "#f1f5f9"
+    Document Ingestion
+    Chunking and Parsing
+    Embedding Generation
+}
 
-    subgraph RAG["RAG Engine"]
-        RET[Hybrid Retriever]
-        RANK[Re-ranker]
-        CTX[Context Builder]
-    end
+Vector Store: {
+    style.fill: "#dbeafe"
+    Vector Database.shape: cylinder
+    Metadata Index.shape: cylinder
+}
 
-    subgraph Agents["Agentic AI"]
-        DIAG[Diagnosis Agent]
-        TREAT[Treatment Agent]
-        DRUG_A[Drug Interaction Agent]
-        CITE[Citation Agent]
-    end
+RAG Engine: {
+    style.fill: "#f1f5f9"
+    Hybrid Retriever
+    Re-ranker
+    Context Builder
+}
 
-    subgraph Interface["Clinical Interface"]
-        CHAT[Chat Interface]
-        DASH[Clinical Dashboard]
-        ALERT[Alert System]
-    end
+Agentic AI: {
+    style.fill: "#ede9fe"
+    Diagnosis Agent
+    Treatment Agent
+    Drug Interaction Agent
+    Citation Agent
+}
 
-    PUB --> ING
-    CG --> ING
-    EHR --> ING
-    DRUG --> ING
+Clinical Interface: {
+    style.fill: "#dcfce7"
+    Chat Interface
+    Clinical Dashboard
+    Alert System
+}
 
-    ING --> CHUNK --> EMB --> VS
-    EMB --> META
+Knowledge Sources.PubMed -> Data Pipeline.Document Ingestion: {style.animated: true}
+Knowledge Sources.Clinical Guidelines -> Data Pipeline.Document Ingestion: {style.animated: true}
+Knowledge Sources.Patient EHR -> Data Pipeline.Document Ingestion: {style.animated: true}
+Knowledge Sources.Drug Database -> Data Pipeline.Document Ingestion: {style.animated: true}
 
-    VS --> RET
-    META --> RET
-    RET --> RANK --> CTX
+Data Pipeline.Document Ingestion -> Data Pipeline.Chunking and Parsing
+Data Pipeline.Chunking and Parsing -> Data Pipeline.Embedding Generation
+Data Pipeline.Embedding Generation -> Vector Store.Vector Database: {style.animated: true}
+Data Pipeline.Embedding Generation -> Vector Store.Metadata Index: {style.animated: true}
 
-    CTX --> DIAG
-    CTX --> TREAT
-    CTX --> DRUG_A
-    DIAG --> CITE
-    TREAT --> CITE
-    DRUG_A --> CITE
+Vector Store.Vector Database -> RAG Engine.Hybrid Retriever
+Vector Store.Metadata Index -> RAG Engine.Hybrid Retriever
+RAG Engine.Hybrid Retriever -> RAG Engine.Re-ranker
+RAG Engine.Re-ranker -> RAG Engine.Context Builder
 
-    CITE --> CHAT
-    CITE --> DASH
-    CITE --> ALERT
+RAG Engine.Context Builder -> Agentic AI.Diagnosis Agent
+RAG Engine.Context Builder -> Agentic AI.Treatment Agent
+RAG Engine.Context Builder -> Agentic AI.Drug Interaction Agent
+Agentic AI.Diagnosis Agent -> Agentic AI.Citation Agent
+Agentic AI.Treatment Agent -> Agentic AI.Citation Agent
+Agentic AI.Drug Interaction Agent -> Agentic AI.Citation Agent
 
-    style Sources fill:#059669,color:#fff
-    style Storage fill:#1e40af,color:#fff
-    style Agents fill:#7c3aed,color:#fff
+Agentic AI.Citation Agent -> Clinical Interface.Chat Interface: {style.stroke-dash: 3}
+Agentic AI.Citation Agent -> Clinical Interface.Clinical Dashboard: {style.stroke-dash: 3}
+Agentic AI.Citation Agent -> Clinical Interface.Alert System: {style.stroke-dash: 3}
                         </div>
                     </div>
 
@@ -1792,65 +1878,45 @@ flowchart LR
                 <div class="use-case-detail" id="healthcare-detail-3" style="grid-column: 1 / -1;">
                     <div class="diagram-container">
                         <h5><span class="material-symbols-outlined">schema</span> Automated Medical Coding Pipeline</h5>
-                        <div class="mermaid">
-flowchart TB
-    subgraph Input["Document Input"]
-        DOC[Physician Notes]
-        OP[Operative Reports]
-        DISC[Discharge Summaries]
-    end
+                        <div class="d2-diagram">
+direction: right
 
-    subgraph Processing["AI Workflow Engine"]
-        OCR[Document OCR]
-        NER[Medical NER]
-        REL[Relation Extraction]
-        LLM[Fine-tuned LLM]
-    end
+Documents: {
+    style.fill: "#f1f5f9"
+    Notes.shape: page
+    Reports.shape: page
+}
 
-    subgraph Coding["Code Assignment"]
-        ICD[ICD-10 Mapper]
-        CPT[CPT Mapper]
-        VAL[Validation Rules]
-        CONF[Confidence Scorer]
-    end
+NStarX: {
+    style.fill: "#dbeafe"
+    OCR
+    NER
+    LLM
+    Mapper
+}
 
-    subgraph Review["Human-in-Loop"]
-        QUEUE[Review Queue]
-        AUDIT[Audit Dashboard]
-        FEED[Feedback Loop]
-    end
+Review: {
+    style.fill: "#fef3c7"
+    Queue
+    Feedback
+}
 
-    subgraph Output["Billing Output"]
-        CLAIM[Claim Generation]
-        EDI[EDI 837 Export]
-        REPORT[Analytics Reports]
-    end
+Output: {
+    style.fill: "#dcfce7"
+    Claims
+    EDI
+}
 
-    DOC --> OCR
-    OP --> OCR
-    DISC --> OCR
-
-    OCR --> NER --> REL --> LLM
-
-    LLM --> ICD
-    LLM --> CPT
-    ICD --> VAL
-    CPT --> VAL
-    VAL --> CONF
-
-    CONF -->|High Confidence| CLAIM
-    CONF -->|Low Confidence| QUEUE
-
-    QUEUE --> AUDIT
-    AUDIT --> FEED
-    FEED --> LLM
-
-    CLAIM --> EDI
-    CLAIM --> REPORT
-
-    style Processing fill:#1e40af,color:#fff
-    style Coding fill:#059669,color:#fff
-    style Review fill:#f59e0b,color:#000
+Documents.Notes -> NStarX.OCR: {style.animated: true}
+Documents.Reports -> NStarX.OCR: {style.animated: true}
+NStarX.OCR -> NStarX.NER
+NStarX.NER -> NStarX.LLM
+NStarX.LLM -> NStarX.Mapper
+NStarX.Mapper -> Output.Claims: High
+NStarX.Mapper -> Review.Queue: Low {style.stroke-dash: 3}
+Review.Queue -> Review.Feedback
+Review.Feedback -> NStarX.LLM: {style.stroke-dash: 3}
+Output.Claims -> Output.EDI
                         </div>
                     </div>
 
@@ -1941,61 +2007,68 @@ flowchart TB
                 <div class="use-case-detail" id="healthcare-detail-4" style="grid-column: 1 / -1;">
                     <div class="diagram-container">
                         <h5><span class="material-symbols-outlined">schema</span> Cross-Pharma Federated Drug Discovery</h5>
-                        <div class="mermaid">
-flowchart TB
-    subgraph Consortium["Federated Consortium"]
-        direction TB
-        ORCH[NStarX Orchestrator]
-        AGG[Secure Aggregator]
-        MODEL[Global QSAR Model]
-    end
+                        <div class="d2-diagram">
+direction: down
 
-    subgraph P1["Pharma Company A"]
-        D1[(Compound Library)]
-        M1[Local Model]
-        P1_DP[Privacy Layer]
-    end
+Federated Consortium: {
+    style.fill: "#dbeafe"
+    NStarX Orchestrator
+    Secure Aggregator
+    Global QSAR Model
+}
 
-    subgraph P2["Pharma Company B"]
-        D2[(Compound Library)]
-        M2[Local Model]
-        P2_DP[Privacy Layer]
-    end
+Pharma Company A: {
+    style.fill: "#ede9fe"
+    Compound Library A.shape: cylinder
+    Local Model A
+    Privacy Layer A
+}
 
-    subgraph P3["Pharma Company C"]
-        D3[(Compound Library)]
-        M3[Local Model]
-        P3_DP[Privacy Layer]
-    end
+Pharma Company B: {
+    style.fill: "#ede9fe"
+    Compound Library B.shape: cylinder
+    Local Model B
+    Privacy Layer B
+}
 
-    subgraph Apps["Applications"]
-        TOX[Toxicity Prediction]
-        EFF[Efficacy Prediction]
-        ADME[ADME Properties]
-        DOCK[Virtual Screening]
-    end
+Pharma Company C: {
+    style.fill: "#ede9fe"
+    Compound Library C.shape: cylinder
+    Local Model C
+    Privacy Layer C
+}
 
-    D1 --> M1 --> P1_DP -->|Gradients| AGG
-    D2 --> M2 --> P2_DP -->|Gradients| AGG
-    D3 --> M3 --> P3_DP -->|Gradients| AGG
+Drug Discovery Apps: {
+    style.fill: "#d1fae5"
+    Toxicity Prediction
+    Efficacy Prediction
+    ADME Properties
+    Virtual Screening
+}
 
-    ORCH --> AGG
-    AGG --> MODEL
+Pharma Company A.Compound Library A -> Pharma Company A.Local Model A: {style.animated: true}
+Pharma Company A.Local Model A -> Pharma Company A.Privacy Layer A
+Pharma Company A.Privacy Layer A -> Federated Consortium.Secure Aggregator: {style.animated: true}
 
-    MODEL -->|Updated| M1
-    MODEL -->|Updated| M2
-    MODEL -->|Updated| M3
+Pharma Company B.Compound Library B -> Pharma Company B.Local Model B: {style.animated: true}
+Pharma Company B.Local Model B -> Pharma Company B.Privacy Layer B
+Pharma Company B.Privacy Layer B -> Federated Consortium.Secure Aggregator: {style.animated: true}
 
-    MODEL --> TOX
-    MODEL --> EFF
-    MODEL --> ADME
-    MODEL --> DOCK
+Pharma Company C.Compound Library C -> Pharma Company C.Local Model C: {style.animated: true}
+Pharma Company C.Local Model C -> Pharma Company C.Privacy Layer C
+Pharma Company C.Privacy Layer C -> Federated Consortium.Secure Aggregator: {style.animated: true}
 
-    style Consortium fill:#1e40af,color:#fff
-    style P1 fill:#7c3aed,color:#fff
-    style P2 fill:#7c3aed,color:#fff
-    style P3 fill:#7c3aed,color:#fff
-    style Apps fill:#059669,color:#fff
+Federated Consortium.NStarX Orchestrator -> Federated Consortium.Secure Aggregator
+Federated Consortium.Secure Aggregator -> Federated Consortium.Global QSAR Model
+
+Federated Consortium.Global QSAR Model -> Pharma Company A.Local Model A: {style.stroke-dash: 3}
+Federated Consortium.Global QSAR Model -> Pharma Company B.Local Model B: {style.stroke-dash: 3}
+Federated Consortium.Global QSAR Model -> Pharma Company C.Local Model C: {style.stroke-dash: 3}
+
+Federated Consortium.Global QSAR Model -> Drug Discovery Apps.Toxicity Prediction: {style.stroke-dash: 3}
+Federated Consortium.Global QSAR Model -> Drug Discovery Apps.Efficacy Prediction: {style.stroke-dash: 3}
+Federated Consortium.Global QSAR Model -> Drug Discovery Apps.ADME Properties: {style.stroke-dash: 3}
+Federated Consortium.Global QSAR Model -> Drug Discovery Apps.Virtual Screening: {style.stroke-dash: 3}
                         </div>
                     </div>
 
@@ -2082,9 +2155,6 @@ flowchart TB
                         <button class="detail-tab active" onclick="switchTab(this, 'fin1-architecture')">
                             <span class="material-symbols-outlined">architecture</span> Architecture
                         </button>
-                        <button class="detail-tab" onclick="switchTab(this, 'fin1-flow')">
-                            <span class="material-symbols-outlined">account_tree</span> Real-time Flow
-                        </button>
                         <button class="detail-tab" onclick="switchTab(this, 'fin1-simulator')">
                             <span class="material-symbols-outlined">calculate</span> Fraud Simulator
                         </button>
@@ -2094,71 +2164,77 @@ flowchart TB
                     <div class="tab-content active" id="fin1-architecture">
                         <div class="diagram-container">
                             <h5><span class="material-symbols-outlined">schema</span> Cross-Bank Federated Fraud Detection</h5>
-                            <div class="mermaid">
-flowchart TB
-    subgraph Consortium["Banking Consortium - NStarX"]
-        ORCH[FL Orchestrator]
-        AGG[Secure Aggregator]
-        MODEL[Global Fraud Model]
-        MON[Consortium Dashboard]
-    end
+                            <div class="d2-diagram">
+direction: down
 
-    subgraph B1["Bank A - AI Zone"]
-        TXN1[(Transaction Data)]
-        FM1[Local Fraud Model]
-        INF1[Real-time Inference]
-        DP1[Privacy Layer]
-    end
+Banking Consortium NStarX: {
+    style.fill: "#dbeafe"
+    FL Orchestrator
+    Secure Aggregator
+    Global Fraud Model
+    Consortium Dashboard
+}
 
-    subgraph B2["Bank B - AI Zone"]
-        TXN2[(Transaction Data)]
-        FM2[Local Fraud Model]
-        INF2[Real-time Inference]
-        DP2[Privacy Layer]
-    end
+Bank A AI Zone: {
+    style.fill: "#d1fae5"
+    Transaction Data A.shape: cylinder
+    Local Fraud Model A
+    Real-time Inference A
+    Privacy Layer A
+}
 
-    subgraph B3["Bank C - AI Zone"]
-        TXN3[(Transaction Data)]
-        FM3[Local Fraud Model]
-        INF3[Real-time Inference]
-        DP3[Privacy Layer]
-    end
+Bank B AI Zone: {
+    style.fill: "#d1fae5"
+    Transaction Data B.shape: cylinder
+    Local Fraud Model B
+    Real-time Inference B
+    Privacy Layer B
+}
 
-    subgraph Detection["Real-time Detection"]
-        SCORE[Risk Scoring]
-        ALERT[Alert Engine]
-        CASE[Case Management]
-    end
+Bank C AI Zone: {
+    style.fill: "#d1fae5"
+    Transaction Data C.shape: cylinder
+    Local Fraud Model C
+    Real-time Inference C
+    Privacy Layer C
+}
 
-    TXN1 --> FM1
-    TXN2 --> FM2
-    TXN3 --> FM3
+Real-time Detection: {
+    style.fill: "#dc2626"
+    Risk Scoring
+    Alert Engine
+    Case Management
+}
 
-    FM1 --> DP1 -->|Encrypted Updates| AGG
-    FM2 --> DP2 -->|Encrypted Updates| AGG
-    FM3 --> DP3 -->|Encrypted Updates| AGG
+Bank A AI Zone.Transaction Data A -> Bank A AI Zone.Local Fraud Model A: {style.animated: true}
+Bank B AI Zone.Transaction Data B -> Bank B AI Zone.Local Fraud Model B: {style.animated: true}
+Bank C AI Zone.Transaction Data C -> Bank C AI Zone.Local Fraud Model C: {style.animated: true}
 
-    AGG --> MODEL
-    MODEL -->|Global Weights| FM1
-    MODEL -->|Global Weights| FM2
-    MODEL -->|Global Weights| FM3
+Bank A AI Zone.Local Fraud Model A -> Bank A AI Zone.Privacy Layer A
+Bank A AI Zone.Privacy Layer A -> Banking Consortium NStarX.Secure Aggregator: {style.animated: true}
 
-    FM1 --> INF1
-    FM2 --> INF2
-    FM3 --> INF3
+Bank B AI Zone.Local Fraud Model B -> Bank B AI Zone.Privacy Layer B
+Bank B AI Zone.Privacy Layer B -> Banking Consortium NStarX.Secure Aggregator: {style.animated: true}
 
-    INF1 --> SCORE
-    INF2 --> SCORE
-    INF3 --> SCORE
+Bank C AI Zone.Local Fraud Model C -> Bank C AI Zone.Privacy Layer C
+Bank C AI Zone.Privacy Layer C -> Banking Consortium NStarX.Secure Aggregator: {style.animated: true}
 
-    SCORE --> ALERT --> CASE
-    AGG --> MON
+Banking Consortium NStarX.Secure Aggregator -> Banking Consortium NStarX.Global Fraud Model
+Banking Consortium NStarX.Global Fraud Model -> Bank A AI Zone.Local Fraud Model A: {style.stroke-dash: 3}
+Banking Consortium NStarX.Global Fraud Model -> Bank B AI Zone.Local Fraud Model B: {style.stroke-dash: 3}
+Banking Consortium NStarX.Global Fraud Model -> Bank C AI Zone.Local Fraud Model C: {style.stroke-dash: 3}
 
-    style Consortium fill:#1e40af,color:#fff
-    style B1 fill:#059669,color:#fff
-    style B2 fill:#059669,color:#fff
-    style B3 fill:#059669,color:#fff
-    style Detection fill:#dc2626,color:#fff
+Bank A AI Zone.Local Fraud Model A -> Bank A AI Zone.Real-time Inference A
+Bank B AI Zone.Local Fraud Model B -> Bank B AI Zone.Real-time Inference B
+Bank C AI Zone.Local Fraud Model C -> Bank C AI Zone.Real-time Inference C
+
+Bank A AI Zone.Real-time Inference A -> Real-time Detection.Risk Scoring: {style.animated: true}
+Bank B AI Zone.Real-time Inference B -> Real-time Detection.Risk Scoring: {style.animated: true}
+Bank C AI Zone.Real-time Inference C -> Real-time Detection.Risk Scoring: {style.animated: true}
+
+Real-time Detection.Risk Scoring -> Real-time Detection.Alert Engine
+Real-time Detection.Alert Engine -> Real-time Detection.Case Management
+Banking Consortium NStarX.Secure Aggregator -> Banking Consortium NStarX.Consortium Dashboard
                             </div>
                         </div>
 
@@ -2180,75 +2256,6 @@ flowchart TB
                                 <div class="component-item">
                                     <h6><span class="material-symbols-outlined">account_tree</span> AI Workflows</h6>
                                     <p>Automated retraining pipelines and feature engineering</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Real-time Flow Tab -->
-                    <div class="tab-content" id="fin1-flow">
-                        <div class="diagram-container">
-                            <h5><span class="material-symbols-outlined">bolt</span> Real-time Transaction Scoring</h5>
-                            <div class="mermaid">
-sequenceDiagram
-    participant C as Customer
-    participant POS as Point of Sale
-    participant GW as Payment Gateway
-    participant INF as NStarX Inference
-    participant FM as Fraud Model
-    participant ALT as Alert System
-    participant ANA as Analyst
-
-    C->>POS: Swipe Card
-    POS->>GW: Authorization Request
-
-    rect rgb(30, 64, 175)
-    Note over GW,FM: Real-time Scoring (<100ms)
-    GW->>INF: Transaction Features
-    INF->>FM: Score Request
-    FM->>FM: Feature Engineering
-    FM->>FM: Model Inference
-    FM->>INF: Risk Score (0.87)
-    INF->>GW: Decision + Score
-    end
-
-    alt High Risk (>0.8)
-        GW->>ALT: Trigger Alert
-        ALT->>ANA: Create Case
-        GW->>POS: Decline + Challenge
-        POS->>C: Additional Verification
-    else Low Risk (<0.3)
-        GW->>POS: Approve
-        POS->>C: Transaction Complete
-    else Medium Risk
-        GW->>POS: Approve with Monitoring
-        GW->>ALT: Flag for Review
-    end
-                            </div>
-                        </div>
-
-                        <div class="transformation-section">
-                            <h5><span class="material-symbols-outlined">speed</span> Performance Metrics</h5>
-                            <div class="transformation-steps">
-                                <div class="transform-step">
-                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">timer</span></div>
-                                    <h6>Latency</h6>
-                                    <p><strong>&lt;50ms</strong> P99 inference time ensures no customer friction at checkout</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">speed</span></div>
-                                    <h6>Throughput</h6>
-                                    <p><strong>100K+ TPS</strong> per bank with horizontal auto-scaling</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">check_circle</span></div>
-                                    <h6>Accuracy</h6>
-                                    <p><strong>99.7%</strong> AUC-ROC with federated model vs 94% with local only</p>
-                                </div>
-                                <div class="transform-step">
-                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">block</span></div>
-                                    <h6>False Positive</h6>
-                                    <p><strong>0.1%</strong> rate protects customer experience</p>
                                 </div>
                             </div>
                         </div>
@@ -2334,6 +2341,62 @@ sequenceDiagram
                             <li>95% compliance accuracy</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-fin2', 'Intelligent Wealth Advisory')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-fin2">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Multi-Agent Orchestrator</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> RAG Knowledge Base</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Gateway</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> CRM Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">verified_user</span> Compliance Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">monitoring</span> Performance Analytics</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Solution Architecture</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Data Sources: {
+    CRM Data.shape: cylinder
+    Market Feeds.shape: cylinder
+    Research Docs.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#dbeafe"
+    RAG Engine
+    Agent Orchestrator
+    LLM Gateway
+    Compliance Check
+}
+
+Advisor Tools: {
+    Recommendations
+    Reports
+    Alerts
+}
+
+Data Sources.CRM Data -> NStarX Platform.RAG Engine: {style.animated: true}
+Data Sources.Market Feeds -> NStarX Platform.Agent Orchestrator: {style.animated: true}
+Data Sources.Research Docs -> NStarX Platform.RAG Engine: {style.animated: true}
+NStarX Platform.RAG Engine -> NStarX Platform.Agent Orchestrator
+NStarX Platform.Agent Orchestrator -> NStarX Platform.LLM Gateway
+NStarX Platform.LLM Gateway -> NStarX Platform.Compliance Check
+NStarX Platform.Compliance Check -> Advisor Tools.Recommendations: {style.stroke-dash: 3}
+NStarX Platform.Compliance Check -> Advisor Tools.Reports: {style.stroke-dash: 3}
+NStarX Platform.Compliance Check -> Advisor Tools.Alerts: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="llm workflows">
@@ -2364,6 +2427,64 @@ sequenceDiagram
                             <li>20% increase in loan approval rates</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-fin3', 'Automated Loan Underwriting')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-fin3">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">tune</span> LLM Fine-tuning Studio</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">description</span> Document Processor</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> KServe Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">rule</span> Decision Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">history</span> Audit Trail</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Loan Processing Workflow</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Document Intake: {
+    Application
+    Income Documents
+    Identity Documents
+}
+
+NStarX AI Workflow: {
+    style.fill: "#dbeafe"
+    Document OCR
+    Data Extraction
+    Verification
+    Risk Scoring
+    Decision Engine
+}
+
+Results: {
+    Approval
+    Review Queue
+    Denial with Reason
+}
+
+Document Intake.Application -> NStarX AI Workflow.Document OCR: {style.animated: true}
+Document Intake.Income Documents -> NStarX AI Workflow.Document OCR: {style.animated: true}
+Document Intake.Identity Documents -> NStarX AI Workflow.Document OCR: {style.animated: true}
+NStarX AI Workflow.Document OCR -> NStarX AI Workflow.Data Extraction
+NStarX AI Workflow.Data Extraction -> NStarX AI Workflow.Verification
+NStarX AI Workflow.Verification -> NStarX AI Workflow.Risk Scoring
+NStarX AI Workflow.Risk Scoring -> NStarX AI Workflow.Decision Engine
+NStarX AI Workflow.Decision Engine -> Results.Approval: {style.stroke-dash: 3}
+NStarX AI Workflow.Decision Engine -> Results.Review Queue: {style.stroke-dash: 3}
+NStarX AI Workflow.Decision Engine -> Results.Denial with Reason: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="rag agentic">
@@ -2393,6 +2514,62 @@ sequenceDiagram
                             <li>$8M annual savings in compliance costs</li>
                             <li>100% regulatory change coverage</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-fin4', 'Regulatory Compliance Assistant')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-fin4">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> RAG Knowledge Base</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Compliance Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">sync</span> Regulatory Feed Ingestion</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">compare</span> Gap Analysis Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">inventory_2</span> AI Catalog</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">notifications</span> Alert System</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Compliance Monitoring Flow</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Regulatory Sources: {
+    Regulatory Feeds
+    Internal Policies
+    Controls Library
+}
+
+NStarX Platform: {
+    style.fill: "#dbeafe"
+    Ingestion Pipeline
+    RAG Engine
+    Compliance Agents
+    Gap Analyzer
+}
+
+Outputs: {
+    Gap Reports
+    Recommendations
+    Risk Alerts
+}
+
+Regulatory Sources.Regulatory Feeds -> NStarX Platform.Ingestion Pipeline: {style.animated: true}
+Regulatory Sources.Internal Policies -> NStarX Platform.RAG Engine: {style.animated: true}
+Regulatory Sources.Controls Library -> NStarX Platform.RAG Engine: {style.animated: true}
+NStarX Platform.Ingestion Pipeline -> NStarX Platform.RAG Engine
+NStarX Platform.RAG Engine -> NStarX Platform.Compliance Agents
+NStarX Platform.Compliance Agents -> NStarX Platform.Gap Analyzer
+NStarX Platform.Gap Analyzer -> Outputs.Gap Reports: {style.stroke-dash: 3}
+NStarX Platform.Gap Analyzer -> Outputs.Recommendations: {style.stroke-dash: 3}
+NStarX Platform.Gap Analyzer -> Outputs.Risk Alerts: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2442,6 +2619,64 @@ sequenceDiagram
                             <li>99.99% network uptime achieved</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-tel1', 'Network Performance Optimization')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-tel1">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">hub</span> Federated Learning Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dns</span> AI Zones (Edge)</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> KServe Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">monitoring</span> Real-time Monitoring</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">sync</span> Model Aggregator</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">tune</span> Auto-scaling Engine</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Federated Network Optimization</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Edge AI Zones: {
+    style.fill: "#ede9fe"
+    Edge Node 1
+    Edge Node 2
+    Edge Node N
+}
+
+NStarX Central: {
+    style.fill: "#dbeafe"
+    Model Aggregator
+    Global Model
+    Monitoring
+}
+
+Network Actions: {
+    Bandwidth Allocation
+    QoS Adjustment
+    Load Balancing
+}
+
+Edge AI Zones.Edge Node 1 -> NStarX Central.Model Aggregator: {style.animated: true}
+Edge AI Zones.Edge Node 2 -> NStarX Central.Model Aggregator: {style.animated: true}
+Edge AI Zones.Edge Node N -> NStarX Central.Model Aggregator: {style.animated: true}
+NStarX Central.Model Aggregator -> NStarX Central.Global Model
+NStarX Central.Global Model -> Edge AI Zones.Edge Node 1: {style.stroke-dash: 3}
+NStarX Central.Global Model -> Edge AI Zones.Edge Node 2: {style.stroke-dash: 3}
+NStarX Central.Global Model -> Edge AI Zones.Edge Node N: {style.stroke-dash: 3}
+Edge AI Zones.Edge Node 1 -> Network Actions.Bandwidth Allocation: {style.stroke-dash: 3}
+Edge AI Zones.Edge Node 2 -> Network Actions.QoS Adjustment: {style.stroke-dash: 3}
+Edge AI Zones.Edge Node N -> Network Actions.Load Balancing: {style.stroke-dash: 3}
+NStarX Central.Model Aggregator -> NStarX Central.Monitoring
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="agentic rag">
@@ -2471,6 +2706,66 @@ sequenceDiagram
                             <li>$120M annual customer service savings</li>
                             <li>NPS score improved by 25 points</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-tel2', 'Intelligent Customer Service')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-tel2">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Multi-Agent System</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> RAG Knowledge Base</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Gateway</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dashboard</span> Converge App Builder</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">record_voice_over</span> Voice/Chat Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">analytics</span> Sentiment Analysis</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Multi-Agent Customer Service</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Customer Channels: {
+    Voice
+    Chat
+    Email
+}
+
+NStarX Platform: {
+    style.fill: "#ede9fe"
+    Intent Router
+    Billing Agent
+    Tech Support Agent
+    Sales Agent
+    RAG Engine
+}
+
+Resolution: {
+    Auto-Resolve
+    Escalate
+    Offer
+}
+
+Customer Channels.Voice -> NStarX Platform.Intent Router: {style.animated: true}
+Customer Channels.Chat -> NStarX Platform.Intent Router: {style.animated: true}
+Customer Channels.Email -> NStarX Platform.Intent Router: {style.animated: true}
+NStarX Platform.Intent Router -> NStarX Platform.Billing Agent
+NStarX Platform.Intent Router -> NStarX Platform.Tech Support Agent
+NStarX Platform.Intent Router -> NStarX Platform.Sales Agent
+NStarX Platform.RAG Engine -> NStarX Platform.Billing Agent
+NStarX Platform.RAG Engine -> NStarX Platform.Tech Support Agent
+NStarX Platform.RAG Engine -> NStarX Platform.Sales Agent
+NStarX Platform.Billing Agent -> Resolution.Auto-Resolve: {style.stroke-dash: 3}
+NStarX Platform.Tech Support Agent -> Resolution.Escalate: {style.stroke-dash: 3}
+NStarX Platform.Sales Agent -> Resolution.Offer
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2502,6 +2797,62 @@ sequenceDiagram
                             <li>3x ROI on retention campaigns</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-tel3', 'Predictive Churn Prevention')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-tel3">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">bolt</span> Spark Processing</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> Real-time Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> CRM Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">campaign</span> Campaign Orchestrator</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">insights</span> Churn Scoring Model</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Churn Prediction Pipeline</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Customer Data: {
+    Usage Patterns
+    Billing History
+    Service Calls
+}
+
+NStarX Platform: {
+    style.fill: "#ede9fe"
+    Spark ETL
+    Feature Store
+    Churn Model
+    Risk Scoring
+}
+
+Retention Actions: {
+    Personalized Offer
+    Proactive Call
+    Plan Upgrade
+}
+
+Customer Data.Usage Patterns -> NStarX Platform.Spark ETL: {style.animated: true}
+Customer Data.Billing History -> NStarX Platform.Spark ETL: {style.animated: true}
+Customer Data.Service Calls -> NStarX Platform.Spark ETL: {style.animated: true}
+NStarX Platform.Spark ETL -> NStarX Platform.Feature Store
+NStarX Platform.Feature Store -> NStarX Platform.Churn Model
+NStarX Platform.Churn Model -> NStarX Platform.Risk Scoring
+NStarX Platform.Risk Scoring -> Retention Actions.Personalized Offer: {style.stroke-dash: 3}
+NStarX Platform.Risk Scoring -> Retention Actions.Proactive Call: {style.stroke-dash: 3}
+NStarX Platform.Risk Scoring -> Retention Actions.Plan Upgrade: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="agentic workflows">
@@ -2531,6 +2882,62 @@ sequenceDiagram
                             <li>$80M new enterprise revenue</li>
                             <li>60% faster slice provisioning</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-tel4', '5G Network Slice Management')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-tel4">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Autonomous Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">monitoring</span> SLA Monitor</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">rocket_launch</span> Deployment Manager</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">tune</span> Resource Optimizer</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">trending_up</span> Demand Predictor</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> 5G Slice Orchestration</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Network Slices: {
+    IoT Slice
+    AR/VR Slice
+    Enterprise Slice
+}
+
+NStarX Orchestrator: {
+    style.fill: "#ede9fe"
+    Slice Agents
+    SLA Monitor
+    Resource Optimizer
+    Demand Predictor
+}
+
+5G Infrastructure: {
+    RAN Resources
+    Core Network
+    Edge Compute
+}
+
+Network Slices.IoT Slice -> NStarX Orchestrator.Slice Agents: {style.animated: true}
+Network Slices.AR/VR Slice -> NStarX Orchestrator.Slice Agents: {style.animated: true}
+Network Slices.Enterprise Slice -> NStarX Orchestrator.Slice Agents: {style.animated: true}
+NStarX Orchestrator.Slice Agents -> NStarX Orchestrator.SLA Monitor
+NStarX Orchestrator.SLA Monitor -> NStarX Orchestrator.Resource Optimizer
+NStarX Orchestrator.Demand Predictor -> NStarX Orchestrator.Resource Optimizer
+NStarX Orchestrator.Resource Optimizer -> 5G Infrastructure.RAN Resources: {style.stroke-dash: 3}
+NStarX Orchestrator.Resource Optimizer -> 5G Infrastructure.Core Network: {style.stroke-dash: 3}
+NStarX Orchestrator.Resource Optimizer -> 5G Infrastructure.Edge Compute: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2580,6 +2987,60 @@ sequenceDiagram
                             <li>$15M annual savings from quality improvements</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-mfg1', 'AI-Powered Quality Inspection')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-mfg1">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> Edge Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dns</span> AI Zones (Factory)</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">monitoring</span> Quality Dashboard</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">image</span> Vision Model Registry</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">notifications</span> Alert System</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Visual Inspection Pipeline</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Production Line: {
+    Cameras
+    Sensors
+}
+
+NStarX Edge AI Zone: {
+    style.fill: "#ffedd5"
+    Preprocessing
+    Vision Model
+    Defect Detection
+    Classification
+}
+
+Quality Actions: {
+    Pass
+    Reject
+    Alert
+}
+
+Production Line.Cameras -> NStarX Edge AI Zone.Preprocessing: {style.animated: true}
+Production Line.Sensors -> NStarX Edge AI Zone.Preprocessing: {style.animated: true}
+NStarX Edge AI Zone.Preprocessing -> NStarX Edge AI Zone.Vision Model
+NStarX Edge AI Zone.Vision Model -> NStarX Edge AI Zone.Defect Detection
+NStarX Edge AI Zone.Defect Detection -> NStarX Edge AI Zone.Classification
+NStarX Edge AI Zone.Classification -> Quality Actions.Pass: {style.stroke-dash: 3}
+NStarX Edge AI Zone.Classification -> Quality Actions.Reject: {style.stroke-dash: 3}
+NStarX Edge AI Zone.Classification -> Quality Actions.Alert: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="federated workflows">
@@ -2609,6 +3070,64 @@ sequenceDiagram
                             <li>92% prediction accuracy for failures</li>
                             <li>$8M annual operational savings</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-mfg2', 'Predictive Maintenance')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-mfg2">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">hub</span> Federated Learning Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">bolt</span> Spark Streaming</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> IoT Integration Hub</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">analytics</span> Anomaly Detection</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">schedule</span> Maintenance Scheduler</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Predictive Maintenance System</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Equipment Sensors: {
+    style.fill: "#f1f5f9"
+    Vibration Sensors
+    Temperature Monitors
+    Operating Data
+}
+
+NStarX Platform: {
+    style.fill: "#ffedd5"
+    Spark Streaming
+    Federated Learning
+    Failure Prediction Model
+    Alert Engine
+}
+
+Maintenance Actions: {
+    style.fill: "#dcfce7"
+    Work Orders
+    Parts Ordering
+    Schedule Maintenance
+}
+
+Equipment Sensors.Vibration Sensors -> NStarX Platform.Spark Streaming: {style.animated: true}
+Equipment Sensors.Temperature Monitors -> NStarX Platform.Spark Streaming: {style.animated: true}
+Equipment Sensors.Operating Data -> NStarX Platform.Spark Streaming: {style.animated: true}
+NStarX Platform.Spark Streaming -> NStarX Platform.Federated Learning
+NStarX Platform.Federated Learning -> NStarX Platform.Failure Prediction Model
+NStarX Platform.Failure Prediction Model -> NStarX Platform.Alert Engine
+NStarX Platform.Alert Engine -> Maintenance Actions.Work Orders: {style.stroke-dash: 3}
+NStarX Platform.Alert Engine -> Maintenance Actions.Parts Ordering: {style.stroke-dash: 3}
+NStarX Platform.Alert Engine -> Maintenance Actions.Schedule Maintenance: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2640,6 +3159,64 @@ sequenceDiagram
                             <li>$3M annual productivity gains</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-mfg3', 'Shop Floor Assistant')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-mfg3">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> RAG Knowledge Base</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Troubleshooting Agent</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dashboard</span> Converge App Builder</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> CMMS Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Gateway</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">description</span> Work Order Generator</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Shop Floor AI Assistant</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Knowledge Base: {
+    style.fill: "#f1f5f9"
+    Equipment Manuals.shape: cylinder
+    Maintenance History.shape: cylinder
+    Tribal Knowledge.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#ffedd5"
+    RAG Engine
+    Troubleshooting Agent
+    LLM Gateway
+    Converge App
+}
+
+Output Actions: {
+    style.fill: "#dcfce7"
+    Guided Resolution
+    Work Orders
+    Escalation
+}
+
+Knowledge Base.Equipment Manuals -> NStarX Platform.RAG Engine: {style.animated: true}
+Knowledge Base.Maintenance History -> NStarX Platform.RAG Engine: {style.animated: true}
+Knowledge Base.Tribal Knowledge -> NStarX Platform.RAG Engine: {style.animated: true}
+NStarX Platform.RAG Engine -> NStarX Platform.Troubleshooting Agent
+NStarX Platform.Troubleshooting Agent -> NStarX Platform.LLM Gateway
+NStarX Platform.LLM Gateway -> NStarX Platform.Converge App
+NStarX Platform.Converge App -> Output Actions.Guided Resolution: {style.stroke-dash: 3}
+NStarX Platform.Converge App -> Output Actions.Work Orders: {style.stroke-dash: 3}
+NStarX Platform.Converge App -> Output Actions.Escalation: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="workflows llm">
@@ -2669,6 +3246,64 @@ sequenceDiagram
                             <li>50% fewer stockout events</li>
                             <li>$18M annual working capital freed</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-mfg4', 'Supply Chain Demand Forecasting')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-mfg4">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Analysis</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">bolt</span> Spark Processing</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">database</span> SQL Lab</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">insights</span> Forecast Models</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">public</span> External Data Integration</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Demand Forecasting Pipeline</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Data Sources: {
+    style.fill: "#f1f5f9"
+    Historical Sales.shape: cylinder
+    Market Signals.shape: cylinder
+    External Data.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#ffedd5"
+    Spark Processing
+    LLM Analysis
+    ML Models
+    Ensemble Engine
+}
+
+Planning Output: {
+    style.fill: "#dcfce7"
+    Demand Forecast
+    Inventory Plan
+    Order Recommendations
+}
+
+Data Sources.Historical Sales -> NStarX Platform.Spark Processing: {style.animated: true}
+Data Sources.Market Signals -> NStarX Platform.Spark Processing: {style.animated: true}
+Data Sources.External Data -> NStarX Platform.LLM Analysis: {style.animated: true}
+NStarX Platform.Spark Processing -> NStarX Platform.ML Models
+NStarX Platform.LLM Analysis -> NStarX Platform.Ensemble Engine
+NStarX Platform.ML Models -> NStarX Platform.Ensemble Engine
+NStarX Platform.Ensemble Engine -> Planning Output.Demand Forecast
+Planning Output.Demand Forecast -> Planning Output.Inventory Plan: {style.stroke-dash: 3}
+Planning Output.Demand Forecast -> Planning Output.Order Recommendations: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2718,6 +3353,62 @@ sequenceDiagram
                             <li>$35M additional annual revenue</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-ret1', 'AI Shopping Assistant')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-ret1">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Shopping Agent</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> Product RAG</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Gateway</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> Commerce Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">person</span> Personalization Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">inventory</span> Inventory Sync</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> AI Shopping Assistant</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Customer Input: {
+    style.fill: "#f1f5f9"
+    Customer Query
+    Customer Preferences
+}
+
+NStarX Platform: {
+    style.fill: "#cffafe"
+    Shopping Agent
+    Product RAG
+    LLM Gateway
+    Personalization Engine
+}
+
+Commerce Output: {
+    style.fill: "#dcfce7"
+    Product Recommendations
+    Cart Updates
+    Checkout
+}
+
+Customer Input.Customer Query -> NStarX Platform.Shopping Agent: {style.animated: true}
+Customer Input.Customer Preferences -> NStarX Platform.Personalization Engine: {style.animated: true}
+NStarX Platform.Shopping Agent -> NStarX Platform.Product RAG
+NStarX Platform.Product RAG -> NStarX Platform.LLM Gateway
+NStarX Platform.Personalization Engine -> NStarX Platform.LLM Gateway
+NStarX Platform.LLM Gateway -> Commerce Output.Product Recommendations
+Commerce Output.Product Recommendations -> Commerce Output.Cart Updates: {style.stroke-dash: 3}
+Commerce Output.Cart Updates -> Commerce Output.Checkout: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="workflows llm">
@@ -2747,6 +3438,64 @@ sequenceDiagram
                             <li>Real-time competitive response</li>
                             <li>$28M annual profit improvement</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-ret2', 'Dynamic Pricing Optimization')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-ret2">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">bolt</span> Spark Processing</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> Real-time Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">database</span> SQL Lab</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">public</span> Competitive Intelligence</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">attach_money</span> Price Engine</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Dynamic Pricing Engine</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Market Data: {
+    style.fill: "#f1f5f9"
+    Competitor Prices.shape: cylinder
+    Demand Signals.shape: cylinder
+    Inventory Levels.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#cffafe"
+    ETL Pipeline
+    Pricing Model
+    Price Optimizer
+    Business Rules
+}
+
+Price Actions: {
+    style.fill: "#dcfce7"
+    Web Prices
+    Store Prices
+    Promotions
+}
+
+Market Data.Competitor Prices -> NStarX Platform.ETL Pipeline: {style.animated: true}
+Market Data.Demand Signals -> NStarX Platform.ETL Pipeline: {style.animated: true}
+Market Data.Inventory Levels -> NStarX Platform.ETL Pipeline: {style.animated: true}
+NStarX Platform.ETL Pipeline -> NStarX Platform.Pricing Model
+NStarX Platform.Pricing Model -> NStarX Platform.Price Optimizer
+NStarX Platform.Price Optimizer -> NStarX Platform.Business Rules
+NStarX Platform.Business Rules -> Price Actions.Web Prices: {style.stroke-dash: 3}
+NStarX Platform.Business Rules -> Price Actions.Store Prices: {style.stroke-dash: 3}
+NStarX Platform.Business Rules -> Price Actions.Promotions: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2778,6 +3527,64 @@ sequenceDiagram
                             <li>$12M annual inventory savings</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-ret3', 'Store Inventory Intelligence')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-ret3">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">hub</span> Federated Learning Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Inventory Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dashboard</span> Store Manager App</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">trending_up</span> Demand Prediction</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">shopping_cart</span> Auto-Reorder</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Store Inventory Intelligence</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Store Locations: {
+    style.fill: "#f1f5f9"
+    Store 1
+    Store 2
+    Store N
+}
+
+NStarX Platform: {
+    style.fill: "#cffafe"
+    Federated Learning
+    Inventory Agent
+    Demand Prediction
+    Order Engine
+}
+
+Inventory Actions: {
+    style.fill: "#dcfce7"
+    Auto Reorder
+    Shelf Allocation
+    Markdown Timing
+}
+
+Store Locations.Store 1 -> NStarX Platform.Federated Learning: {style.animated: true}
+Store Locations.Store 2 -> NStarX Platform.Federated Learning: {style.animated: true}
+Store Locations.Store N -> NStarX Platform.Federated Learning: {style.animated: true}
+NStarX Platform.Federated Learning -> NStarX Platform.Inventory Agent
+NStarX Platform.Inventory Agent -> NStarX Platform.Demand Prediction
+NStarX Platform.Demand Prediction -> NStarX Platform.Order Engine
+NStarX Platform.Order Engine -> Inventory Actions.Auto Reorder: {style.stroke-dash: 3}
+NStarX Platform.Order Engine -> Inventory Actions.Shelf Allocation: {style.stroke-dash: 3}
+NStarX Platform.Order Engine -> Inventory Actions.Markdown Timing: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="rag llm">
@@ -2807,6 +3614,64 @@ sequenceDiagram
                             <li>15% increase in organic traffic</li>
                             <li>$4M annual content cost savings</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-ret4', 'Product Content Generation')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-ret4">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Gateway</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> Brand Voice RAG</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">inventory_2</span> AI Catalog</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">travel_explore</span> SEO Optimizer</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">fact_check</span> Quality Validator</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Content Generation Pipeline</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Product Input: {
+    style.fill: "#f1f5f9"
+    Specifications.shape: cylinder
+    Product Images.shape: cylinder
+    Categories.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#cffafe"
+    Brand Voice RAG
+    LLM Gateway
+    SEO Optimizer
+    Quality Validator
+}
+
+Content Output: {
+    style.fill: "#dcfce7"
+    Product Descriptions
+    Product Titles
+    Product Attributes
+}
+
+Product Input.Specifications -> NStarX Platform.Brand Voice RAG: {style.animated: true}
+Product Input.Product Images -> NStarX Platform.LLM Gateway: {style.animated: true}
+Product Input.Categories -> NStarX Platform.Brand Voice RAG: {style.animated: true}
+NStarX Platform.Brand Voice RAG -> NStarX Platform.LLM Gateway
+NStarX Platform.LLM Gateway -> NStarX Platform.SEO Optimizer
+NStarX Platform.SEO Optimizer -> NStarX Platform.Quality Validator
+NStarX Platform.Quality Validator -> Content Output.Product Descriptions: {style.stroke-dash: 3}
+NStarX Platform.Quality Validator -> Content Output.Product Titles: {style.stroke-dash: 3}
+NStarX Platform.Quality Validator -> Content Output.Product Attributes: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2856,6 +3721,64 @@ sequenceDiagram
                             <li>99.99% grid reliability achieved</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-eng1', 'Smart Grid Load Balancing')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-eng1">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">hub</span> Federated Learning Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dns</span> AI Zones (Edge)</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">monitoring</span> Grid Dashboard</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">electric_meter</span> Meter Analytics</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">balance</span> Load Balancer</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Smart Grid Architecture</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Grid Infrastructure: {
+    style.fill: "#f1f5f9"
+    Smart Meters
+    Grid Sensors
+    Renewable Sources
+}
+
+NStarX Platform: {
+    style.fill: "#ecfccb"
+    Federated Learning
+    Load Prediction
+    Grid Optimizer
+    Control System
+}
+
+Grid Actions: {
+    style.fill: "#dcfce7"
+    Demand Response
+    Storage Dispatch
+    Load Routing
+}
+
+Grid Infrastructure.Smart Meters -> NStarX Platform.Federated Learning: {style.animated: true}
+Grid Infrastructure.Grid Sensors -> NStarX Platform.Federated Learning: {style.animated: true}
+Grid Infrastructure.Renewable Sources -> NStarX Platform.Load Prediction: {style.animated: true}
+NStarX Platform.Federated Learning -> NStarX Platform.Load Prediction
+NStarX Platform.Load Prediction -> NStarX Platform.Grid Optimizer
+NStarX Platform.Grid Optimizer -> NStarX Platform.Control System
+NStarX Platform.Control System -> Grid Actions.Demand Response: {style.stroke-dash: 3}
+NStarX Platform.Control System -> Grid Actions.Storage Dispatch: {style.stroke-dash: 3}
+NStarX Platform.Control System -> Grid Actions.Load Routing: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="agentic workflows">
@@ -2885,6 +3808,62 @@ sequenceDiagram
                             <li>$200M annual grid cost savings</li>
                             <li>25% more renewable integration</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-eng2', 'Renewable Energy Forecasting')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-eng2">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Forecast Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">bolt</span> Spark Processing</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> Real-time Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">wb_sunny</span> Weather Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">battery_charging_full</span> Storage Optimizer</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Renewable Forecasting System</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Data Sources: {
+    style.fill: "#f1f5f9"
+    Weather Data.shape: cylinder
+    Satellite Imagery.shape: cylinder
+    Historical Patterns.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#ecfccb"
+    ML Models
+    Forecast Agent
+    Grid Optimizer
+}
+
+Energy Output: {
+    style.fill: "#dcfce7"
+    Generation Forecast
+    Storage Dispatch
+    Demand Response
+}
+
+Data Sources.Weather Data -> NStarX Platform.ML Models: {style.animated: true}
+Data Sources.Satellite Imagery -> NStarX Platform.ML Models: {style.animated: true}
+Data Sources.Historical Patterns -> NStarX Platform.ML Models: {style.animated: true}
+NStarX Platform.ML Models -> NStarX Platform.Forecast Agent
+NStarX Platform.Forecast Agent -> NStarX Platform.Grid Optimizer
+NStarX Platform.Grid Optimizer -> Energy Output.Generation Forecast: {style.stroke-dash: 3}
+NStarX Platform.Grid Optimizer -> Energy Output.Storage Dispatch: {style.stroke-dash: 3}
+NStarX Platform.Grid Optimizer -> Energy Output.Demand Response: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -2916,6 +3895,62 @@ sequenceDiagram
                             <li>$25M annual field service savings</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-eng3', 'Field Service Optimization')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-eng3">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> Equipment RAG</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Diagnostics</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dashboard</span> Converge Mobile App</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> WMS Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">build</span> Parts Lookup</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">history</span> Repair History</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Field Service AI Assistant</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Knowledge Base: {
+    style.fill: "#f1f5f9"
+    Equipment Documentation.shape: cylinder
+    Repair History.shape: cylinder
+    Expert Knowledge.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#ecfccb"
+    RAG Engine
+    LLM Diagnostics
+    Mobile App
+}
+
+Field Output: {
+    style.fill: "#dcfce7"
+    Guided Diagnosis
+    Parts Identification
+    Repair Instructions
+}
+
+Knowledge Base.Equipment Documentation -> NStarX Platform.RAG Engine: {style.animated: true}
+Knowledge Base.Repair History -> NStarX Platform.RAG Engine: {style.animated: true}
+Knowledge Base.Expert Knowledge -> NStarX Platform.RAG Engine: {style.animated: true}
+NStarX Platform.RAG Engine -> NStarX Platform.LLM Diagnostics
+NStarX Platform.LLM Diagnostics -> NStarX Platform.Mobile App
+NStarX Platform.Mobile App -> Field Output.Guided Diagnosis: {style.stroke-dash: 3}
+NStarX Platform.Mobile App -> Field Output.Parts Identification: {style.stroke-dash: 3}
+NStarX Platform.Mobile App -> Field Output.Repair Instructions: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="workflows agentic">
@@ -2945,6 +3980,64 @@ sequenceDiagram
                             <li>15% emissions reduction identified</li>
                             <li>$50M carbon credit optimization</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-eng4', 'Carbon Emissions Tracking')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-eng4">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Carbon Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">database</span> SQL Lab</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dashboard</span> Emissions Dashboard</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">calculate</span> GHG Calculator</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">description</span> Report Generator</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Carbon Tracking System</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Emissions Sources: {
+    style.fill: "#f1f5f9"
+    Scope 1 Direct Emissions
+    Scope 2 Energy Indirect
+    Scope 3 Supply Chain
+}
+
+NStarX Platform: {
+    style.fill: "#ecfccb"
+    Data Collector
+    GHG Calculator
+    Carbon Agent
+    Report Generator
+}
+
+Reporting Output: {
+    style.fill: "#dcfce7"
+    Emissions Dashboard
+    Compliance Reports
+    Reduction Recommendations
+}
+
+Emissions Sources.Scope 1 Direct Emissions -> NStarX Platform.Data Collector: {style.animated: true}
+Emissions Sources.Scope 2 Energy Indirect -> NStarX Platform.Data Collector: {style.animated: true}
+Emissions Sources.Scope 3 Supply Chain -> NStarX Platform.Data Collector: {style.animated: true}
+NStarX Platform.Data Collector -> NStarX Platform.GHG Calculator
+NStarX Platform.GHG Calculator -> NStarX Platform.Carbon Agent
+NStarX Platform.Carbon Agent -> NStarX Platform.Report Generator
+NStarX Platform.Report Generator -> Reporting Output.Emissions Dashboard: {style.stroke-dash: 3}
+NStarX Platform.Report Generator -> Reporting Output.Compliance Reports: {style.stroke-dash: 3}
+NStarX Platform.Carbon Agent -> Reporting Output.Reduction Recommendations: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2994,6 +4087,61 @@ sequenceDiagram
                             <li>$100M annual operational savings</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-gov1', 'Citizen Services Portal')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-gov1">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> Services RAG</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Service Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dashboard</span> Citizen Portal</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> Agency Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">description</span> Form Pre-fill</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">task</span> Case Management</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Citizen Services Platform</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Citizen Input: {
+    style.fill: "#f1f5f9"
+    Service Request
+    Supporting Documents
+}
+
+NStarX Platform: {
+    style.fill: "#e0e7ff"
+    Services RAG
+    Service Agent
+    Form Pre-fill
+    Agency Coordinator
+}
+
+Government Agencies: {
+    style.fill: "#dcfce7"
+    Agency 1
+    Agency 2
+    Agency N
+}
+
+Citizen Input.Service Request -> NStarX Platform.Services RAG: {style.animated: true}
+Citizen Input.Supporting Documents -> NStarX Platform.Form Pre-fill: {style.animated: true}
+NStarX Platform.Services RAG -> NStarX Platform.Service Agent
+NStarX Platform.Service Agent -> NStarX Platform.Agency Coordinator
+NStarX Platform.Agency Coordinator -> Government Agencies.Agency 1: {style.stroke-dash: 3}
+NStarX Platform.Agency Coordinator -> Government Agencies.Agency 2: {style.stroke-dash: 3}
+NStarX Platform.Agency Coordinator -> Government Agencies.Agency N: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="federated workflows">
@@ -3023,6 +4171,64 @@ sequenceDiagram
                             <li>100% privacy compliance</li>
                             <li>40% reduction in false accusations</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-gov2', 'Cross-Agency Fraud Detection')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-gov2">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">hub</span> Federated Learning Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">security</span> Differential Privacy</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">monitoring</span> Fraud Dashboard</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">pattern</span> Pattern Detection</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">shield</span> Privacy Guard</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Cross-Agency Fraud Detection</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Government Agencies: {
+    style.fill: "#f1f5f9"
+    Tax Agency
+    Benefits Agency
+    Health Agency
+}
+
+NStarX Platform: {
+    style.fill: "#e0e7ff"
+    Federated Learning
+    Differential Privacy
+    Global Model
+    Fraud Detector
+}
+
+Detection Output: {
+    style.fill: "#dcfce7"
+    Fraud Alerts
+    Risk Scores
+    Investigation Reports
+}
+
+Government Agencies.Tax Agency -> NStarX Platform.Federated Learning: {style.animated: true}
+Government Agencies.Benefits Agency -> NStarX Platform.Federated Learning: {style.animated: true}
+Government Agencies.Health Agency -> NStarX Platform.Federated Learning: {style.animated: true}
+NStarX Platform.Federated Learning -> NStarX Platform.Differential Privacy
+NStarX Platform.Differential Privacy -> NStarX Platform.Global Model
+NStarX Platform.Global Model -> NStarX Platform.Fraud Detector
+NStarX Platform.Fraud Detector -> Detection Output.Fraud Alerts: {style.stroke-dash: 3}
+NStarX Platform.Fraud Detector -> Detection Output.Risk Scores: {style.stroke-dash: 3}
+NStarX Platform.Fraud Detector -> Detection Output.Investigation Reports: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -3054,6 +4260,64 @@ sequenceDiagram
                             <li>Increased legislative transparency</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-gov3', 'Policy Impact Analysis')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-gov3">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Analysis Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">bolt</span> Spark Processing</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">database</span> SQL Lab</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">insights</span> Scenario Simulator</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">assessment</span> Impact Scorer</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Policy Impact Analysis</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Policy Input: {
+    style.fill: "#f1f5f9"
+    Policy Draft.shape: cylinder
+    Historical Data.shape: cylinder
+    Economic Models.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#e0e7ff"
+    LLM Analysis
+    Scenario Simulator
+    Spark Processing
+    Impact Scorer
+}
+
+Analysis Output: {
+    style.fill: "#dcfce7"
+    Impact Assessment
+    Stakeholder Effects
+    Policy Recommendations
+}
+
+Policy Input.Policy Draft -> NStarX Platform.LLM Analysis: {style.animated: true}
+Policy Input.Historical Data -> NStarX Platform.Spark Processing: {style.animated: true}
+Policy Input.Economic Models -> NStarX Platform.Scenario Simulator: {style.animated: true}
+NStarX Platform.LLM Analysis -> NStarX Platform.Scenario Simulator
+NStarX Platform.Spark Processing -> NStarX Platform.Scenario Simulator
+NStarX Platform.Scenario Simulator -> NStarX Platform.Impact Scorer
+NStarX Platform.Impact Scorer -> Analysis Output.Impact Assessment: {style.stroke-dash: 3}
+NStarX Platform.Impact Scorer -> Analysis Output.Stakeholder Effects: {style.stroke-dash: 3}
+NStarX Platform.Impact Scorer -> Analysis Output.Policy Recommendations: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="agentic rag">
@@ -3083,6 +4347,64 @@ sequenceDiagram
                             <li>$2B reduced disaster costs</li>
                             <li>95% resource utilization</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-gov4', 'Emergency Response Coordination')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-gov4">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Response Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> Protocol RAG</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> Agency Connector</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">map</span> Resource Tracker</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">notifications</span> Alert System</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Emergency Response System</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Emergency Event: {
+    style.fill: "#f1f5f9"
+    Incident Report
+    Location Data
+}
+
+NStarX Platform: {
+    style.fill: "#e0e7ff"
+    Response Agent
+    Protocol RAG
+    Agency Coordinator
+    Resource Optimizer
+}
+
+Response Teams: {
+    style.fill: "#dcfce7"
+    Fire Department
+    Medical Services
+    Police
+    Utilities
+}
+
+Emergency Event.Incident Report -> NStarX Platform.Response Agent: {style.animated: true}
+Emergency Event.Location Data -> NStarX Platform.Response Agent: {style.animated: true}
+NStarX Platform.Response Agent -> NStarX Platform.Protocol RAG
+NStarX Platform.Protocol RAG -> NStarX Platform.Agency Coordinator
+NStarX Platform.Agency Coordinator -> NStarX Platform.Resource Optimizer
+NStarX Platform.Resource Optimizer -> Response Teams.Fire Department: {style.stroke-dash: 3}
+NStarX Platform.Resource Optimizer -> Response Teams.Medical Services: {style.stroke-dash: 3}
+NStarX Platform.Resource Optimizer -> Response Teams.Police: {style.stroke-dash: 3}
+NStarX Platform.Resource Optimizer -> Response Teams.Utilities: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3132,6 +4454,62 @@ sequenceDiagram
                             <li>$40M annual transportation savings</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-log1', 'Dynamic Route Optimization')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-log1">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Route Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> Real-time Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> Fleet Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">traffic</span> Traffic Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">map</span> Route Optimizer</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Dynamic Route Optimization</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Real-time Input: {
+    style.fill: "#f1f5f9"
+    Traffic Data
+    Weather Conditions
+    Delivery Orders
+}
+
+NStarX Platform: {
+    style.fill: "#ccfbf1"
+    Route Agent
+    Route Optimizer
+    Fleet Coordinator
+}
+
+Fleet Output: {
+    style.fill: "#dcfce7"
+    Optimized Routes
+    Driver Dispatch
+    Live Tracking
+}
+
+Real-time Input.Traffic Data -> NStarX Platform.Route Agent: {style.animated: true}
+Real-time Input.Weather Conditions -> NStarX Platform.Route Agent: {style.animated: true}
+Real-time Input.Delivery Orders -> NStarX Platform.Route Agent: {style.animated: true}
+NStarX Platform.Route Agent -> NStarX Platform.Route Optimizer
+NStarX Platform.Route Optimizer -> NStarX Platform.Fleet Coordinator
+NStarX Platform.Fleet Coordinator -> Fleet Output.Optimized Routes: {style.stroke-dash: 3}
+NStarX Platform.Fleet Coordinator -> Fleet Output.Driver Dispatch: {style.stroke-dash: 3}
+NStarX Platform.Fleet Coordinator -> Fleet Output.Live Tracking: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="federated llm">
@@ -3161,6 +4539,64 @@ sequenceDiagram
                             <li>35% reduction in labor costs</li>
                             <li>$15M annual operational savings</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-log2', 'Warehouse Automation')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-log2">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">hub</span> Federated Learning Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">speed</span> Edge Inference</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">monitoring</span> Operations Dashboard</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">precision_manufacturing</span> Robot Coordinator</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">inventory_2</span> Inventory Optimizer</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Warehouse AI Orchestration</h6>
+                                <div class="d2-diagram">
+direction: down
+
+Warehouse Facilities: {
+    style.fill: "#f1f5f9"
+    Warehouse 1
+    Warehouse 2
+    Warehouse N
+}
+
+NStarX Platform: {
+    style.fill: "#ccfbf1"
+    Federated Learning
+    Pick Optimizer
+    Robot Coordinator
+    Demand Predictor
+}
+
+Operations Output: {
+    style.fill: "#dcfce7"
+    Pick Paths
+    Resource Allocation
+    Inventory Slotting
+}
+
+Warehouse Facilities.Warehouse 1 -> NStarX Platform.Federated Learning: {style.animated: true}
+Warehouse Facilities.Warehouse 2 -> NStarX Platform.Federated Learning: {style.animated: true}
+Warehouse Facilities.Warehouse N -> NStarX Platform.Federated Learning: {style.animated: true}
+NStarX Platform.Federated Learning -> NStarX Platform.Pick Optimizer
+NStarX Platform.Federated Learning -> NStarX Platform.Demand Predictor
+NStarX Platform.Pick Optimizer -> NStarX Platform.Robot Coordinator
+NStarX Platform.Robot Coordinator -> Operations Output.Pick Paths: {style.stroke-dash: 3}
+NStarX Platform.Robot Coordinator -> Operations Output.Resource Allocation: {style.stroke-dash: 3}
+NStarX Platform.Demand Predictor -> Operations Output.Inventory Slotting: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -3192,6 +4628,64 @@ sequenceDiagram
                             <li>$80M annual inventory savings</li>
                         </ul>
                     </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-log3', 'Supply Chain Visibility')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-log3">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">smart_toy</span> Supply Chain Agents</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">library_books</span> Supply Chain RAG</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">integration_instructions</span> Partner Integration</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">warning</span> Disruption Predictor</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">visibility</span> Control Tower</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Supply Chain Intelligence</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Data Sources: {
+    style.fill: "#f1f5f9"
+    Supplier Data.shape: cylinder
+    Shipping Data.shape: cylinder
+    ERP Systems.shape: cylinder
+}
+
+NStarX Platform: {
+    style.fill: "#ccfbf1"
+    Supply Chain Agent
+    Supply Chain RAG
+    Disruption Predictor
+    Control Tower
+}
+
+Visibility Output: {
+    style.fill: "#dcfce7"
+    End-to-End Visibility
+    Disruption Alerts
+    Mitigation Plans
+}
+
+Data Sources.Supplier Data -> NStarX Platform.Supply Chain Agent: {style.animated: true}
+Data Sources.Shipping Data -> NStarX Platform.Supply Chain Agent: {style.animated: true}
+Data Sources.ERP Systems -> NStarX Platform.Supply Chain RAG: {style.animated: true}
+NStarX Platform.Supply Chain Agent -> NStarX Platform.Disruption Predictor
+NStarX Platform.Supply Chain RAG -> NStarX Platform.Control Tower
+NStarX Platform.Disruption Predictor -> NStarX Platform.Control Tower
+NStarX Platform.Control Tower -> Visibility Output.End-to-End Visibility: {style.stroke-dash: 3}
+NStarX Platform.Control Tower -> Visibility Output.Disruption Alerts: {style.stroke-dash: 3}
+NStarX Platform.Control Tower -> Visibility Output.Mitigation Plans: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="use-case-card" data-capabilities="workflows llm">
@@ -3221,6 +4715,64 @@ sequenceDiagram
                             <li>Zero compliance penalties</li>
                             <li>$5M annual processing savings</li>
                         </ul>
+                    </div>
+                    <div class="solution-architecture">
+                        <button class="architecture-toggle" onclick="toggleArchitecture('arch-log4', 'Customs & Compliance Automation')">
+                            <span class="material-symbols-outlined">schema</span>
+                            View Solution Architecture
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="architecture-content" id="arch-log4">
+                            <div class="inline-components">
+                                <h6><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h6>
+                                <div class="inline-component-list">
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">account_tree</span> AI Workflow Engine</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">psychology</span> LLM Document Processor</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">description</span> Document Intelligence</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">dashboard</span> Compliance Dashboard</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">fact_check</span> Tariff Classifier</div>
+                                    <div class="inline-component-item"><span class="material-symbols-outlined">gavel</span> Regulation Engine</div>
+                                </div>
+                            </div>
+                            <div class="inline-diagram">
+                                <h6><span class="material-symbols-outlined">account_tree</span> Customs Automation Pipeline</h6>
+                                <div class="d2-diagram">
+direction: right
+
+Trade Documents: {
+    style.fill: "#f1f5f9"
+    Commercial Invoices
+    Bills of Lading
+    Origin Certificates
+}
+
+NStarX Platform: {
+    style.fill: "#ccfbf1"
+    Document OCR
+    LLM Extractor
+    Tariff Classifier
+    Compliance Validator
+}
+
+Customs Output: {
+    style.fill: "#dcfce7"
+    Customs Declaration
+    Clearance Status
+    Audit Trail
+}
+
+Trade Documents.Commercial Invoices -> NStarX Platform.Document OCR: {style.animated: true}
+Trade Documents.Bills of Lading -> NStarX Platform.Document OCR: {style.animated: true}
+Trade Documents.Origin Certificates -> NStarX Platform.Document OCR: {style.animated: true}
+NStarX Platform.Document OCR -> NStarX Platform.LLM Extractor
+NStarX Platform.LLM Extractor -> NStarX Platform.Tariff Classifier
+NStarX Platform.Tariff Classifier -> NStarX Platform.Compliance Validator
+NStarX Platform.Compliance Validator -> Customs Output.Customs Declaration: {style.stroke-dash: 3}
+NStarX Platform.Compliance Validator -> Customs Output.Clearance Status: {style.stroke-dash: 3}
+NStarX Platform.Compliance Validator -> Customs Output.Audit Trail: {style.stroke-dash: 3}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -3520,31 +5072,56 @@ sequenceDiagram
 </footer>
 
 <script>
-    // Initialize Mermaid
-    mermaid.initialize({
-        startOnLoad: true,
-        theme: 'base',
-        themeVariables: {
-            primaryColor: '#1e40af',
-            primaryTextColor: '#fff',
-            primaryBorderColor: '#3b82f6',
-            lineColor: '#64748b',
-            secondaryColor: '#7c3aed',
-            tertiaryColor: '#f8fafc'
-        },
-        flowchart: {
-            useMaxWidth: true,
-            htmlLabels: true,
-            curve: 'basis'
-        },
-        sequence: {
-            useMaxWidth: true,
-            actorMargin: 50
-        },
-        gantt: {
-            useMaxWidth: true
+    // D2 diagram renderer using Kroki.io service
+    // Kroki renders D2 diagrams server-side and returns SVG
+
+    // Render D2 diagram using Kroki.io POST API
+    async function renderD2Diagram(element) {
+        if (element.classList.contains('d2-rendered')) return;
+
+        const code = element.textContent.trim();
+        if (!code) return;
+
+        // Show loading state
+        element.innerHTML = '<div style="color: #64748b; padding: 1rem; text-align: center;"><span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">sync</span> Loading diagram...</div>';
+
+        try {
+            // Use Kroki.io POST API to render D2 diagram
+            const response = await fetch('https://kroki.io/d2/svg', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'text/plain'
+                },
+                body: code
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                throw new Error(`Kroki error: ${errorText}`);
+            }
+
+            const svg = await response.text();
+            element.innerHTML = svg;
+            element.classList.add('d2-rendered');
+
+            // Style the SVG to fit container
+            const svgEl = element.querySelector('svg');
+            if (svgEl) {
+                svgEl.style.maxWidth = '100%';
+                svgEl.style.height = 'auto';
+                svgEl.style.display = 'block';
+                svgEl.style.margin = '0 auto';
+            }
+        } catch (error) {
+            console.error('D2 render error:', error);
+            element.innerHTML = '<div style="color: #ef4444; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;"><strong>Diagram Error:</strong> ' + error.message + '</div>';
         }
-    });
+    }
+
+    // Add CSS for loading spinner
+    const style = document.createElement('style');
+    style.textContent = '@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }';
+    document.head.appendChild(style);
 
     // Toggle detail panel
     function toggleDetail(detailId) {
@@ -3557,12 +5134,59 @@ sequenceDiagram
         } else {
             detail.classList.add('expanded');
             btn.classList.add('active');
-            // Re-render mermaid diagrams when panel opens
+            // Re-render D2 diagrams when panel opens
             setTimeout(() => {
-                mermaid.init(undefined, detail.querySelectorAll('.mermaid'));
+                detail.querySelectorAll('.d2-diagram:not(.d2-rendered)').forEach(el => {
+                    renderD2Diagram(el);
+                });
             }, 100);
         }
     }
+
+    // Open architecture modal popup
+    async function toggleArchitecture(contentId, title) {
+        const content = document.getElementById(contentId);
+        const modal = document.getElementById('arch-modal');
+        const modalBody = document.getElementById('arch-modal-body');
+        const modalTitle = document.getElementById('arch-modal-title');
+
+        // Clone the content into the modal
+        modalBody.innerHTML = content.innerHTML;
+        modalTitle.textContent = title || 'Solution Architecture';
+
+        // Show modal
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+
+        // Render D2 diagrams in modal
+        setTimeout(async () => {
+            const diagrams = modalBody.querySelectorAll('.d2-diagram');
+            for (const el of diagrams) {
+                await renderD2Diagram(el);
+            }
+        }, 100);
+    }
+
+    // Close architecture modal
+    function closeArchModal() {
+        const modal = document.getElementById('arch-modal');
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on overlay click
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('arch-modal-overlay')) {
+            closeArchModal();
+        }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeArchModal();
+        }
+    });
 
     // Tab switching
     function switchTab(btn, tabId) {
@@ -3576,9 +5200,11 @@ sequenceDiagram
         btn.classList.add('active');
         document.getElementById(tabId).classList.add('active');
 
-        // Re-render mermaid in new tab
+        // Re-render D2 diagrams in new tab
         setTimeout(() => {
-            mermaid.init(undefined, document.getElementById(tabId).querySelectorAll('.mermaid'));
+            document.getElementById(tabId).querySelectorAll('.d2-diagram:not(.d2-rendered)').forEach(el => {
+                renderD2Diagram(el);
+            });
         }, 100);
     }
 
@@ -3804,6 +5430,21 @@ sequenceDiagram
         }, 500);
     });
 </script>
+
+<!-- Architecture Modal Popup -->
+<div class="arch-modal-overlay" id="arch-modal">
+    <div class="arch-modal">
+        <div class="arch-modal-header">
+            <h3><span class="material-symbols-outlined">schema</span> <span id="arch-modal-title">Solution Architecture</span></h3>
+            <button class="arch-modal-close" onclick="closeArchModal()">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+        <div class="arch-modal-body" id="arch-modal-body">
+            <!-- Content will be dynamically inserted -->
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

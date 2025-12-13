@@ -777,6 +777,20 @@
             font-size: 1rem;
         }
 
+        .arch-modal .inline-diagram .d2-diagram {
+            height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .arch-modal .inline-diagram .d2-diagram svg {
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
+        }
+
         .arch-modal .mermaid {
             display: flex;
             justify-content: center;
@@ -895,6 +909,20 @@
             font-size: 12px;
         }
 
+        .inline-diagram .d2-diagram {
+            height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .inline-diagram .d2-diagram svg {
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             header h1 { font-size: 2rem; }
@@ -981,6 +1009,23 @@
             align-items: center;
             gap: 0.5rem;
             font-size: 1.1rem;
+        }
+
+        .diagram-container .d2-diagram {
+            height: 800px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+        }
+
+        .diagram-container .d2-diagram svg {
+            max-height: 100%;
+            width: auto;
+            max-width: 100%;
         }
 
         .mermaid {
@@ -5104,10 +5149,12 @@ NStarX Platform.Compliance Validator -> Customs Output.Audit Trail: {style.strok
             element.innerHTML = svg;
             element.classList.add('d2-rendered');
 
-            // Style the SVG to fit container
+            // Style the SVG to fit container with consistent sizing
             const svgEl = element.querySelector('svg');
             if (svgEl) {
                 svgEl.style.maxWidth = '100%';
+                svgEl.style.maxHeight = '100%';
+                svgEl.style.width = 'auto';
                 svgEl.style.height = 'auto';
                 svgEl.style.display = 'block';
                 svgEl.style.margin = '0 auto';

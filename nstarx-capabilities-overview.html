@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NStarX Enterprise AI Platform - Business Capabilities</title>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        header .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        section:nth-child(even) {
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Persona Cards */
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .persona-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border-top: 4px solid var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .persona-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .persona-card.data-science { border-color: var(--primary); }
+        .persona-card.operations { border-color: var(--success); }
+        .persona-card.business { border-color: var(--warning); }
+        .persona-card.admin { border-color: var(--secondary); }
+
+        .persona-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .persona-card .role {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .persona-card ul {
+            list-style: none;
+        }
+
+        .persona-card li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .persona-card li:last-child {
+            border: none;
+        }
+
+        /* Feature Grid */
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .feature-card:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+
+        .feature-list li {
+            padding: 0.4rem 0;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Use Cases */
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .use-case {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            transition: transform 0.3s;
+        }
+
+        .use-case:hover {
+            transform: scale(1.03);
+        }
+
+        .use-case h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .use-case p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--gray);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Architecture */
+        .architecture-diagram {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .arch-layers {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .arch-layer {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .arch-layer.presentation { background: linear-gradient(90deg, #dbeafe, #e0e7ff); }
+        .arch-layer.business { background: linear-gradient(90deg, #d1fae5, #cffafe); }
+        .arch-layer.data { background: linear-gradient(90deg, #fef3c7, #fce7f3); }
+        .arch-layer.infrastructure { background: linear-gradient(90deg, #f3e8ff, #e0e7ff); }
+
+        .arch-layer h4 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .arch-components {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+
+        .arch-component {
+            background: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 0.5rem;
+            font-size: 0.85rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Benefits Table */
+        .benefits-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .benefits-table th,
+        .benefits-table td {
+            padding: 1rem 1.5rem;
+            text-align: left;
+        }
+
+        .benefits-table th {
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+        }
+
+        .benefits-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .benefits-table tr:hover {
+            background: #e0f2fe;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #e0f2fe;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            header .tagline { font-size: 1.1rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            nav ul { flex-direction: column; align-items: center; }
+            .feature-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Accordion for mobile */
+        .accordion {
+            margin-top: 2rem;
+        }
+
+        .accordion-item {
+            background: white;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            padding: 1.25rem 1.5rem;
+            background: linear-gradient(90deg, #f8fafc, #fff);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .accordion-header:hover {
+            background: #e0f2fe;
+        }
+
+        .accordion-content {
+            padding: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: #e0f2fe;
+            color: var(--primary);
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            margin: 0.25rem;
+        }
+
+        .tag.ai { background: #dbeafe; color: #1e40af; }
+        .tag.data { background: #d1fae5; color: #065f46; }
+        .tag.ops { background: #fef3c7; color: #92400e; }
+        .tag.business { background: #fce7f3; color: #9d174d; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>NStarX Enterprise AI Platform</h1>
+        <p class="tagline">Unified AI/ML Platform for Building, Deploying, and Managing Enterprise AI at Scale</p>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#personas">User Personas</a></li>
+        <li><a href="#ai-capabilities">AI Capabilities</a></li>
+        <li><a href="#operations">Operations</a></li>
+        <li><a href="#business">Business Apps</a></li>
+        <li><a href="#architecture">Architecture</a></li>
+        <li><a href="#use-cases">Use Cases</a></li>
+        <li><a href="#benefits">Benefits</a></li>
+    </ul>
+</nav>
+
+<!-- Key Stats -->
+<section>
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">4</div>
+                <div class="stat-label">User Personas Supported</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">AI/ML Capabilities</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">99.9%</div>
+                <div class="stat-label">Uptime SLA</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">10K+</div>
+                <div class="stat-label">Concurrent Users</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- User Personas -->
+<section id="personas">
+    <div class="container">
+        <div class="section-header">
+            <h2>Multi-Persona Architecture</h2>
+            <p>Tailored experiences for every role in your AI journey</p>
+        </div>
+
+        <div class="persona-grid">
+            <div class="persona-card data-science">
+                <h3>Data Science</h3>
+                <p class="role">Data Scientists, ML Engineers, AI Researchers</p>
+                <ul>
+                    <li>AI Catalog & Artifact Management</li>
+                    <li>Agentic AI Visual Designer</li>
+                    <li>Federated Learning Framework</li>
+                    <li>LLM Fine-tuning & Management</li>
+                    <li>RAG Development Environment</li>
+                    <li>Visual Workflow Designer</li>
+                    <li>SQL Lab & Analytics</li>
+                    <li>Experimentation Platform</li>
+                </ul>
+            </div>
+
+            <div class="persona-card operations">
+                <h3>Operations</h3>
+                <p class="role">DevOps, Platform Engineers, Infrastructure Teams</p>
+                <ul>
+                    <li>AI Zones & Compute Management</li>
+                    <li>Deployment Orchestration</li>
+                    <li>KServe Inference Services</li>
+                    <li>Spark Jobs & Data Pipelines</li>
+                    <li>System Monitoring & Alerting</li>
+                    <li>CI/CD Pipeline Integration</li>
+                    <li>Cost Center Management</li>
+                    <li>Connection Management</li>
+                </ul>
+            </div>
+
+            <div class="persona-card business">
+                <h3>Business</h3>
+                <p class="role">Business Analysts, Product Managers, Domain Experts</p>
+                <ul>
+                    <li>Converge Low-Code App Builder</li>
+                    <li>RAG Chat Applications</li>
+                    <li>Pre-built Industry Templates</li>
+                    <li>Workflow Automation</li>
+                    <li>Custom Dashboard Builder</li>
+                    <li>Enterprise System Integration</li>
+                    <li>Document Intelligence</li>
+                    <li>Decision Support Tools</li>
+                </ul>
+            </div>
+
+            <div class="persona-card admin">
+                <h3>Administration</h3>
+                <p class="role">Platform Administrators, IT Managers</p>
+                <ul>
+                    <li>Admin Dashboard & Controls</li>
+                    <li>User & Role Management</li>
+                    <li>RBAC & Permissions</li>
+                    <li>Audit Logging & Compliance</li>
+                    <li>License Management</li>
+                    <li>System Configuration</li>
+                    <li>Workspace Management</li>
+                    <li>Security Governance</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI Capabilities -->
+<section id="ai-capabilities">
+    <div class="container">
+        <div class="section-header">
+            <h2>Advanced AI Capabilities</h2>
+            <p>Beyond RAG - Full spectrum AI/ML development and deployment</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">AI</div>
+                <h3>Agentic AI</h3>
+                <p>Build and deploy autonomous multi-agent AI systems with visual flow designer</p>
+                <ul class="feature-list">
+                    <li>Visual Agent Flow Designer (VueFlow)</li>
+                    <li>Multi-Agent Orchestration</li>
+                    <li>Agent Marketplace & Templates</li>
+                    <li>Chain of Thought (CoT) & ReAct</li>
+                    <li>MCP Tool Integration</li>
+                    <li>Agent State & Recovery Management</li>
+                    <li>System Prompt Management</li>
+                    <li>Memory Management (Short/Long-term)</li>
+                    <li>Safety Guardrails & Content Filtering</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">FL</div>
+                <h3>Federated Learning</h3>
+                <p>Privacy-preserving distributed ML across organizations</p>
+                <ul class="feature-list">
+                    <li>Server-Client Training Architecture</li>
+                    <li>Differential Privacy (Configurable ε)</li>
+                    <li>Secure Aggregation Protocols</li>
+                    <li>Multiple Aggregation Strategies</li>
+                    <li>Client & Node Management</li>
+                    <li>Geographic Client Visualization</li>
+                    <li>Privacy Budget Tracking</li>
+                    <li>GDPR/HIPAA Compliance</li>
+                    <li>Cross-Organization Collaboration</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">LM</div>
+                <h3>LLM Management</h3>
+                <p>Complete lifecycle management for Large Language Models</p>
+                <ul class="feature-list">
+                    <li>Model Fine-tuning Pipelines</li>
+                    <li>Multi-Model Orchestration</li>
+                    <li>Custom Model Integration</li>
+                    <li>Performance Optimization</li>
+                    <li>Model Quantization & Pruning</li>
+                    <li>Bias Detection & Mitigation</li>
+                    <li>A/B Testing for Models</li>
+                    <li>Ethical AI Controls</li>
+                    <li>Model Version Control</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">RC</div>
+                <h3>RAG Chat</h3>
+                <p>Enterprise knowledge base with conversational AI</p>
+                <ul class="feature-list">
+                    <li>Intelligent Chat Interface</li>
+                    <li>Multi-Format Document Processing</li>
+                    <li>Hybrid Retrieval (Semantic + Keyword)</li>
+                    <li>Source Citation & Attribution</li>
+                    <li>Multi-turn Conversations</li>
+                    <li>Visual Pipeline Builder</li>
+                    <li>Hallucination Prevention</li>
+                    <li>Confidence Scoring</li>
+                    <li>Streaming Responses</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">CT</div>
+                <h3>AI Catalog</h3>
+                <p>Intelligent marketplace for AI assets discovery and governance</p>
+                <ul class="feature-list">
+                    <li>Centralized AI Asset Repository</li>
+                    <li>AI-Driven Recommendations</li>
+                    <li>Semantic Search & Discovery</li>
+                    <li>Automated Quality Assessment</li>
+                    <li>Version Control & Lineage</li>
+                    <li>One-Click Deployment</li>
+                    <li>Compliance & Certification</li>
+                    <li>Usage Analytics & Insights</li>
+                    <li>Community Ratings & Reviews</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">WF</div>
+                <h3>AI Workflows</h3>
+                <p>Visual orchestration for complex AI/ML pipelines</p>
+                <ul class="feature-list">
+                    <li>Drag-and-Drop Flow Designer</li>
+                    <li>RAG, Agentic, ML, ETL Workflows</li>
+                    <li>Parallel & Streaming Processing</li>
+                    <li>Self-Healing Error Recovery</li>
+                    <li>Intelligent Scheduling</li>
+                    <li>Git-like Version Control</li>
+                    <li>Real-time Performance Analytics</li>
+                    <li>Cross-Workflow Events</li>
+                    <li>Workflow Marketplace</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Operations -->
+<section id="operations">
+    <div class="container">
+        <div class="section-header">
+            <h2>Enterprise Operations</h2>
+            <p>Production-grade infrastructure for AI at scale</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">ZN</div>
+                <h3>AI Zones</h3>
+                <p>Dedicated compute environments with intelligent resource management</p>
+                <ul class="feature-list">
+                    <li>Namespace Isolation & Multi-tenancy</li>
+                    <li>GPU/CPU Resource Allocation</li>
+                    <li>Auto-scaling Policies</li>
+                    <li>Node Affinity & Tolerations</li>
+                    <li>Network Policies & mTLS</li>
+                    <li>Resource Quotas & Limits</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">DP</div>
+                <h3>Deployments</h3>
+                <p>Comprehensive deployment management with rollback</p>
+                <ul class="feature-list">
+                    <li>Multi-environment Support</li>
+                    <li>Blue-Green Deployments</li>
+                    <li>Canary Releases</li>
+                    <li>Automated Rollback</li>
+                    <li>Health Checks & Readiness</li>
+                    <li>Configuration Management</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">IF</div>
+                <h3>Inference Model</h3>
+                <p>KServe-based model serving with visual flow editor</p>
+                <ul class="feature-list">
+                    <li>KServe/Triton Integration</li>
+                    <li>Auto-scaling Inference</li>
+                    <li>Model A/B Testing</li>
+                    <li>Latency & Throughput Monitoring</li>
+                    <li>Drift Detection</li>
+                    <li>Custom Transformers</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">SP</div>
+                <h3>Spark Jobs</h3>
+                <p>Visual designer for big data processing workflows</p>
+                <ul class="feature-list">
+                    <li>Spark-on-Kubernetes</li>
+                    <li>Visual Job Designer</li>
+                    <li>Dynamic Resource Allocation</li>
+                    <li>Job Scheduling & Triggers</li>
+                    <li>DataFrame Transformations</li>
+                    <li>ML Pipeline Integration</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">MN</div>
+                <h3>Monitoring</h3>
+                <p>Comprehensive observability with proactive alerting</p>
+                <ul class="feature-list">
+                    <li>Real-time Dashboards</li>
+                    <li>Prometheus/Grafana Integration</li>
+                    <li>Custom Metrics & Alerts</li>
+                    <li>Distributed Tracing (Jaeger)</li>
+                    <li>Log Aggregation (ELK)</li>
+                    <li>SLA Monitoring</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">CI</div>
+                <h3>CI/CD</h3>
+                <p>Tekton-based continuous integration and deployment</p>
+                <ul class="feature-list">
+                    <li>Tekton Pipelines</li>
+                    <li>GitOps Workflows</li>
+                    <li>Automated Testing</li>
+                    <li>Security Scanning</li>
+                    <li>Container Registry</li>
+                    <li>ArgoCD Integration</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Business Applications -->
+<section id="business">
+    <div class="container">
+        <div class="section-header">
+            <h2>Business Applications</h2>
+            <p>Democratize AI with low-code tools for business users</p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">CV</div>
+                <h3>Converge App</h3>
+                <p>Low-code/no-code platform for AI-powered business applications</p>
+                <ul class="feature-list">
+                    <li>Drag-and-Drop App Builder</li>
+                    <li>Pre-built Industry Templates</li>
+                    <li>AI Component Library</li>
+                    <li>Enterprise System Integration</li>
+                    <li>Workflow Automation</li>
+                    <li>One-click Deployment</li>
+                    <li>Mobile & Desktop Support</li>
+                    <li>Progressive Web Apps</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">IN</div>
+                <h3>Integration Hub</h3>
+                <p>Seamless connectivity with enterprise systems</p>
+                <ul class="feature-list">
+                    <li>CRM: Salesforce, HubSpot, Dynamics</li>
+                    <li>ERP: SAP, Oracle, NetSuite</li>
+                    <li>HR: Workday, ADP, BambooHR</li>
+                    <li>Databases: SQL & NoSQL</li>
+                    <li>APIs: REST & GraphQL</li>
+                    <li>Messaging: Slack, Teams</li>
+                    <li>Data Lakes: S3, Azure, GCP</li>
+                    <li>Streaming: Kafka, RabbitMQ</li>
+                </ul>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">SQ</div>
+                <h3>SQL Lab</h3>
+                <p>Advanced SQL environment with analytics capabilities</p>
+                <ul class="feature-list">
+                    <li>Interactive Query Builder</li>
+                    <li>Data Visualization</li>
+                    <li>Query History & Sharing</li>
+                    <li>Multi-Database Support</li>
+                    <li>Scheduled Queries</li>
+                    <li>Export & Reporting</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Architecture -->
+<section id="architecture">
+    <div class="container">
+        <div class="section-header">
+            <h2>Platform Architecture</h2>
+            <p>Cloud-native, Kubernetes-based architecture with CRD management</p>
+        </div>
+
+        <div class="architecture-diagram">
+            <div class="arch-layers">
+                <div class="arch-layer presentation">
+                    <h4>Presentation Layer</h4>
+                    <p>Multi-persona UI with Vue.js 3, TypeScript, VueFlow</p>
+                    <div class="arch-components">
+                        <span class="arch-component">Data Science Portal</span>
+                        <span class="arch-component">Operations Console</span>
+                        <span class="arch-component">Business Apps</span>
+                        <span class="arch-component">Admin Dashboard</span>
+                    </div>
+                </div>
+
+                <div class="arch-layer business">
+                    <h4>AI/ML Services Layer</h4>
+                    <p>Kubernetes Operators & Controllers for AI/ML lifecycle</p>
+                    <div class="arch-components">
+                        <span class="arch-component">Agentic AI Engine</span>
+                        <span class="arch-component">Federated Learning</span>
+                        <span class="arch-component">RAG Platform</span>
+                        <span class="arch-component">LLM Services</span>
+                        <span class="arch-component">Workflow Engine</span>
+                        <span class="arch-component">Model Serving (KServe)</span>
+                    </div>
+                </div>
+
+                <div class="arch-layer data">
+                    <h4>Data & Storage Layer</h4>
+                    <p>Kubernetes CRDs as schema, etcd as database</p>
+                    <div class="arch-components">
+                        <span class="arch-component">AI Model CRDs</span>
+                        <span class="arch-component">Pipeline CRDs</span>
+                        <span class="arch-component">Feature Store CRDs</span>
+                        <span class="arch-component">Vector Databases</span>
+                        <span class="arch-component">Object Storage (S3)</span>
+                    </div>
+                </div>
+
+                <div class="arch-layer infrastructure">
+                    <h4>Infrastructure Layer</h4>
+                    <p>Kubernetes-native with multi-cloud support</p>
+                    <div class="arch-components">
+                        <span class="arch-component">Kubernetes Clusters</span>
+                        <span class="arch-component">GPU Nodes</span>
+                        <span class="arch-component">Istio Service Mesh</span>
+                        <span class="arch-component">Prometheus/Grafana</span>
+                        <span class="arch-component">Tekton CI/CD</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2rem;">
+            <h3 style="text-align: center; color: var(--primary); margin-bottom: 1rem;">Key CRD Resources</h3>
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <h4>AIModel CRD</h4>
+                    <p>Model serving, scaling, endpoints, metrics</p>
+                </div>
+                <div class="use-case">
+                    <h4>DataPipeline CRD</h4>
+                    <p>ETL scheduling, sources, transformations, sinks</p>
+                </div>
+                <div class="use-case">
+                    <h4>MLWorkflow CRD</h4>
+                    <p>Training stages, hyperparameters, evaluation</p>
+                </div>
+                <div class="use-case">
+                    <h4>AIZone CRD</h4>
+                    <p>Compute isolation, resources, networking, security</p>
+                </div>
+                <div class="use-case">
+                    <h4>FeatureStore CRD</h4>
+                    <p>Features, online/offline serving, versioning</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Use Cases by Industry -->
+<section id="use-cases">
+    <div class="container">
+        <div class="section-header">
+            <h2>Industry Use Cases</h2>
+            <p>Proven solutions across enterprise verticals</p>
+        </div>
+
+        <div class="accordion">
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Healthcare
+                    <span class="tag ai">Federated Learning</span>
+                    <span class="tag data">Privacy-First</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="feature-list">
+                        <li>Collaborative disease prediction across hospitals</li>
+                        <li>Privacy-preserving drug discovery</li>
+                        <li>Distributed medical imaging AI</li>
+                        <li>Multi-site clinical trial analysis</li>
+                        <li>HIPAA-compliant patient data analysis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Financial Services
+                    <span class="tag ai">ML Models</span>
+                    <span class="tag ops">Real-time</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="feature-list">
+                        <li>Cross-institution fraud detection</li>
+                        <li>Fair lending credit scoring models</li>
+                        <li>Industry-wide risk assessment</li>
+                        <li>Anti-money laundering pattern detection</li>
+                        <li>Real-time transaction monitoring</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Telecommunications
+                    <span class="tag ai">Edge AI</span>
+                    <span class="tag data">IoT</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="feature-list">
+                        <li>Network optimization with distributed learning</li>
+                        <li>Customer churn prediction</li>
+                        <li>Predictive equipment maintenance</li>
+                        <li>Traffic flow optimization</li>
+                        <li>5G network intelligence</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Manufacturing
+                    <span class="tag ai">Computer Vision</span>
+                    <span class="tag ops">MLOps</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="feature-list">
+                        <li>Visual quality inspection</li>
+                        <li>Predictive maintenance for equipment</li>
+                        <li>Supply chain optimization</li>
+                        <li>Demand forecasting</li>
+                        <li>Process optimization with ML</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Retail & E-commerce
+                    <span class="tag ai">Recommendations</span>
+                    <span class="tag business">Personalization</span>
+                </div>
+                <div class="accordion-content">
+                    <ul class="feature-list">
+                        <li>Personalized product recommendations</li>
+                        <li>Customer segmentation</li>
+                        <li>Inventory optimization</li>
+                        <li>Price optimization</li>
+                        <li>Customer service automation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits -->
+<section id="benefits">
+    <div class="container">
+        <div class="section-header">
+            <h2>Business Benefits</h2>
+            <p>Measurable outcomes for enterprise AI initiatives</p>
+        </div>
+
+        <table class="benefits-table">
+            <thead>
+                <tr>
+                    <th>Metric</th>
+                    <th>Target</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Time to Value</strong></td>
+                    <td>50% reduction</td>
+                    <td>Accelerate AI project delivery with unified platform</td>
+                </tr>
+                <tr>
+                    <td><strong>Infrastructure Costs</strong></td>
+                    <td>30% reduction</td>
+                    <td>Optimize resources with intelligent scaling & management</td>
+                </tr>
+                <tr>
+                    <td><strong>Platform Uptime</strong></td>
+                    <td>99.9% SLA</td>
+                    <td>Enterprise-grade reliability with self-healing</td>
+                </tr>
+                <tr>
+                    <td><strong>User Adoption</strong></td>
+                    <td>90% satisfaction</td>
+                    <td>Intuitive multi-persona interfaces drive adoption</td>
+                </tr>
+                <tr>
+                    <td><strong>ROI</strong></td>
+                    <td>300% in 18 months</td>
+                    <td>Unified platform eliminates tool sprawl</td>
+                </tr>
+                <tr>
+                    <td><strong>Deployment Success</strong></td>
+                    <td>99% success rate</td>
+                    <td>Reliable CI/CD with automated rollback</td>
+                </tr>
+                <tr>
+                    <td><strong>Mean Time to Recovery</strong></td>
+                    <td>&lt;15 minutes</td>
+                    <td>Rapid incident resolution with self-healing</td>
+                </tr>
+                <tr>
+                    <td><strong>Compliance</strong></td>
+                    <td>100% adherence</td>
+                    <td>Built-in GDPR, HIPAA, SOC2 compliance</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Transform Your Enterprise AI?</h2>
+        <p>Join leading organizations leveraging NStarX to accelerate their AI initiatives while maintaining enterprise-grade security and governance.</p>
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">Request Demo</a>
+            <a href="#" class="btn btn-secondary">Contact Sales</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 NStarX Enterprise AI Platform. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Accordion functionality
+    document.querySelectorAll('.accordion-header').forEach(header => {
+        header.addEventListener('click', () => {
+            const content = header.nextElementSibling;
+            const isOpen = content.style.display === 'block';
+
+            // Close all
+            document.querySelectorAll('.accordion-content').forEach(c => {
+                c.style.display = 'none';
+            });
+
+            // Toggle current
+            content.style.display = isOpen ? 'none' : 'block';
+        });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+</script>
+
+</body>
+</html>

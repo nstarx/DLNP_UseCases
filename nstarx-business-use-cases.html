@@ -1,0 +1,3809 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NStarX Enterprise AI Platform - Business Use Cases</title>
+    <!-- Google Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+    <!-- Mermaid.js for diagrams -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-dark: #1e3a8a;
+            --secondary: #7c3aed;
+            --accent: #06b6d4;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1f2937;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            position: relative;
+        }
+
+        header .tagline {
+            font-size: 1.4rem;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+
+        header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.85;
+            position: relative;
+        }
+
+        /* Navigation */
+        nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 1rem 0;
+            gap: 0.5rem;
+        }
+
+        nav a {
+            color: var(--dark);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        nav a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Sections */
+        section {
+            padding: 4rem 0;
+        }
+
+        section:nth-child(even) {
+            background: white;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Industry Header */
+        .industry-header {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            color: white;
+            padding: 2rem;
+            border-radius: 1rem 1rem 0 0;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .industry-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .industry-title h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .industry-title p {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        /* Use Case Cards */
+        .use-case-container {
+            margin-bottom: 3rem;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 0;
+            background: white;
+            border-radius: 0 0 1rem 1rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .use-case-card {
+            padding: 2rem;
+            border-bottom: 1px solid var(--gray-light);
+            border-right: 1px solid var(--gray-light);
+            transition: all 0.3s;
+        }
+
+        .use-case-card:hover {
+            background: #f0f9ff;
+        }
+
+        .use-case-card h4 {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .use-case-card h4::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .use-case-card .challenge {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .use-case-card .challenge h5 {
+            color: #92400e;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .use-case-card .challenge p {
+            color: #78350f;
+            font-size: 0.95rem;
+        }
+
+        .use-case-card .solution {
+            background: #d1fae5;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .use-case-card .solution h5 {
+            color: #065f46;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .use-case-card .solution p {
+            color: #064e3b;
+            font-size: 0.95rem;
+        }
+
+        .use-case-card .capabilities {
+            margin-top: 1rem;
+        }
+
+        .use-case-card .capabilities h5 {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .capability-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .capability-tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            color: white;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .use-case-card .outcomes {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--gray-light);
+        }
+
+        .use-case-card .outcomes h5 {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .outcome-list {
+            list-style: none;
+        }
+
+        .outcome-list li {
+            padding: 0.3rem 0;
+            color: var(--dark);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .outcome-list li::before {
+            content: "▲";
+            color: var(--success);
+            font-size: 0.7rem;
+        }
+
+        /* Featured Use Case */
+        .featured-use-case {
+            background: linear-gradient(135deg, #1e3a8a 0%, #4c1d95 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-use-case::before {
+            content: 'FEATURED';
+            position: absolute;
+            top: 20px;
+            right: -35px;
+            background: var(--warning);
+            color: var(--dark);
+            padding: 0.5rem 3rem;
+            transform: rotate(45deg);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .featured-use-case h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .featured-use-case .description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+        }
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .featured-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .featured-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .featured-item p {
+            font-size: 0.95rem;
+            opacity: 0.85;
+        }
+
+        /* Stats Section */
+        .stats-banner {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            color: var(--gray-light);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* How It Works */
+        .workflow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .workflow-step {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: relative;
+            text-align: center;
+        }
+
+        .workflow-step::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .workflow-step h4 {
+            margin-top: 0.5rem;
+            margin-bottom: 0.75rem;
+            color: var(--primary);
+        }
+
+        .workflow-step p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* ROI Calculator Preview */
+        .roi-preview {
+            background: linear-gradient(135deg, #065f46 0%, #047857 100%);
+            color: white;
+            border-radius: 1rem;
+            padding: 3rem;
+            margin: 2rem 0;
+        }
+
+        .roi-preview h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .roi-item {
+            background: rgba(255,255,255,0.15);
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            text-align: center;
+        }
+
+        .roi-item .value {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .roi-item .label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background: #e0f2fe;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+        }
+
+        /* Quick Filter */
+        .filter-bar {
+            background: white;
+            padding: 1rem 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .filter-bar span {
+            font-weight: 600;
+            color: var(--gray);
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--gray-light);
+            background: white;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--primary);
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header h1 { font-size: 2rem; }
+            header .tagline { font-size: 1.1rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            nav ul { flex-direction: column; align-items: center; }
+            .use-cases-grid { grid-template-columns: 1fr; }
+            .industry-header { flex-direction: column; text-align: center; }
+            .featured-use-case { padding: 2rem 1.5rem; }
+        }
+
+        /* Accordion for detailed use cases */
+        .use-case-details {
+            margin-top: 1rem;
+        }
+
+        .details-toggle {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .details-toggle:hover {
+            text-decoration: underline;
+        }
+
+        .details-content {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 0.5rem;
+        }
+
+        .details-content.show {
+            display: block;
+        }
+
+        /* Industry colors */
+        .healthcare .industry-header { background: linear-gradient(135deg, #059669, #0d9488); }
+        .finance .industry-header { background: linear-gradient(135deg, #1e40af, #3730a3); }
+        .telecom .industry-header { background: linear-gradient(135deg, #7c3aed, #9333ea); }
+        .manufacturing .industry-header { background: linear-gradient(135deg, #ea580c, #dc2626); }
+        .retail .industry-header { background: linear-gradient(135deg, #0891b2, #0284c7); }
+        .energy .industry-header { background: linear-gradient(135deg, #65a30d, #16a34a); }
+        .government .industry-header { background: linear-gradient(135deg, #4338ca, #1e40af); }
+        .logistics .industry-header { background: linear-gradient(135deg, #ca8a04, #ea580c); }
+
+        /* Material Icons Styling */
+        .material-icons, .material-symbols-outlined {
+            vertical-align: middle;
+            font-size: 24px;
+        }
+
+        .industry-icon .material-symbols-outlined {
+            font-size: 48px;
+            color: white;
+        }
+
+        .nav-icon {
+            font-size: 18px;
+            margin-right: 4px;
+        }
+
+        /* Mermaid Diagram Container */
+        .diagram-container {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        .diagram-container h5 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .mermaid {
+            display: flex;
+            justify-content: center;
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+        }
+
+        /* Detailed Use Case Expansion */
+        .use-case-detail {
+            background: #f0f9ff;
+            border-radius: 0 0 1rem 1rem;
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+        }
+
+        .use-case-detail.expanded {
+            max-height: 3000px;
+            padding: 2rem;
+        }
+
+        .detail-toggle {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent));
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s;
+        }
+
+        .detail-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        }
+
+        .detail-toggle .material-symbols-outlined {
+            transition: transform 0.3s;
+        }
+
+        .detail-toggle.active .material-symbols-outlined {
+            transform: rotate(180deg);
+        }
+
+        /* Transformation Steps */
+        .transformation-section {
+            margin: 1.5rem 0;
+        }
+
+        .transformation-section h5 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .transformation-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .transform-step {
+            background: white;
+            padding: 1.25rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            border-left: 4px solid var(--primary);
+        }
+
+        .transform-step .step-number {
+            background: var(--primary);
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .transform-step h6 {
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .transform-step p {
+            color: var(--gray);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* Platform Components Used */
+        .platform-components {
+            background: linear-gradient(135deg, #1e3a8a, #4c1d95);
+            color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .platform-components h5 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .component-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+        }
+
+        .component-item {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .component-item h6 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .component-item p {
+            font-size: 0.8rem;
+            opacity: 0.85;
+            line-height: 1.4;
+        }
+
+        /* Simulator Styles */
+        .simulator-container {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 1rem;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            color: white;
+        }
+
+        .simulator-container h5 {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .simulator-inputs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .sim-input-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sim-input-group label {
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.9;
+        }
+
+        .sim-input-group input,
+        .sim-input-group select {
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 0.5rem;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .sim-input-group input:focus,
+        .sim-input-group select:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .sim-input-group input::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .sim-input-group select option {
+            background: var(--dark);
+            color: white;
+        }
+
+        .simulator-results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .sim-result {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .sim-result .value {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .sim-result .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        .sim-result.highlight {
+            background: rgba(16, 185, 129, 0.2);
+            border-radius: 0.75rem;
+        }
+
+        .sim-result.highlight .value {
+            background: linear-gradient(135deg, #10b981, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .calculate-btn {
+            background: linear-gradient(135deg, var(--accent), var(--success));
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0 auto;
+            transition: all 0.3s;
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+        }
+
+        /* Before/After Comparison */
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: stretch;
+            margin: 1.5rem 0;
+        }
+
+        .comparison-box {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .comparison-box.before {
+            border-top: 4px solid var(--danger);
+        }
+
+        .comparison-box.after {
+            border-top: 4px solid var(--success);
+        }
+
+        .comparison-box h6 {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .comparison-box.before h6 {
+            color: var(--danger);
+        }
+
+        .comparison-box.after h6 {
+            color: var(--success);
+        }
+
+        .comparison-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+        }
+
+        .comparison-arrow .material-symbols-outlined {
+            font-size: 48px;
+        }
+
+        .comparison-list {
+            list-style: none;
+        }
+
+        .comparison-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--dark);
+        }
+
+        .comparison-list li .material-symbols-outlined {
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .comparison-box.before .comparison-list li .material-symbols-outlined {
+            color: var(--danger);
+        }
+
+        .comparison-box.after .comparison-list li .material-symbols-outlined {
+            color: var(--success);
+        }
+
+        /* Data Flow Section */
+        .data-flow-section {
+            background: #f8fafc;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .data-flow-section h5 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Responsive for comparison */
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+            .comparison-arrow {
+                transform: rotate(90deg);
+                padding: 1rem 0;
+            }
+        }
+
+        /* Tabs for detailed view */
+        .detail-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-light);
+            padding-bottom: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-tab {
+            padding: 0.75rem 1.25rem;
+            border: none;
+            background: transparent;
+            color: var(--gray);
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 0.5rem 0.5rem 0 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .detail-tab:hover {
+            background: #e0f2fe;
+            color: var(--primary);
+        }
+
+        .detail-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Implementation Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 1.5rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--accent));
+            border-radius: 3px;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--primary);
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-light);
+            transform: translateX(calc(50% - 1.5px));
+        }
+
+        .timeline-item h6 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .timeline-item p {
+            color: var(--gray);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .timeline-item .phase-tag {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: var(--primary-light);
+            color: white;
+            border-radius: 1rem;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <h1>NStarX Business Use Cases</h1>
+        <p class="tagline">Real-World AI Solutions Transforming Enterprise Operations</p>
+        <p class="subtitle">Discover how leading organizations leverage NStarX to solve complex business challenges</p>
+    </div>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#healthcare"><span class="material-symbols-outlined nav-icon">local_hospital</span>Healthcare</a></li>
+        <li><a href="#finance"><span class="material-symbols-outlined nav-icon">account_balance</span>Finance</a></li>
+        <li><a href="#telecom"><span class="material-symbols-outlined nav-icon">cell_tower</span>Telecom</a></li>
+        <li><a href="#manufacturing"><span class="material-symbols-outlined nav-icon">precision_manufacturing</span>Manufacturing</a></li>
+        <li><a href="#retail"><span class="material-symbols-outlined nav-icon">shopping_cart</span>Retail</a></li>
+        <li><a href="#energy"><span class="material-symbols-outlined nav-icon">bolt</span>Energy</a></li>
+        <li><a href="#government"><span class="material-symbols-outlined nav-icon">account_balance</span>Government</a></li>
+        <li><a href="#logistics"><span class="material-symbols-outlined nav-icon">local_shipping</span>Logistics</a></li>
+        <li><a href="#simulators"><span class="material-symbols-outlined nav-icon">calculate</span>Simulators</a></li>
+    </ul>
+</nav>
+
+<!-- Stats Banner -->
+<section class="stats-banner">
+    <div class="container">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">40+</div>
+                <div class="stat-label">Industry Use Cases</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Business Domains</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">300%</div>
+                <div class="stat-label">Average ROI</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50%</div>
+                <div class="stat-label">Faster Time-to-Value</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Bar -->
+<section>
+    <div class="container">
+        <div class="filter-bar">
+            <span>Filter by Capability:</span>
+            <button class="filter-btn active" data-filter="all">All Use Cases</button>
+            <button class="filter-btn" data-filter="agentic">Agentic AI</button>
+            <button class="filter-btn" data-filter="federated">Federated Learning</button>
+            <button class="filter-btn" data-filter="rag">RAG Chat</button>
+            <button class="filter-btn" data-filter="workflows">AI Workflows</button>
+            <button class="filter-btn" data-filter="llm">LLM Management</button>
+        </div>
+    </div>
+</section>
+
+<!-- Healthcare -->
+<section id="healthcare">
+    <div class="container">
+        <div class="use-case-container healthcare">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">local_hospital</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Healthcare & Life Sciences</h3>
+                    <p>Privacy-preserving AI for patient care, drug discovery, and clinical operations</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="federated rag" id="healthcare-uc1">
+                    <h4><span class="material-symbols-outlined" style="font-size:20px;color:var(--primary);">monitor_heart</span> Multi-Hospital Disease Prediction</h4>
+                    <div class="challenge">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">warning</span> Business Challenge</h5>
+                        <p>Hospitals want to collaborate on predictive models for early disease detection but cannot share sensitive patient data due to HIPAA regulations and patient privacy concerns.</p>
+                    </div>
+                    <div class="solution">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">lightbulb</span> NStarX Solution</h5>
+                        <p>Deploy Federated Learning across hospital networks where models are trained locally on each institution's data. Only encrypted model parameters are shared, enabling collaborative AI without exposing any patient information.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">widgets</span> Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">Differential Privacy</span>
+                            <span class="capability-tag">Secure Aggregation</span>
+                            <span class="capability-tag">AI Zones</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">trending_up</span> Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>25% improvement in early detection accuracy</li>
+                            <li>100% HIPAA compliance maintained</li>
+                            <li>15+ hospitals collaborating securely</li>
+                            <li>$12M annual savings in preventable treatments</li>
+                        </ul>
+                    </div>
+                    <button class="detail-toggle" onclick="toggleDetail('healthcare-detail-1')">
+                        <span class="material-symbols-outlined">expand_more</span>
+                        View Implementation Details & Simulator
+                    </button>
+                </div>
+
+                <!-- Detailed Implementation for Use Case 1 -->
+                <div class="use-case-detail" id="healthcare-detail-1" style="grid-column: 1 / -1;">
+                    <div class="detail-tabs">
+                        <button class="detail-tab active" onclick="switchTab(this, 'hc1-architecture')">
+                            <span class="material-symbols-outlined">architecture</span> Architecture
+                        </button>
+                        <button class="detail-tab" onclick="switchTab(this, 'hc1-flow')">
+                            <span class="material-symbols-outlined">account_tree</span> Data Flow
+                        </button>
+                        <button class="detail-tab" onclick="switchTab(this, 'hc1-implementation')">
+                            <span class="material-symbols-outlined">build</span> Implementation
+                        </button>
+                        <button class="detail-tab" onclick="switchTab(this, 'hc1-simulator')">
+                            <span class="material-symbols-outlined">calculate</span> ROI Simulator
+                        </button>
+                    </div>
+
+                    <!-- Architecture Tab -->
+                    <div class="tab-content active" id="hc1-architecture">
+                        <div class="comparison-container">
+                            <div class="comparison-box before">
+                                <h6><span class="material-symbols-outlined">cancel</span> Before NStarX</h6>
+                                <ul class="comparison-list">
+                                    <li><span class="material-symbols-outlined">close</span> Siloed hospital data prevents collaborative learning</li>
+                                    <li><span class="material-symbols-outlined">close</span> Limited training data leads to poor model accuracy</li>
+                                    <li><span class="material-symbols-outlined">close</span> Manual data anonymization is error-prone</li>
+                                    <li><span class="material-symbols-outlined">close</span> Regulatory compliance requires expensive audits</li>
+                                    <li><span class="material-symbols-outlined">close</span> Rare disease patterns go undetected</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-arrow">
+                                <span class="material-symbols-outlined">arrow_forward</span>
+                            </div>
+                            <div class="comparison-box after">
+                                <h6><span class="material-symbols-outlined">check_circle</span> After NStarX</h6>
+                                <ul class="comparison-list">
+                                    <li><span class="material-symbols-outlined">check</span> Federated learning enables collaboration without data sharing</li>
+                                    <li><span class="material-symbols-outlined">check</span> 10x larger effective training dataset</li>
+                                    <li><span class="material-symbols-outlined">check</span> Built-in differential privacy guarantees</li>
+                                    <li><span class="material-symbols-outlined">check</span> Automated compliance with audit trails</li>
+                                    <li><span class="material-symbols-outlined">check</span> Cross-institution pattern detection</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="diagram-container">
+                            <h5><span class="material-symbols-outlined">schema</span> Federated Learning Architecture</h5>
+                            <div class="mermaid">
+flowchart TB
+    subgraph Central["NStarX Central Server"]
+        AG[Secure Aggregator]
+        GM[Global Model]
+        PC[Privacy Controller]
+        MON[Monitoring Dashboard]
+    end
+
+    subgraph H1["Hospital A - AI Zone"]
+        D1[(Patient Data)]
+        LM1[Local Model]
+        DP1[Differential Privacy]
+    end
+
+    subgraph H2["Hospital B - AI Zone"]
+        D2[(Patient Data)]
+        LM2[Local Model]
+        DP2[Differential Privacy]
+    end
+
+    subgraph H3["Hospital C - AI Zone"]
+        D3[(Patient Data)]
+        LM3[Local Model]
+        DP3[Differential Privacy]
+    end
+
+    D1 --> LM1
+    D2 --> LM2
+    D3 --> LM3
+
+    LM1 --> DP1
+    LM2 --> DP2
+    LM3 --> DP3
+
+    DP1 -->|Encrypted Gradients| AG
+    DP2 -->|Encrypted Gradients| AG
+    DP3 -->|Encrypted Gradients| AG
+
+    AG --> GM
+    GM --> PC
+    PC -->|Updated Model| LM1
+    PC -->|Updated Model| LM2
+    PC -->|Updated Model| LM3
+
+    AG --> MON
+
+    style Central fill:#1e40af,color:#fff
+    style H1 fill:#059669,color:#fff
+    style H2 fill:#059669,color:#fff
+    style H3 fill:#059669,color:#fff
+                            </div>
+                        </div>
+
+                        <div class="platform-components">
+                            <h5><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h5>
+                            <div class="component-grid">
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">hub</span> Federated Learning Engine</h6>
+                                    <p>Orchestrates distributed training across hospitals with configurable aggregation strategies (FedAvg, FedProx, FedOpt)</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">shield</span> Differential Privacy</h6>
+                                    <p>Adds calibrated noise to gradients ensuring privacy budget (ε) compliance per HIPAA requirements</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">lock</span> Secure Aggregation</h6>
+                                    <p>Cryptographic protocols ensure server never sees individual hospital updates</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">dns</span> AI Zones</h6>
+                                    <p>Isolated compute environments with network policies, RBAC, and data residency controls</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">monitoring</span> Privacy Budget Tracker</h6>
+                                    <p>Real-time monitoring of privacy spend across training rounds with automatic limits</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">assignment</span> Compliance Auditor</h6>
+                                    <p>Automated audit logs and compliance reports for HIPAA, GDPR, and institutional policies</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Data Flow Tab -->
+                    <div class="tab-content" id="hc1-flow">
+                        <div class="diagram-container">
+                            <h5><span class="material-symbols-outlined">conversion_path</span> End-to-End Data Flow</h5>
+                            <div class="mermaid">
+sequenceDiagram
+    participant H as Hospital EHR
+    participant AZ as AI Zone (Local)
+    participant DP as Privacy Layer
+    participant CS as Central Server
+    participant GM as Global Model
+
+    Note over H,GM: Training Round Initialization
+    CS->>AZ: Distribute current global model
+
+    Note over H,GM: Local Training Phase
+    H->>AZ: Stream patient records (encrypted)
+    AZ->>AZ: Preprocess & validate data
+    AZ->>AZ: Train local model (5 epochs)
+    AZ->>DP: Submit local gradients
+
+    Note over H,GM: Privacy Protection
+    DP->>DP: Apply differential privacy (ε=1.0)
+    DP->>DP: Clip gradient norms
+    DP->>CS: Send encrypted gradients
+
+    Note over H,GM: Secure Aggregation
+    CS->>CS: Wait for all hospitals
+    CS->>CS: Aggregate (FedAvg)
+    CS->>GM: Update global model
+
+    Note over H,GM: Model Distribution
+    GM->>AZ: Push updated model
+    AZ->>AZ: Evaluate on local test set
+    AZ->>CS: Report metrics (non-sensitive)
+                            </div>
+                        </div>
+
+                        <div class="transformation-section">
+                            <h5><span class="material-symbols-outlined">timeline</span> Processing Pipeline Stages</h5>
+                            <div class="transformation-steps">
+                                <div class="transform-step">
+                                    <div class="step-number">1</div>
+                                    <h6>Data Ingestion</h6>
+                                    <p>EHR data streamed via FHIR APIs to local AI Zone. Patient identifiers removed at source.</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number">2</div>
+                                    <h6>Feature Engineering</h6>
+                                    <p>Standardized clinical features extracted (vitals, labs, diagnoses, medications) using ML pipelines.</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number">3</div>
+                                    <h6>Local Training</h6>
+                                    <p>Deep learning model trained on local data. Weights stored in encrypted format.</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number">4</div>
+                                    <h6>Privacy Application</h6>
+                                    <p>Differential privacy noise added. Gradient clipping ensures bounded sensitivity.</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number">5</div>
+                                    <h6>Secure Transmission</h6>
+                                    <p>Encrypted gradients sent to central server via mTLS. Zero knowledge of individual contributions.</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number">6</div>
+                                    <h6>Global Aggregation</h6>
+                                    <p>FedAvg algorithm combines updates. New global model tested and distributed.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Implementation Tab -->
+                    <div class="tab-content" id="hc1-implementation">
+                        <div class="diagram-container">
+                            <h5><span class="material-symbols-outlined">rocket_launch</span> Implementation Roadmap</h5>
+                            <div class="mermaid">
+gantt
+    title Multi-Hospital Federated Learning Implementation
+    dateFormat  YYYY-MM-DD
+    section Discovery
+    Requirements & Compliance Review    :a1, 2024-01-01, 14d
+    Data Assessment & Schema Mapping    :a2, after a1, 14d
+    section Infrastructure
+    AI Zone Setup (Per Hospital)        :b1, after a2, 21d
+    Network & Security Configuration    :b2, after a2, 14d
+    section Development
+    FL Pipeline Development             :c1, after b1, 28d
+    Privacy Controls Implementation     :c2, after b1, 21d
+    Monitoring Dashboard Setup          :c3, after c1, 14d
+    section Testing
+    Integration Testing                 :d1, after c3, 14d
+    Privacy Audit & Certification       :d2, after d1, 14d
+    section Deployment
+    Pilot with 3 Hospitals              :e1, after d2, 30d
+    Full Rollout                        :e2, after e1, 30d
+                            </div>
+                        </div>
+
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <h6>Phase 1: Foundation <span class="phase-tag">Weeks 1-4</span></h6>
+                                <p>Deploy NStarX AI Zones at each participating hospital. Configure network policies, establish secure communication channels, and implement RBAC for healthcare staff roles.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Phase 2: Data Pipeline <span class="phase-tag">Weeks 5-8</span></h6>
+                                <p>Build FHIR-compliant data connectors. Implement feature extraction pipelines using Spark Jobs. Configure data validation and quality checks.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Phase 3: FL Setup <span class="phase-tag">Weeks 9-12</span></h6>
+                                <p>Deploy Federated Learning framework. Configure privacy parameters (ε, δ). Set up secure aggregation protocols and model versioning.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Phase 4: Training & Validation <span class="phase-tag">Weeks 13-16</span></h6>
+                                <p>Execute training rounds with pilot hospitals. Validate model performance. Fine-tune hyperparameters and privacy budgets.</p>
+                            </div>
+                            <div class="timeline-item">
+                                <h6>Phase 5: Production <span class="phase-tag">Weeks 17-20</span></h6>
+                                <p>Roll out to all hospitals. Implement continuous learning. Set up alerting and performance monitoring dashboards.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Tab -->
+                    <div class="tab-content" id="hc1-simulator">
+                        <div class="simulator-container">
+                            <h5><span class="material-symbols-outlined">calculate</span> Federated Learning ROI Simulator</h5>
+                            <p style="opacity:0.8;margin-bottom:1.5rem;">Enter your organization's parameters to estimate potential value from federated learning</p>
+
+                            <div class="simulator-inputs">
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">domain</span> Number of Hospitals</label>
+                                    <input type="number" id="hc1-hospitals" value="10" min="2" max="100">
+                                </div>
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">groups</span> Avg Patients per Hospital (K)</label>
+                                    <input type="number" id="hc1-patients" value="50" min="10" max="500">
+                                </div>
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">percent</span> Current Detection Rate (%)</label>
+                                    <input type="number" id="hc1-current-rate" value="65" min="40" max="90">
+                                </div>
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">payments</span> Cost per Missed Detection ($K)</label>
+                                    <input type="number" id="hc1-miss-cost" value="75" min="10" max="500">
+                                </div>
+                            </div>
+
+                            <button class="calculate-btn" onclick="calculateHealthcareROI()">
+                                <span class="material-symbols-outlined">play_arrow</span>
+                                Calculate ROI
+                            </button>
+
+                            <div class="simulator-results" id="hc1-results">
+                                <div class="sim-result">
+                                    <div class="value" id="hc1-effective-data">500K</div>
+                                    <div class="label">Effective Training Data</div>
+                                </div>
+                                <div class="sim-result">
+                                    <div class="value" id="hc1-new-rate">81%</div>
+                                    <div class="label">Projected Detection Rate</div>
+                                </div>
+                                <div class="sim-result">
+                                    <div class="value" id="hc1-lives-saved">2,400</div>
+                                    <div class="label">Additional Early Detections/Year</div>
+                                </div>
+                                <div class="sim-result highlight">
+                                    <div class="value" id="hc1-savings">$18M</div>
+                                    <div class="label">Annual Cost Savings</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="comparison-container" style="margin-top:2rem;">
+                            <div class="comparison-box before">
+                                <h6><span class="material-symbols-outlined">warning</span> Without Federated Learning</h6>
+                                <ul class="comparison-list">
+                                    <li><span class="material-symbols-outlined">data_array</span> <strong>Limited Data:</strong> Each hospital trains on only its own patient data</li>
+                                    <li><span class="material-symbols-outlined">trending_down</span> <strong>Lower Accuracy:</strong> Small datasets lead to overfitting and poor generalization</li>
+                                    <li><span class="material-symbols-outlined">visibility_off</span> <strong>Blind Spots:</strong> Rare conditions go undetected without diverse data</li>
+                                    <li><span class="material-symbols-outlined">gavel</span> <strong>Compliance Risk:</strong> Any data sharing attempt requires complex legal agreements</li>
+                                </ul>
+                            </div>
+                            <div class="comparison-arrow">
+                                <span class="material-symbols-outlined">trending_flat</span>
+                            </div>
+                            <div class="comparison-box after">
+                                <h6><span class="material-symbols-outlined">verified</span> With NStarX Federated Learning</h6>
+                                <ul class="comparison-list">
+                                    <li><span class="material-symbols-outlined">database</span> <strong>Massive Dataset:</strong> Learn from millions of patients across all hospitals</li>
+                                    <li><span class="material-symbols-outlined">trending_up</span> <strong>Superior Accuracy:</strong> 25%+ improvement in early detection rates</li>
+                                    <li><span class="material-symbols-outlined">visibility</span> <strong>Pattern Discovery:</strong> Identify rare conditions across populations</li>
+                                    <li><span class="material-symbols-outlined">verified_user</span> <strong>Built-in Compliance:</strong> HIPAA-ready with automated audit trails</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="rag agentic" id="healthcare-uc2">
+                    <h4><span class="material-symbols-outlined" style="font-size:20px;color:var(--primary);">clinical_notes</span> Clinical Decision Support System</h4>
+                    <div class="challenge">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">warning</span> Business Challenge</h5>
+                        <p>Physicians spend 2+ hours daily searching medical literature and patient history. Outdated information leads to suboptimal treatment decisions and increased liability.</p>
+                    </div>
+                    <div class="solution">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">lightbulb</span> NStarX Solution</h5>
+                        <p>Implement RAG Chat integrated with medical knowledge bases, clinical guidelines, and patient EHR data. Agentic AI assistants provide real-time treatment recommendations with source citations.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">widgets</span> Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">trending_up</span> Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>70% reduction in literature review time</li>
+                            <li>18% improvement in treatment outcomes</li>
+                            <li>99.2% physician satisfaction rate</li>
+                            <li>40% reduction in diagnostic errors</li>
+                        </ul>
+                    </div>
+                    <button class="detail-toggle" onclick="toggleDetail('healthcare-detail-2')">
+                        <span class="material-symbols-outlined">expand_more</span>
+                        View Implementation Details
+                    </button>
+                </div>
+
+                <!-- Detailed Implementation for Use Case 2 -->
+                <div class="use-case-detail" id="healthcare-detail-2" style="grid-column: 1 / -1;">
+                    <div class="diagram-container">
+                        <h5><span class="material-symbols-outlined">schema</span> RAG-Powered Clinical Decision Support Architecture</h5>
+                        <div class="mermaid">
+flowchart LR
+    subgraph Sources["Knowledge Sources"]
+        PUB[(PubMed)]
+        CG[(Clinical Guidelines)]
+        EHR[(Patient EHR)]
+        DRUG[(Drug Database)]
+    end
+
+    subgraph Ingestion["Data Pipeline"]
+        ING[Document Ingestion]
+        CHUNK[Chunking & Parsing]
+        EMB[Embedding Generation]
+    end
+
+    subgraph Storage["Vector Store"]
+        VS[(Vector Database)]
+        META[(Metadata Index)]
+    end
+
+    subgraph RAG["RAG Engine"]
+        RET[Hybrid Retriever]
+        RANK[Re-ranker]
+        CTX[Context Builder]
+    end
+
+    subgraph Agents["Agentic AI"]
+        DIAG[Diagnosis Agent]
+        TREAT[Treatment Agent]
+        DRUG_A[Drug Interaction Agent]
+        CITE[Citation Agent]
+    end
+
+    subgraph Interface["Clinical Interface"]
+        CHAT[Chat Interface]
+        DASH[Clinical Dashboard]
+        ALERT[Alert System]
+    end
+
+    PUB --> ING
+    CG --> ING
+    EHR --> ING
+    DRUG --> ING
+
+    ING --> CHUNK --> EMB --> VS
+    EMB --> META
+
+    VS --> RET
+    META --> RET
+    RET --> RANK --> CTX
+
+    CTX --> DIAG
+    CTX --> TREAT
+    CTX --> DRUG_A
+    DIAG --> CITE
+    TREAT --> CITE
+    DRUG_A --> CITE
+
+    CITE --> CHAT
+    CITE --> DASH
+    CITE --> ALERT
+
+    style Sources fill:#059669,color:#fff
+    style Storage fill:#1e40af,color:#fff
+    style Agents fill:#7c3aed,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="platform-components">
+                        <h5><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h5>
+                        <div class="component-grid">
+                            <div class="component-item">
+                                <h6><span class="material-symbols-outlined">chat</span> RAG Chat</h6>
+                                <p>Conversational interface with source citation, confidence scoring, and hallucination prevention</p>
+                            </div>
+                            <div class="component-item">
+                                <h6><span class="material-symbols-outlined">psychology</span> Agentic AI</h6>
+                                <p>Multi-agent orchestration for specialized clinical reasoning tasks</p>
+                            </div>
+                            <div class="component-item">
+                                <h6><span class="material-symbols-outlined">tune</span> LLM Fine-tuning</h6>
+                                <p>Domain-adapted models trained on medical terminology and clinical protocols</p>
+                            </div>
+                            <div class="component-item">
+                                <h6><span class="material-symbols-outlined">integration_instructions</span> Integration Hub</h6>
+                                <p>HL7 FHIR connectors for seamless EHR integration</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="workflows llm" id="healthcare-uc3">
+                    <h4><span class="material-symbols-outlined" style="font-size:20px;color:var(--primary);">receipt_long</span> Automated Medical Coding & Billing</h4>
+                    <div class="challenge">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">warning</span> Business Challenge</h5>
+                        <p>Manual medical coding results in 15-20% error rates, delayed reimbursements, and $125B annual losses in the US healthcare system due to coding inaccuracies.</p>
+                    </div>
+                    <div class="solution">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">lightbulb</span> NStarX Solution</h5>
+                        <p>Deploy AI Workflows that automatically extract clinical information from physician notes, map to ICD-10/CPT codes, and flag anomalies for human review. LLM fine-tuning ensures domain-specific accuracy.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">widgets</span> Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">LLM Fine-tuning</span>
+                            <span class="capability-tag">Document Intelligence</span>
+                            <span class="capability-tag">Converge App</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">trending_up</span> Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>95% coding accuracy (up from 80%)</li>
+                            <li>60% faster claim processing</li>
+                            <li>$4.5M annual revenue recovery</li>
+                            <li>85% reduction in claim denials</li>
+                        </ul>
+                    </div>
+                    <button class="detail-toggle" onclick="toggleDetail('healthcare-detail-3')">
+                        <span class="material-symbols-outlined">expand_more</span>
+                        View Implementation Details
+                    </button>
+                </div>
+
+                <!-- Detailed Implementation for Use Case 3 -->
+                <div class="use-case-detail" id="healthcare-detail-3" style="grid-column: 1 / -1;">
+                    <div class="diagram-container">
+                        <h5><span class="material-symbols-outlined">schema</span> Automated Medical Coding Pipeline</h5>
+                        <div class="mermaid">
+flowchart TB
+    subgraph Input["Document Input"]
+        DOC[Physician Notes]
+        OP[Operative Reports]
+        DISC[Discharge Summaries]
+    end
+
+    subgraph Processing["AI Workflow Engine"]
+        OCR[Document OCR]
+        NER[Medical NER]
+        REL[Relation Extraction]
+        LLM[Fine-tuned LLM]
+    end
+
+    subgraph Coding["Code Assignment"]
+        ICD[ICD-10 Mapper]
+        CPT[CPT Mapper]
+        VAL[Validation Rules]
+        CONF[Confidence Scorer]
+    end
+
+    subgraph Review["Human-in-Loop"]
+        QUEUE[Review Queue]
+        AUDIT[Audit Dashboard]
+        FEED[Feedback Loop]
+    end
+
+    subgraph Output["Billing Output"]
+        CLAIM[Claim Generation]
+        EDI[EDI 837 Export]
+        REPORT[Analytics Reports]
+    end
+
+    DOC --> OCR
+    OP --> OCR
+    DISC --> OCR
+
+    OCR --> NER --> REL --> LLM
+
+    LLM --> ICD
+    LLM --> CPT
+    ICD --> VAL
+    CPT --> VAL
+    VAL --> CONF
+
+    CONF -->|High Confidence| CLAIM
+    CONF -->|Low Confidence| QUEUE
+
+    QUEUE --> AUDIT
+    AUDIT --> FEED
+    FEED --> LLM
+
+    CLAIM --> EDI
+    CLAIM --> REPORT
+
+    style Processing fill:#1e40af,color:#fff
+    style Coding fill:#059669,color:#fff
+    style Review fill:#f59e0b,color:#000
+                        </div>
+                    </div>
+
+                    <div class="simulator-container">
+                        <h5><span class="material-symbols-outlined">calculate</span> Medical Coding ROI Simulator</h5>
+                        <p style="opacity:0.8;margin-bottom:1.5rem;">Calculate potential savings from automated medical coding</p>
+
+                        <div class="simulator-inputs">
+                            <div class="sim-input-group">
+                                <label><span class="material-symbols-outlined" style="font-size:16px;">description</span> Monthly Claims Volume</label>
+                                <input type="number" id="hc3-claims" value="50000" min="1000" max="500000">
+                            </div>
+                            <div class="sim-input-group">
+                                <label><span class="material-symbols-outlined" style="font-size:16px;">error</span> Current Error Rate (%)</label>
+                                <input type="number" id="hc3-error-rate" value="18" min="5" max="30">
+                            </div>
+                            <div class="sim-input-group">
+                                <label><span class="material-symbols-outlined" style="font-size:16px;">payments</span> Avg Claim Value ($)</label>
+                                <input type="number" id="hc3-claim-value" value="450" min="100" max="2000">
+                            </div>
+                            <div class="sim-input-group">
+                                <label><span class="material-symbols-outlined" style="font-size:16px;">person</span> FTE Coders</label>
+                                <input type="number" id="hc3-coders" value="25" min="5" max="200">
+                            </div>
+                        </div>
+
+                        <button class="calculate-btn" onclick="calculateCodingROI()">
+                            <span class="material-symbols-outlined">play_arrow</span>
+                            Calculate ROI
+                        </button>
+
+                        <div class="simulator-results" id="hc3-results">
+                            <div class="sim-result">
+                                <div class="value" id="hc3-revenue-recovered">$4.2M</div>
+                                <div class="label">Annual Revenue Recovered</div>
+                            </div>
+                            <div class="sim-result">
+                                <div class="value" id="hc3-labor-saved">$1.8M</div>
+                                <div class="label">Labor Cost Savings</div>
+                            </div>
+                            <div class="sim-result">
+                                <div class="value" id="hc3-new-error-rate">3.2%</div>
+                                <div class="label">New Error Rate</div>
+                            </div>
+                            <div class="sim-result highlight">
+                                <div class="value" id="hc3-total-roi">$6.0M</div>
+                                <div class="label">Total Annual Impact</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="federated workflows" id="healthcare-uc4">
+                    <h4><span class="material-symbols-outlined" style="font-size:20px;color:var(--primary);">biotech</span> Drug Discovery Collaboration</h4>
+                    <div class="challenge">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">warning</span> Business Challenge</h5>
+                        <p>Pharmaceutical companies want to accelerate drug discovery by sharing molecular insights without revealing proprietary compound data worth billions in R&D investment.</p>
+                    </div>
+                    <div class="solution">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">lightbulb</span> NStarX Solution</h5>
+                        <p>Enable cross-organization federated learning for molecular property prediction. Companies train on local compound libraries while contributing to shared models that predict drug efficacy and toxicity.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">widgets</span> Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">Secure Aggregation</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Spark Jobs</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">trending_up</span> Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>30% reduction in drug discovery timeline</li>
+                            <li>$200M savings per successful drug</li>
+                            <li>5x larger training dataset without data sharing</li>
+                            <li>IP protection maintained across competitors</li>
+                        </ul>
+                    </div>
+                    <button class="detail-toggle" onclick="toggleDetail('healthcare-detail-4')">
+                        <span class="material-symbols-outlined">expand_more</span>
+                        View Implementation Details
+                    </button>
+                </div>
+
+                <!-- Detailed Implementation for Use Case 4 -->
+                <div class="use-case-detail" id="healthcare-detail-4" style="grid-column: 1 / -1;">
+                    <div class="diagram-container">
+                        <h5><span class="material-symbols-outlined">schema</span> Cross-Pharma Federated Drug Discovery</h5>
+                        <div class="mermaid">
+flowchart TB
+    subgraph Consortium["Federated Consortium"]
+        direction TB
+        ORCH[NStarX Orchestrator]
+        AGG[Secure Aggregator]
+        MODEL[Global QSAR Model]
+    end
+
+    subgraph P1["Pharma Company A"]
+        D1[(Compound Library)]
+        M1[Local Model]
+        P1_DP[Privacy Layer]
+    end
+
+    subgraph P2["Pharma Company B"]
+        D2[(Compound Library)]
+        M2[Local Model]
+        P2_DP[Privacy Layer]
+    end
+
+    subgraph P3["Pharma Company C"]
+        D3[(Compound Library)]
+        M3[Local Model]
+        P3_DP[Privacy Layer]
+    end
+
+    subgraph Apps["Applications"]
+        TOX[Toxicity Prediction]
+        EFF[Efficacy Prediction]
+        ADME[ADME Properties]
+        DOCK[Virtual Screening]
+    end
+
+    D1 --> M1 --> P1_DP -->|Gradients| AGG
+    D2 --> M2 --> P2_DP -->|Gradients| AGG
+    D3 --> M3 --> P3_DP -->|Gradients| AGG
+
+    ORCH --> AGG
+    AGG --> MODEL
+
+    MODEL -->|Updated| M1
+    MODEL -->|Updated| M2
+    MODEL -->|Updated| M3
+
+    MODEL --> TOX
+    MODEL --> EFF
+    MODEL --> ADME
+    MODEL --> DOCK
+
+    style Consortium fill:#1e40af,color:#fff
+    style P1 fill:#7c3aed,color:#fff
+    style P2 fill:#7c3aed,color:#fff
+    style P3 fill:#7c3aed,color:#fff
+    style Apps fill:#059669,color:#fff
+                        </div>
+                    </div>
+
+                    <div class="comparison-container">
+                        <div class="comparison-box before">
+                            <h6><span class="material-symbols-outlined">cancel</span> Traditional Approach</h6>
+                            <ul class="comparison-list">
+                                <li><span class="material-symbols-outlined">close</span> Each company trains on limited internal data only</li>
+                                <li><span class="material-symbols-outlined">close</span> Redundant R&D efforts across competitors</li>
+                                <li><span class="material-symbols-outlined">close</span> Poor prediction accuracy for novel compounds</li>
+                                <li><span class="material-symbols-outlined">close</span> High failure rate in clinical trials</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-arrow">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </div>
+                        <div class="comparison-box after">
+                            <h6><span class="material-symbols-outlined">check_circle</span> Federated Approach</h6>
+                            <ul class="comparison-list">
+                                <li><span class="material-symbols-outlined">check</span> Collective learning from millions of compounds</li>
+                                <li><span class="material-symbols-outlined">check</span> IP fully protected - no compound data shared</li>
+                                <li><span class="material-symbols-outlined">check</span> Superior model generalization</li>
+                                <li><span class="material-symbols-outlined">check</span> Faster candidate identification</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Financial Services -->
+<section id="finance">
+    <div class="container">
+        <div class="use-case-container finance">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">account_balance</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Financial Services</h3>
+                    <p>Real-time risk management, fraud detection, and intelligent customer engagement</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="federated workflows" id="finance-uc1">
+                    <h4><span class="material-symbols-outlined" style="font-size:20px;color:var(--primary);">security</span> Cross-Institution Fraud Detection</h4>
+                    <div class="challenge">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">warning</span> Business Challenge</h5>
+                        <p>Individual banks see only their portion of fraud patterns. Sophisticated fraud rings exploit this blind spot, causing $32B in annual losses across the banking industry.</p>
+                    </div>
+                    <div class="solution">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">lightbulb</span> NStarX Solution</h5>
+                        <p>Deploy federated learning across banking consortium to build fraud detection models that learn from patterns across all institutions without sharing customer transaction data or competitive intelligence.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">widgets</span> Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">Real-time Inference</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5><span class="material-symbols-outlined" style="font-size:16px;">trending_up</span> Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>45% improvement in fraud detection rate</li>
+                            <li>60% reduction in false positives</li>
+                            <li>$180M annual fraud losses prevented</li>
+                            <li>Sub-100ms detection latency</li>
+                        </ul>
+                    </div>
+                    <button class="detail-toggle" onclick="toggleDetail('finance-detail-1')">
+                        <span class="material-symbols-outlined">expand_more</span>
+                        View Implementation Details & Simulator
+                    </button>
+                </div>
+
+                <!-- Detailed Implementation for Finance Use Case 1 -->
+                <div class="use-case-detail" id="finance-detail-1" style="grid-column: 1 / -1;">
+                    <div class="detail-tabs">
+                        <button class="detail-tab active" onclick="switchTab(this, 'fin1-architecture')">
+                            <span class="material-symbols-outlined">architecture</span> Architecture
+                        </button>
+                        <button class="detail-tab" onclick="switchTab(this, 'fin1-flow')">
+                            <span class="material-symbols-outlined">account_tree</span> Real-time Flow
+                        </button>
+                        <button class="detail-tab" onclick="switchTab(this, 'fin1-simulator')">
+                            <span class="material-symbols-outlined">calculate</span> Fraud Simulator
+                        </button>
+                    </div>
+
+                    <!-- Architecture Tab -->
+                    <div class="tab-content active" id="fin1-architecture">
+                        <div class="diagram-container">
+                            <h5><span class="material-symbols-outlined">schema</span> Cross-Bank Federated Fraud Detection</h5>
+                            <div class="mermaid">
+flowchart TB
+    subgraph Consortium["Banking Consortium - NStarX"]
+        ORCH[FL Orchestrator]
+        AGG[Secure Aggregator]
+        MODEL[Global Fraud Model]
+        MON[Consortium Dashboard]
+    end
+
+    subgraph B1["Bank A - AI Zone"]
+        TXN1[(Transaction Data)]
+        FM1[Local Fraud Model]
+        INF1[Real-time Inference]
+        DP1[Privacy Layer]
+    end
+
+    subgraph B2["Bank B - AI Zone"]
+        TXN2[(Transaction Data)]
+        FM2[Local Fraud Model]
+        INF2[Real-time Inference]
+        DP2[Privacy Layer]
+    end
+
+    subgraph B3["Bank C - AI Zone"]
+        TXN3[(Transaction Data)]
+        FM3[Local Fraud Model]
+        INF3[Real-time Inference]
+        DP3[Privacy Layer]
+    end
+
+    subgraph Detection["Real-time Detection"]
+        SCORE[Risk Scoring]
+        ALERT[Alert Engine]
+        CASE[Case Management]
+    end
+
+    TXN1 --> FM1
+    TXN2 --> FM2
+    TXN3 --> FM3
+
+    FM1 --> DP1 -->|Encrypted Updates| AGG
+    FM2 --> DP2 -->|Encrypted Updates| AGG
+    FM3 --> DP3 -->|Encrypted Updates| AGG
+
+    AGG --> MODEL
+    MODEL -->|Global Weights| FM1
+    MODEL -->|Global Weights| FM2
+    MODEL -->|Global Weights| FM3
+
+    FM1 --> INF1
+    FM2 --> INF2
+    FM3 --> INF3
+
+    INF1 --> SCORE
+    INF2 --> SCORE
+    INF3 --> SCORE
+
+    SCORE --> ALERT --> CASE
+    AGG --> MON
+
+    style Consortium fill:#1e40af,color:#fff
+    style B1 fill:#059669,color:#fff
+    style B2 fill:#059669,color:#fff
+    style B3 fill:#059669,color:#fff
+    style Detection fill:#dc2626,color:#fff
+                            </div>
+                        </div>
+
+                        <div class="platform-components">
+                            <h5><span class="material-symbols-outlined">apps</span> NStarX Platform Components</h5>
+                            <div class="component-grid">
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">hub</span> Federated Learning</h6>
+                                    <p>Privacy-preserving model training across banks without sharing transaction data</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">speed</span> Real-time Inference</h6>
+                                    <p>Sub-100ms fraud scoring with KServe auto-scaling</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">monitoring</span> Monitoring</h6>
+                                    <p>Real-time metrics, model drift detection, and alert dashboards</p>
+                                </div>
+                                <div class="component-item">
+                                    <h6><span class="material-symbols-outlined">account_tree</span> AI Workflows</h6>
+                                    <p>Automated retraining pipelines and feature engineering</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Real-time Flow Tab -->
+                    <div class="tab-content" id="fin1-flow">
+                        <div class="diagram-container">
+                            <h5><span class="material-symbols-outlined">bolt</span> Real-time Transaction Scoring</h5>
+                            <div class="mermaid">
+sequenceDiagram
+    participant C as Customer
+    participant POS as Point of Sale
+    participant GW as Payment Gateway
+    participant INF as NStarX Inference
+    participant FM as Fraud Model
+    participant ALT as Alert System
+    participant ANA as Analyst
+
+    C->>POS: Swipe Card
+    POS->>GW: Authorization Request
+
+    rect rgb(30, 64, 175)
+    Note over GW,FM: Real-time Scoring (<100ms)
+    GW->>INF: Transaction Features
+    INF->>FM: Score Request
+    FM->>FM: Feature Engineering
+    FM->>FM: Model Inference
+    FM->>INF: Risk Score (0.87)
+    INF->>GW: Decision + Score
+    end
+
+    alt High Risk (>0.8)
+        GW->>ALT: Trigger Alert
+        ALT->>ANA: Create Case
+        GW->>POS: Decline + Challenge
+        POS->>C: Additional Verification
+    else Low Risk (<0.3)
+        GW->>POS: Approve
+        POS->>C: Transaction Complete
+    else Medium Risk
+        GW->>POS: Approve with Monitoring
+        GW->>ALT: Flag for Review
+    end
+                            </div>
+                        </div>
+
+                        <div class="transformation-section">
+                            <h5><span class="material-symbols-outlined">speed</span> Performance Metrics</h5>
+                            <div class="transformation-steps">
+                                <div class="transform-step">
+                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">timer</span></div>
+                                    <h6>Latency</h6>
+                                    <p><strong>&lt;50ms</strong> P99 inference time ensures no customer friction at checkout</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">speed</span></div>
+                                    <h6>Throughput</h6>
+                                    <p><strong>100K+ TPS</strong> per bank with horizontal auto-scaling</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">check_circle</span></div>
+                                    <h6>Accuracy</h6>
+                                    <p><strong>99.7%</strong> AUC-ROC with federated model vs 94% with local only</p>
+                                </div>
+                                <div class="transform-step">
+                                    <div class="step-number"><span class="material-symbols-outlined" style="font-size:16px;">block</span></div>
+                                    <h6>False Positive</h6>
+                                    <p><strong>0.1%</strong> rate protects customer experience</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Tab -->
+                    <div class="tab-content" id="fin1-simulator">
+                        <div class="simulator-container">
+                            <h5><span class="material-symbols-outlined">calculate</span> Fraud Detection ROI Simulator</h5>
+                            <p style="opacity:0.8;margin-bottom:1.5rem;">Estimate value from consortium-based fraud detection</p>
+
+                            <div class="simulator-inputs">
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">domain</span> Banks in Consortium</label>
+                                    <input type="number" id="fin1-banks" value="8" min="3" max="50">
+                                </div>
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">credit_card</span> Monthly Transactions (M)</label>
+                                    <input type="number" id="fin1-transactions" value="500" min="10" max="5000">
+                                </div>
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">percent</span> Current Detection Rate (%)</label>
+                                    <input type="number" id="fin1-current-rate" value="72" min="50" max="90">
+                                </div>
+                                <div class="sim-input-group">
+                                    <label><span class="material-symbols-outlined" style="font-size:16px;">payments</span> Avg Fraud Amount ($)</label>
+                                    <input type="number" id="fin1-fraud-amount" value="850" min="100" max="5000">
+                                </div>
+                            </div>
+
+                            <button class="calculate-btn" onclick="calculateFraudROI()">
+                                <span class="material-symbols-outlined">play_arrow</span>
+                                Calculate ROI
+                            </button>
+
+                            <div class="simulator-results" id="fin1-results">
+                                <div class="sim-result">
+                                    <div class="value" id="fin1-detection-rate">89%</div>
+                                    <div class="label">New Detection Rate</div>
+                                </div>
+                                <div class="sim-result">
+                                    <div class="value" id="fin1-fraud-caught">$425M</div>
+                                    <div class="label">Additional Fraud Caught</div>
+                                </div>
+                                <div class="sim-result">
+                                    <div class="value" id="fin1-fp-reduction">62%</div>
+                                    <div class="label">False Positive Reduction</div>
+                                </div>
+                                <div class="sim-result highlight">
+                                    <div class="value" id="fin1-total-value">$485M</div>
+                                    <div class="label">Total Annual Value</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="agentic rag" id="finance-uc2">
+                    <h4><span class="material-symbols-outlined" style="font-size:20px;color:var(--primary);">account_balance_wallet</span> Intelligent Wealth Advisory</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Wealth advisors manage 150+ client relationships each, spending 60% of time on administrative tasks instead of high-value client interactions and portfolio optimization.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy agentic AI assistants that autonomously analyze market conditions, client portfolios, and life events to generate personalized recommendations. RAG integration provides instant access to research and compliance documentation.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>3x increase in client touchpoints</li>
+                            <li>25% improvement in portfolio performance</li>
+                            <li>$50M additional AUM per advisor</li>
+                            <li>95% compliance accuracy</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="llm workflows">
+                    <h4>Automated Loan Underwriting</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Traditional loan underwriting takes 30-45 days, involves 50+ manual document reviews, and results in inconsistent decisions that create regulatory risk and customer dissatisfaction.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Implement end-to-end AI workflow for loan processing: document extraction, income verification, risk scoring, and decision generation. Fine-tuned LLMs ensure accurate extraction from diverse document formats.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">LLM Fine-tuning</span>
+                            <span class="capability-tag">Document Intelligence</span>
+                            <span class="capability-tag">Inference Model</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>85% reduction in processing time (45 days to 7 days)</li>
+                            <li>40% lower operational costs</li>
+                            <li>99.5% document extraction accuracy</li>
+                            <li>20% increase in loan approval rates</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="rag agentic">
+                    <h4>Regulatory Compliance Assistant</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Banks face 200+ regulatory changes annually. Compliance teams struggle to track requirements across jurisdictions, leading to $10B+ in industry fines annually.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy RAG-powered compliance assistant that monitors regulatory updates, maps requirements to internal policies, and generates gap analysis reports. Agentic workflows automate policy update recommendations.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">AI Catalog</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>Zero regulatory fines in 18 months</li>
+                            <li>70% faster compliance assessments</li>
+                            <li>$8M annual savings in compliance costs</li>
+                            <li>100% regulatory change coverage</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Telecommunications -->
+<section id="telecom">
+    <div class="container">
+        <div class="use-case-container telecom">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">cell_tower</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Telecommunications</h3>
+                    <p>Network intelligence, customer experience optimization, and edge AI deployment</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="federated workflows">
+                    <h4>Network Performance Optimization</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Telecom operators manage millions of network elements generating petabytes of telemetry data. Manual optimization is impossible, and centralized AI cannot scale to edge locations.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy federated learning across edge nodes for distributed network optimization. Local models predict traffic patterns and optimize bandwidth allocation, while global model aggregates insights across the network.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">AI Zones</span>
+                            <span class="capability-tag">Inference Model</span>
+                            <span class="capability-tag">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>35% improvement in network efficiency</li>
+                            <li>50% reduction in congestion events</li>
+                            <li>$45M annual bandwidth cost savings</li>
+                            <li>99.99% network uptime achieved</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="agentic rag">
+                    <h4>Intelligent Customer Service</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Call centers handle 50M+ monthly interactions with 40% repeat calls. Agent turnover is 30% annually, and training costs $15K per agent.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Implement multi-agent AI system with specialized agents for billing, technical support, and sales. RAG integration provides instant access to product knowledge and customer history for personalized resolution.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">Converge App</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>65% of inquiries resolved by AI</li>
+                            <li>40% reduction in call handling time</li>
+                            <li>$120M annual customer service savings</li>
+                            <li>NPS score improved by 25 points</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="workflows llm">
+                    <h4>Predictive Churn Prevention</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Monthly churn rate of 2% costs $3B annually in lost revenue. By the time customers call to cancel, it's often too late to retain them.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy ML workflows that analyze usage patterns, billing history, and service interactions to predict churn 60 days in advance. Agentic systems trigger personalized retention offers automatically.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Spark Jobs</span>
+                            <span class="capability-tag">Inference Model</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>30% reduction in churn rate</li>
+                            <li>$450M annual revenue retained</li>
+                            <li>85% prediction accuracy</li>
+                            <li>3x ROI on retention campaigns</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="agentic workflows">
+                    <h4>5G Network Slice Management</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>5G network slicing promises differentiated services but requires dynamic resource allocation across thousands of slices serving diverse use cases from IoT to AR/VR.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy agentic AI for autonomous slice lifecycle management. AI agents monitor SLA compliance, predict demand, and orchestrate resource reallocation in real-time across network domains.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Monitoring</span>
+                            <span class="capability-tag">Deployments</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>99.99% SLA compliance across slices</li>
+                            <li>40% improvement in resource utilization</li>
+                            <li>$80M new enterprise revenue</li>
+                            <li>60% faster slice provisioning</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Manufacturing -->
+<section id="manufacturing">
+    <div class="container">
+        <div class="use-case-container manufacturing">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">precision_manufacturing</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Manufacturing</h3>
+                    <p>Smart factory operations, predictive maintenance, and supply chain intelligence</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="workflows llm">
+                    <h4>Visual Quality Inspection</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Manual quality inspection catches only 85% of defects, costs $50 per inspection hour, and creates bottlenecks at 500K units/day production volume.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy computer vision workflows for real-time defect detection. Models trained on historical defect images identify anomalies at production speed. Edge inference enables sub-second detection without network latency.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Inference Model</span>
+                            <span class="capability-tag">AI Zones</span>
+                            <span class="capability-tag">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>99.7% defect detection rate</li>
+                            <li>80% reduction in inspection costs</li>
+                            <li>50ms inspection time per unit</li>
+                            <li>$15M annual savings from quality improvements</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="federated workflows">
+                    <h4>Predictive Maintenance</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Unplanned equipment downtime costs $50K/hour. Time-based maintenance schedules waste $1M+ annually in unnecessary part replacements and still miss 25% of failures.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Implement federated learning across factory floor sensors to predict equipment failures. Models learn from vibration, temperature, and operational patterns while keeping sensitive production data local.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">Spark Jobs</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>45% reduction in unplanned downtime</li>
+                            <li>30% reduction in maintenance costs</li>
+                            <li>92% prediction accuracy for failures</li>
+                            <li>$8M annual operational savings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="agentic rag">
+                    <h4>Shop Floor Assistant</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Plant operators consult 500+ page manuals and wait hours for engineering support. Average resolution time for production issues is 4 hours, causing significant output losses.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy RAG-powered assistant with access to equipment manuals, maintenance history, and tribal knowledge. Agentic capabilities enable guided troubleshooting and automatic work order generation.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">Converge App</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>70% reduction in issue resolution time</li>
+                            <li>40% fewer engineering escalations</li>
+                            <li>95% operator satisfaction</li>
+                            <li>$3M annual productivity gains</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="workflows llm">
+                    <h4>Supply Chain Demand Forecasting</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Inaccurate demand forecasts cause $2M monthly in excess inventory and $1.5M in stockouts. Traditional forecasting models fail to adapt to market disruptions.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy ML workflows that combine historical sales, market signals, weather data, and economic indicators. LLM analysis of news and social media provides early warning of demand shifts.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">Spark Jobs</span>
+                            <span class="capability-tag">SQL Lab</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>35% improvement in forecast accuracy</li>
+                            <li>25% reduction in inventory costs</li>
+                            <li>50% fewer stockout events</li>
+                            <li>$18M annual working capital freed</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Retail -->
+<section id="retail">
+    <div class="container">
+        <div class="use-case-container retail">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">shopping_cart</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Retail & E-Commerce</h3>
+                    <p>Personalized experiences, inventory optimization, and omnichannel intelligence</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="agentic rag">
+                    <h4>AI Shopping Assistant</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>E-commerce conversion rates average 2.5%. Customers abandon 70% of carts due to product confusion and lack of personalized guidance.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy conversational AI shopping assistant that understands customer preferences, recommends products through dialogue, and guides purchases. RAG integration enables real-time product knowledge and inventory awareness.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>40% increase in conversion rate</li>
+                            <li>25% higher average order value</li>
+                            <li>60% reduction in cart abandonment</li>
+                            <li>$35M additional annual revenue</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="workflows llm">
+                    <h4>Dynamic Pricing Optimization</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Static pricing leaves $50M+ annual revenue on the table. Competitors change prices hourly, and manual repricing for 500K SKUs is impossible.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Implement ML workflows that analyze competitor prices, demand elasticity, inventory levels, and margin targets to recommend optimal prices. Automated workflows execute price changes across channels.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Spark Jobs</span>
+                            <span class="capability-tag">Inference Model</span>
+                            <span class="capability-tag">SQL Lab</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>8% margin improvement</li>
+                            <li>15% revenue increase from pricing</li>
+                            <li>Real-time competitive response</li>
+                            <li>$28M annual profit improvement</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="federated agentic">
+                    <h4>Store Inventory Intelligence</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Inventory accuracy is 65% at store level. Out-of-stocks cost $1T globally in retail. Store managers spend 20% of time on manual inventory tasks.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy federated learning across stores for localized demand prediction. AI agents automate reorder decisions, shelf allocation, and markdown timing based on store-specific patterns.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Converge App</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>95% inventory accuracy achieved</li>
+                            <li>40% reduction in out-of-stocks</li>
+                            <li>20% reduction in overstock markdowns</li>
+                            <li>$12M annual inventory savings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="rag llm">
+                    <h4>Product Content Generation</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Creating product descriptions for 100K+ SKUs costs $5M annually. Poor content quality impacts SEO rankings and conversion rates.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy LLM-powered content generation that creates SEO-optimized product descriptions, titles, and attributes. RAG ensures brand voice consistency and accurate technical specifications.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">AI Catalog</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>90% reduction in content creation time</li>
+                            <li>30% improvement in SEO rankings</li>
+                            <li>15% increase in organic traffic</li>
+                            <li>$4M annual content cost savings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Energy -->
+<section id="energy">
+    <div class="container">
+        <div class="use-case-container energy">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">bolt</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Energy & Utilities</h3>
+                    <p>Grid optimization, renewable integration, and asset performance management</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="federated workflows">
+                    <h4>Smart Grid Load Balancing</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Grid operators manage 50M+ endpoints with intermittent renewable generation. Peak demand causes $5B annually in infrastructure investments and $2B in outage costs.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy federated learning across smart meters and grid sensors. Local models predict consumption patterns while preserving customer privacy. Central coordination optimizes load distribution in real-time.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">AI Zones</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>20% reduction in peak demand</li>
+                            <li>$500M deferred infrastructure spend</li>
+                            <li>95% renewable utilization rate</li>
+                            <li>99.99% grid reliability achieved</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="agentic workflows">
+                    <h4>Renewable Energy Forecasting</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Solar and wind variability causes $1B annually in grid imbalance costs. Inaccurate forecasts result in curtailment of 15% of renewable generation.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy agentic AI system that combines weather data, satellite imagery, and historical patterns to predict renewable generation. Autonomous agents coordinate storage dispatch and demand response.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Spark Jobs</span>
+                            <span class="capability-tag">Inference Model</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>40% improvement in forecast accuracy</li>
+                            <li>50% reduction in curtailment</li>
+                            <li>$200M annual grid cost savings</li>
+                            <li>25% more renewable integration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="rag llm">
+                    <h4>Field Service Optimization</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Field technicians manage 50K+ equipment types with 500+ failure modes. First-time fix rate is 70%, requiring costly repeat visits and extended outages.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy RAG-powered mobile assistant with access to equipment documentation, repair history, and expert knowledge. LLM-powered diagnostics guide troubleshooting and part identification.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">Converge App</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>92% first-time fix rate</li>
+                            <li>30% reduction in truck rolls</li>
+                            <li>50% faster diagnosis time</li>
+                            <li>$25M annual field service savings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="workflows agentic">
+                    <h4>Carbon Emissions Tracking</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Regulatory requirements demand accurate carbon accounting across Scope 1-3 emissions. Manual tracking is error-prone and audits cost $2M annually.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Implement AI workflows that automatically collect emissions data across operations, calculate carbon footprints, and generate compliance reports. Agentic systems recommend decarbonization actions.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">SQL Lab</span>
+                            <span class="capability-tag">Converge App</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>100% emissions visibility</li>
+                            <li>80% reduction in audit time</li>
+                            <li>15% emissions reduction identified</li>
+                            <li>$50M carbon credit optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Government -->
+<section id="government">
+    <div class="container">
+        <div class="use-case-container government">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">account_balance</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Government & Public Sector</h3>
+                    <p>Citizen services, public safety, and transparent governance</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="rag agentic">
+                    <h4>Citizen Services Portal</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Citizens navigate 200+ government services across multiple agencies. Average service completion takes 3+ weeks with 40% requiring in-person visits.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy unified RAG-powered portal that understands citizen needs, guides through service requirements, and pre-fills forms. Agentic workflows coordinate across agencies for seamless service delivery.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">Converge App</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>70% reduction in service completion time</li>
+                            <li>85% digital service adoption</li>
+                            <li>90% citizen satisfaction rate</li>
+                            <li>$100M annual operational savings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="federated workflows">
+                    <h4>Cross-Agency Fraud Detection</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Benefits fraud costs governments $100B+ annually. Siloed agency data prevents detection of cross-program fraud schemes.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy federated learning across agencies to detect fraud patterns without sharing sensitive citizen data. Each agency maintains data sovereignty while contributing to collective fraud intelligence.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">Differential Privacy</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>60% improvement in fraud detection</li>
+                            <li>$5B annual fraud prevented</li>
+                            <li>100% privacy compliance</li>
+                            <li>40% reduction in false accusations</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="llm workflows">
+                    <h4>Policy Impact Analysis</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Policy makers lack tools to simulate impacts of proposed legislation. Unintended consequences cost $50B+ annually in policy corrections.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy LLM-powered policy analysis that simulates economic, social, and environmental impacts. AI workflows integrate multiple data sources to model policy scenarios and stakeholder effects.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Spark Jobs</span>
+                            <span class="capability-tag">SQL Lab</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>50% better policy outcome prediction</li>
+                            <li>70% faster impact assessment</li>
+                            <li>$10B avoided in policy corrections</li>
+                            <li>Increased legislative transparency</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="agentic rag">
+                    <h4>Emergency Response Coordination</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Emergency response involves 50+ agencies with different systems. Coordination delays cost lives and increase disaster recovery costs by 30%.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy multi-agent AI system that coordinates emergency response across agencies. RAG integration provides instant access to response protocols and resource availability.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>40% faster emergency response</li>
+                            <li>25% reduction in casualties</li>
+                            <li>$2B reduced disaster costs</li>
+                            <li>95% resource utilization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Logistics -->
+<section id="logistics">
+    <div class="container">
+        <div class="use-case-container logistics">
+            <div class="industry-header">
+                <div class="industry-icon">
+                    <span class="material-symbols-outlined">local_shipping</span>
+                </div>
+                <div class="industry-title">
+                    <h3>Logistics & Transportation</h3>
+                    <p>Route optimization, fleet management, and supply chain visibility</p>
+                </div>
+            </div>
+            <div class="use-cases-grid">
+                <div class="use-case-card" data-capabilities="agentic workflows">
+                    <h4>Dynamic Route Optimization</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Fleet operators manage 10K+ vehicles with dynamic delivery requirements. Static routing wastes 20% of fuel and fails to adapt to real-time conditions.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy agentic AI that continuously optimizes routes based on traffic, weather, delivery windows, and vehicle capacity. AI agents coordinate fleet-wide to minimize total miles and maximize on-time delivery.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Inference Model</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>25% reduction in fuel costs</li>
+                            <li>99% on-time delivery rate</li>
+                            <li>30% more deliveries per route</li>
+                            <li>$40M annual transportation savings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="federated llm">
+                    <h4>Warehouse Automation</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Distribution centers process 100K+ items daily with 5% picking errors. Labor costs represent 65% of warehouse expenses with 100% seasonal variation.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Implement AI-orchestrated warehouse operations with federated learning across facilities. Models optimize pick paths, predict demand, and coordinate human-robot collaboration.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Federated Learning</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Inference Model</span>
+                            <span class="capability-tag">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>99.9% picking accuracy</li>
+                            <li>50% increase in throughput</li>
+                            <li>35% reduction in labor costs</li>
+                            <li>$15M annual operational savings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="rag agentic">
+                    <h4>Supply Chain Visibility</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>Global supply chains span 1000+ suppliers across 50+ countries. Lack of visibility causes $500B annually in supply disruptions and excess inventory.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Deploy agentic AI that monitors supply chain events, predicts disruptions, and recommends mitigation actions. RAG integration enables natural language queries across supply chain data.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">Agentic AI</span>
+                            <span class="capability-tag">RAG Chat</span>
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">Integration Hub</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>100% end-to-end visibility</li>
+                            <li>70% faster disruption response</li>
+                            <li>40% reduction in safety stock</li>
+                            <li>$80M annual inventory savings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="use-case-card" data-capabilities="workflows llm">
+                    <h4>Customs & Compliance Automation</h4>
+                    <div class="challenge">
+                        <h5>Business Challenge</h5>
+                        <p>International shipments require 30+ documents per transaction. Manual compliance checking delays 15% of shipments and incurs $1M+ in annual penalties.</p>
+                    </div>
+                    <div class="solution">
+                        <h5>NStarX Solution</h5>
+                        <p>Implement AI workflows for automated document processing, tariff classification, and compliance checking. LLMs extract information from unstructured documents and validate against regulations.</p>
+                    </div>
+                    <div class="capabilities">
+                        <h5>Platform Capabilities Used</h5>
+                        <div class="capability-tags">
+                            <span class="capability-tag">AI Workflows</span>
+                            <span class="capability-tag">LLM Management</span>
+                            <span class="capability-tag">Document Intelligence</span>
+                            <span class="capability-tag">Converge App</span>
+                        </div>
+                    </div>
+                    <div class="outcomes">
+                        <h5>Business Outcomes</h5>
+                        <ul class="outcome-list">
+                            <li>99.5% document accuracy</li>
+                            <li>80% reduction in clearance time</li>
+                            <li>Zero compliance penalties</li>
+                            <li>$5M annual processing savings</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Use Case -->
+<section>
+    <div class="container">
+        <div class="featured-use-case">
+            <h3>Featured: Cross-Industry Federated AI Consortium</h3>
+            <p class="description">
+                Multiple organizations across different industries collaborate on AI models without sharing sensitive data.
+                This groundbreaking approach enables unprecedented model accuracy while maintaining complete data privacy and regulatory compliance.
+            </p>
+            <div class="featured-grid">
+                <div class="featured-item">
+                    <h4>The Challenge</h4>
+                    <p>Organizations possess valuable data but cannot share it due to privacy regulations, competitive concerns, or security requirements. This limits AI model effectiveness.</p>
+                </div>
+                <div class="featured-item">
+                    <h4>The Solution</h4>
+                    <p>NStarX Federated Learning enables collaborative model training where only encrypted parameters are shared. Each participant benefits from collective intelligence while maintaining data sovereignty.</p>
+                </div>
+                <div class="featured-item">
+                    <h4>Key Capabilities</h4>
+                    <p>Differential privacy, secure aggregation, geographic client management, multiple aggregation strategies, and comprehensive privacy budget tracking.</p>
+                </div>
+                <div class="featured-item">
+                    <h4>Business Impact</h4>
+                    <p>Organizations achieve 40% better model accuracy, 100% regulatory compliance, and unlock $500M+ in collective value without any data exposure.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ROI Preview -->
+<section>
+    <div class="container">
+        <div class="roi-preview">
+            <h3>Typical ROI Across Industries</h3>
+            <p>NStarX delivers measurable business value within months of deployment</p>
+            <div class="roi-grid">
+                <div class="roi-item">
+                    <div class="value">50%</div>
+                    <div class="label">Faster Time to Value</div>
+                </div>
+                <div class="roi-item">
+                    <div class="value">30%</div>
+                    <div class="label">Cost Reduction</div>
+                </div>
+                <div class="roi-item">
+                    <div class="value">300%</div>
+                    <div class="label">Average ROI</div>
+                </div>
+                <div class="roi-item">
+                    <div class="value">6 Mo</div>
+                    <div class="label">Payback Period</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- How It Works -->
+<section>
+    <div class="container">
+        <div class="section-header">
+            <h2>How NStarX Enables Your Use Case</h2>
+            <p>From concept to production in weeks, not months</p>
+        </div>
+        <div class="workflow-steps">
+            <div class="workflow-step" data-step="1">
+                <h4>Discovery</h4>
+                <p>Identify high-impact use cases through business analysis and data assessment. Map requirements to NStarX capabilities.</p>
+            </div>
+            <div class="workflow-step" data-step="2">
+                <h4>Design</h4>
+                <p>Architect AI solutions using visual workflow designers. Configure data pipelines, model architectures, and integrations.</p>
+            </div>
+            <div class="workflow-step" data-step="3">
+                <h4>Develop</h4>
+                <p>Build and train models using the unified platform. Leverage pre-built components and industry templates.</p>
+            </div>
+            <div class="workflow-step" data-step="4">
+                <h4>Deploy</h4>
+                <p>Production deployment with enterprise security, monitoring, and governance. Blue-green deployments ensure zero downtime.</p>
+            </div>
+            <div class="workflow-step" data-step="5">
+                <h4>Optimize</h4>
+                <p>Continuous improvement through monitoring, A/B testing, and automated retraining. Scale based on business impact.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Business Value Simulators -->
+<section id="simulators">
+    <div class="container">
+        <div class="section-header">
+            <h2><span class="material-symbols-outlined" style="font-size:2.5rem;vertical-align:middle;">calculate</span> Business Value Simulators</h2>
+            <p>Estimate the potential ROI and business impact of NStarX AI solutions for your organization</p>
+        </div>
+
+        <!-- General ROI Calculator -->
+        <div class="simulator-container" style="margin-bottom:2rem;">
+            <h5><span class="material-symbols-outlined">savings</span> Enterprise AI ROI Calculator</h5>
+            <p style="opacity:0.8;margin-bottom:1.5rem;">Calculate your expected return on investment from implementing enterprise AI</p>
+
+            <div class="simulator-inputs">
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">business</span> Industry</label>
+                    <select id="gen-industry">
+                        <option value="healthcare">Healthcare</option>
+                        <option value="finance">Financial Services</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="retail">Retail</option>
+                        <option value="telecom">Telecommunications</option>
+                        <option value="energy">Energy</option>
+                        <option value="logistics">Logistics</option>
+                    </select>
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">groups</span> Company Size (Employees)</label>
+                    <select id="gen-size">
+                        <option value="small">500 - 2,000</option>
+                        <option value="medium" selected>2,000 - 10,000</option>
+                        <option value="large">10,000 - 50,000</option>
+                        <option value="enterprise">50,000+</option>
+                    </select>
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">payments</span> Annual Revenue ($M)</label>
+                    <input type="number" id="gen-revenue" value="500" min="10" max="100000">
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">priority_high</span> AI Maturity Level</label>
+                    <select id="gen-maturity">
+                        <option value="early">Early Stage (POCs)</option>
+                        <option value="developing" selected>Developing (Some Production)</option>
+                        <option value="mature">Mature (Scaled AI)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateGeneralROI()">
+                <span class="material-symbols-outlined">play_arrow</span>
+                Calculate Enterprise ROI
+            </button>
+
+            <div class="simulator-results" id="gen-results">
+                <div class="sim-result">
+                    <div class="value" id="gen-efficiency">$12.5M</div>
+                    <div class="label">Operational Efficiency Gains</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="gen-revenue-impact">$8.2M</div>
+                    <div class="label">Revenue Impact</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="gen-risk">$4.8M</div>
+                    <div class="label">Risk Reduction Value</div>
+                </div>
+                <div class="sim-result highlight">
+                    <div class="value" id="gen-total">$25.5M</div>
+                    <div class="label">Total 3-Year Value</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="gen-roi-percent">340%</div>
+                    <div class="label">Expected ROI</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="gen-payback">8 Mo</div>
+                    <div class="label">Payback Period</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Predictive Maintenance Calculator -->
+        <div class="simulator-container" style="margin-bottom:2rem;">
+            <h5><span class="material-symbols-outlined">build</span> Predictive Maintenance ROI Calculator</h5>
+            <p style="opacity:0.8;margin-bottom:1.5rem;">Calculate savings from AI-powered predictive maintenance</p>
+
+            <div class="simulator-inputs">
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">factory</span> Number of Assets/Machines</label>
+                    <input type="number" id="pm-assets" value="250" min="10" max="10000">
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">event_busy</span> Avg Downtime Events/Year</label>
+                    <input type="number" id="pm-downtime" value="48" min="1" max="500">
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">payments</span> Cost per Hour Downtime ($K)</label>
+                    <input type="number" id="pm-cost" value="25" min="1" max="500">
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">schedule</span> Avg Downtime Duration (Hours)</label>
+                    <input type="number" id="pm-duration" value="4" min="1" max="48">
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculatePredictiveMaintenanceROI()">
+                <span class="material-symbols-outlined">play_arrow</span>
+                Calculate Maintenance ROI
+            </button>
+
+            <div class="simulator-results" id="pm-results">
+                <div class="sim-result">
+                    <div class="value" id="pm-current-cost">$4.8M</div>
+                    <div class="label">Current Annual Downtime Cost</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="pm-reduction">45%</div>
+                    <div class="label">Expected Reduction</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="pm-parts-saved">$620K</div>
+                    <div class="label">Parts & Labor Savings</div>
+                </div>
+                <div class="sim-result highlight">
+                    <div class="value" id="pm-total-savings">$2.8M</div>
+                    <div class="label">Total Annual Savings</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Customer Service AI Calculator -->
+        <div class="simulator-container">
+            <h5><span class="material-symbols-outlined">support_agent</span> Customer Service AI ROI Calculator</h5>
+            <p style="opacity:0.8;margin-bottom:1.5rem;">Estimate value from AI-powered customer service automation</p>
+
+            <div class="simulator-inputs">
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">chat</span> Monthly Support Tickets</label>
+                    <input type="number" id="cs-tickets" value="100000" min="1000" max="10000000">
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">payments</span> Cost per Ticket ($)</label>
+                    <input type="number" id="cs-cost" value="12" min="1" max="100">
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">schedule</span> Avg Resolution Time (Min)</label>
+                    <input type="number" id="cs-time" value="18" min="1" max="120">
+                </div>
+                <div class="sim-input-group">
+                    <label><span class="material-symbols-outlined" style="font-size:16px;">person</span> Support Agents</label>
+                    <input type="number" id="cs-agents" value="150" min="10" max="5000">
+                </div>
+            </div>
+
+            <button class="calculate-btn" onclick="calculateCustomerServiceROI()">
+                <span class="material-symbols-outlined">play_arrow</span>
+                Calculate Service ROI
+            </button>
+
+            <div class="simulator-results" id="cs-results">
+                <div class="sim-result">
+                    <div class="value" id="cs-automation">65%</div>
+                    <div class="label">Automation Rate</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="cs-time-saved">8 min</div>
+                    <div class="label">Avg Time Reduction</div>
+                </div>
+                <div class="sim-result">
+                    <div class="value" id="cs-labor-saved">$5.4M</div>
+                    <div class="label">Annual Labor Savings</div>
+                </div>
+                <div class="sim-result highlight">
+                    <div class="value" id="cs-total-value">$7.2M</div>
+                    <div class="label">Total Annual Value</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+    <div class="container">
+        <h2>Ready to Transform Your Business with AI?</h2>
+        <p>Explore how NStarX can address your specific industry challenges with enterprise-grade AI solutions.</p>
+        <div class="cta-buttons">
+            <a href="#" class="btn btn-primary">Schedule Use Case Workshop</a>
+            <a href="#" class="btn btn-secondary">Download Industry Guide</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>&copy; 2025 NStarX Enterprise AI Platform. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    // Initialize Mermaid
+    mermaid.initialize({
+        startOnLoad: true,
+        theme: 'base',
+        themeVariables: {
+            primaryColor: '#1e40af',
+            primaryTextColor: '#fff',
+            primaryBorderColor: '#3b82f6',
+            lineColor: '#64748b',
+            secondaryColor: '#7c3aed',
+            tertiaryColor: '#f8fafc'
+        },
+        flowchart: {
+            useMaxWidth: true,
+            htmlLabels: true,
+            curve: 'basis'
+        },
+        sequence: {
+            useMaxWidth: true,
+            actorMargin: 50
+        },
+        gantt: {
+            useMaxWidth: true
+        }
+    });
+
+    // Toggle detail panel
+    function toggleDetail(detailId) {
+        const detail = document.getElementById(detailId);
+        const btn = event.currentTarget;
+
+        if (detail.classList.contains('expanded')) {
+            detail.classList.remove('expanded');
+            btn.classList.remove('active');
+        } else {
+            detail.classList.add('expanded');
+            btn.classList.add('active');
+            // Re-render mermaid diagrams when panel opens
+            setTimeout(() => {
+                mermaid.init(undefined, detail.querySelectorAll('.mermaid'));
+            }, 100);
+        }
+    }
+
+    // Tab switching
+    function switchTab(btn, tabId) {
+        const parent = btn.closest('.use-case-detail');
+
+        // Remove active from all tabs and contents
+        parent.querySelectorAll('.detail-tab').forEach(t => t.classList.remove('active'));
+        parent.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        // Activate clicked tab and content
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+
+        // Re-render mermaid in new tab
+        setTimeout(() => {
+            mermaid.init(undefined, document.getElementById(tabId).querySelectorAll('.mermaid'));
+        }, 100);
+    }
+
+    // Format currency
+    function formatCurrency(num) {
+        if (num >= 1000000000) return '$' + (num / 1000000000).toFixed(1) + 'B';
+        if (num >= 1000000) return '$' + (num / 1000000).toFixed(1) + 'M';
+        if (num >= 1000) return '$' + (num / 1000).toFixed(0) + 'K';
+        return '$' + num.toFixed(0);
+    }
+
+    // Healthcare ROI Calculator
+    function calculateHealthcareROI() {
+        const hospitals = parseInt(document.getElementById('hc1-hospitals').value);
+        const patients = parseInt(document.getElementById('hc1-patients').value) * 1000;
+        const currentRate = parseInt(document.getElementById('hc1-current-rate').value) / 100;
+        const missCost = parseInt(document.getElementById('hc1-miss-cost').value) * 1000;
+
+        const effectiveData = hospitals * patients;
+        const improvement = Math.min(0.25 + (hospitals * 0.01), 0.35);
+        const newRate = Math.min(currentRate + (currentRate * improvement), 0.95);
+        const annualCases = effectiveData * 0.03; // 3% disease incidence
+        const additionalDetections = Math.round(annualCases * (newRate - currentRate));
+        const savings = additionalDetections * missCost;
+
+        document.getElementById('hc1-effective-data').textContent = (effectiveData / 1000).toFixed(0) + 'K';
+        document.getElementById('hc1-new-rate').textContent = (newRate * 100).toFixed(0) + '%';
+        document.getElementById('hc1-lives-saved').textContent = additionalDetections.toLocaleString();
+        document.getElementById('hc1-savings').textContent = formatCurrency(savings);
+    }
+
+    // Medical Coding ROI Calculator
+    function calculateCodingROI() {
+        const claims = parseInt(document.getElementById('hc3-claims').value);
+        const errorRate = parseInt(document.getElementById('hc3-error-rate').value) / 100;
+        const claimValue = parseInt(document.getElementById('hc3-claim-value').value);
+        const coders = parseInt(document.getElementById('hc3-coders').value);
+
+        const annualClaims = claims * 12;
+        const currentErrors = annualClaims * errorRate;
+        const revenueAtRisk = currentErrors * claimValue * 0.15; // 15% of errors result in denial
+        const newErrorRate = errorRate * 0.18; // 82% reduction in errors
+        const newErrors = annualClaims * newErrorRate;
+        const revenueRecovered = (currentErrors - newErrors) * claimValue * 0.15;
+        const laborSaved = coders * 85000 * 0.35; // 35% productivity gain
+        const totalROI = revenueRecovered + laborSaved;
+
+        document.getElementById('hc3-revenue-recovered').textContent = formatCurrency(revenueRecovered);
+        document.getElementById('hc3-labor-saved').textContent = formatCurrency(laborSaved);
+        document.getElementById('hc3-new-error-rate').textContent = (newErrorRate * 100).toFixed(1) + '%';
+        document.getElementById('hc3-total-roi').textContent = formatCurrency(totalROI);
+    }
+
+    // Fraud Detection ROI Calculator
+    function calculateFraudROI() {
+        const banks = parseInt(document.getElementById('fin1-banks').value);
+        const transactions = parseInt(document.getElementById('fin1-transactions').value) * 1000000;
+        const currentRate = parseInt(document.getElementById('fin1-current-rate').value) / 100;
+        const fraudAmount = parseInt(document.getElementById('fin1-fraud-amount').value);
+
+        const fraudRate = 0.001; // 0.1% fraud rate
+        const totalFraud = transactions * 12 * fraudRate * fraudAmount;
+        const improvement = Math.min(0.15 + (banks * 0.02), 0.25);
+        const newRate = Math.min(currentRate + improvement, 0.95);
+        const currentCaught = totalFraud * currentRate;
+        const newCaught = totalFraud * newRate;
+        const additionalCaught = newCaught - currentCaught;
+        const fpReduction = Math.min(50 + (banks * 2), 70);
+        const fpSavings = transactions * 12 * 0.02 * 5 * (fpReduction / 100); // $5 per false positive review
+        const totalValue = additionalCaught + fpSavings;
+
+        document.getElementById('fin1-detection-rate').textContent = (newRate * 100).toFixed(0) + '%';
+        document.getElementById('fin1-fraud-caught').textContent = formatCurrency(additionalCaught);
+        document.getElementById('fin1-fp-reduction').textContent = fpReduction.toFixed(0) + '%';
+        document.getElementById('fin1-total-value').textContent = formatCurrency(totalValue);
+    }
+
+    // General Enterprise ROI Calculator
+    function calculateGeneralROI() {
+        const industry = document.getElementById('gen-industry').value;
+        const size = document.getElementById('gen-size').value;
+        const revenue = parseInt(document.getElementById('gen-revenue').value) * 1000000;
+        const maturity = document.getElementById('gen-maturity').value;
+
+        // Industry multipliers
+        const industryMultipliers = {
+            healthcare: 1.2, finance: 1.3, manufacturing: 1.1,
+            retail: 1.15, telecom: 1.25, energy: 1.1, logistics: 1.2
+        };
+
+        // Size multipliers
+        const sizeMultipliers = { small: 0.7, medium: 1.0, large: 1.3, enterprise: 1.6 };
+
+        // Maturity impact (early gets more benefit from catching up)
+        const maturityMultipliers = { early: 1.4, developing: 1.0, mature: 0.7 };
+
+        const baseEfficiency = revenue * 0.025;
+        const baseRevenue = revenue * 0.015;
+        const baseRisk = revenue * 0.01;
+
+        const multiplier = industryMultipliers[industry] * sizeMultipliers[size] * maturityMultipliers[maturity];
+
+        const efficiency = baseEfficiency * multiplier;
+        const revenueImpact = baseRevenue * multiplier;
+        const riskReduction = baseRisk * multiplier;
+        const total3Year = (efficiency + revenueImpact + riskReduction) * 3;
+        const investment = revenue * 0.005 * 3; // 0.5% of revenue investment over 3 years
+        const roiPercent = ((total3Year - investment) / investment) * 100;
+        const paybackMonths = Math.round((investment / (total3Year / 36)));
+
+        document.getElementById('gen-efficiency').textContent = formatCurrency(efficiency);
+        document.getElementById('gen-revenue-impact').textContent = formatCurrency(revenueImpact);
+        document.getElementById('gen-risk').textContent = formatCurrency(riskReduction);
+        document.getElementById('gen-total').textContent = formatCurrency(total3Year);
+        document.getElementById('gen-roi-percent').textContent = roiPercent.toFixed(0) + '%';
+        document.getElementById('gen-payback').textContent = paybackMonths + ' Mo';
+    }
+
+    // Predictive Maintenance ROI Calculator
+    function calculatePredictiveMaintenanceROI() {
+        const assets = parseInt(document.getElementById('pm-assets').value);
+        const downtimeEvents = parseInt(document.getElementById('pm-downtime').value);
+        const costPerHour = parseInt(document.getElementById('pm-cost').value) * 1000;
+        const duration = parseInt(document.getElementById('pm-duration').value);
+
+        const currentCost = assets * (downtimeEvents / assets) * duration * costPerHour;
+        const reduction = 0.45; // 45% reduction
+        const downtimeSavings = currentCost * reduction;
+        const partsLaborSavings = assets * 2500; // $2500 per asset in parts optimization
+        const totalSavings = downtimeSavings + partsLaborSavings;
+
+        document.getElementById('pm-current-cost').textContent = formatCurrency(currentCost);
+        document.getElementById('pm-reduction').textContent = (reduction * 100).toFixed(0) + '%';
+        document.getElementById('pm-parts-saved').textContent = formatCurrency(partsLaborSavings);
+        document.getElementById('pm-total-savings').textContent = formatCurrency(totalSavings);
+    }
+
+    // Customer Service ROI Calculator
+    function calculateCustomerServiceROI() {
+        const tickets = parseInt(document.getElementById('cs-tickets').value);
+        const costPerTicket = parseInt(document.getElementById('cs-cost').value);
+        const avgTime = parseInt(document.getElementById('cs-time').value);
+        const agents = parseInt(document.getElementById('cs-agents').value);
+
+        const annualTickets = tickets * 12;
+        const automationRate = 0.65; // 65% automation
+        const timeSaved = Math.round(avgTime * 0.45); // 45% time reduction
+        const automatedTickets = annualTickets * automationRate;
+        const laborSavings = automatedTickets * costPerTicket * 0.7; // 70% cost savings on automated tickets
+        const humanEfficiencySavings = (annualTickets - automatedTickets) * costPerTicket * 0.25; // 25% efficiency on remaining
+        const cxValue = annualTickets * 0.02 * 50; // 2% of tickets become promoters worth $50 each
+        const totalValue = laborSavings + humanEfficiencySavings + cxValue;
+
+        document.getElementById('cs-automation').textContent = (automationRate * 100).toFixed(0) + '%';
+        document.getElementById('cs-time-saved').textContent = timeSaved + ' min';
+        document.getElementById('cs-labor-saved').textContent = formatCurrency(laborSavings);
+        document.getElementById('cs-total-value').textContent = formatCurrency(totalValue);
+    }
+
+    // Filter functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+
+            document.querySelectorAll('.use-case-card').forEach(card => {
+                if (filter === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    const capabilities = card.dataset.capabilities || '';
+                    card.style.display = capabilities.includes(filter) ? 'block' : 'none';
+                }
+            });
+
+            // Hide detail panels when filtering
+            document.querySelectorAll('.use-case-detail').forEach(d => d.classList.remove('expanded'));
+            document.querySelectorAll('.detail-toggle').forEach(b => b.classList.remove('active'));
+        });
+    });
+
+    // Smooth scroll for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    // Intersection Observer for card animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.use-case-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        observer.observe(card);
+    });
+
+    // Initialize simulators with default values on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        // Run initial calculations
+        setTimeout(() => {
+            if (document.getElementById('gen-revenue')) calculateGeneralROI();
+            if (document.getElementById('pm-assets')) calculatePredictiveMaintenanceROI();
+            if (document.getElementById('cs-tickets')) calculateCustomerServiceROI();
+        }, 500);
+    });
+</script>
+
+</body>
+</html>

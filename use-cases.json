@@ -1,0 +1,6258 @@
+[
+  {
+    "id": "healthcare-uc1",
+    "industry": "Healthcare & Life Sciences",
+    "icon": "monitor_heart",
+    "title": "Multi-Hospital Disease Prediction",
+    "challenge": "Hospitals want to collaborate on predictive models for early disease detection but cannot share sensitive patient data due to HIPAA regulations and patient privacy concerns.",
+    "solution": "Deploy Federated Learning across hospital networks where models are trained locally on each institution's data. Only encrypted model parameters are shared, enabling collaborative AI without exposing any patient information.",
+    "capabilities": [
+      "Federated Learning",
+      "Differential Privacy",
+      "Secure Aggregation",
+      "AI Zones"
+    ],
+    "outcomes": [
+      "25% improvement in early detection accuracy",
+      "100% HIPAA compliance maintained",
+      "15+ hospitals collaborating securely",
+      "$12M annual savings in preventable treatments"
+    ],
+    "tags": [
+      "federated",
+      "rag"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__nstarx-central-server",
+          "name": "NStarX Central Server",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "nstarx-central-server__secure-aggregator",
+              "name": "Secure Aggregator",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "nstarx-central-server__global-model",
+              "name": "Global Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-central-server__privacy-controller",
+              "name": "Privacy Controller",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "nstarx-central-server__monitoring-dashboard",
+              "name": "Monitoring Dashboard",
+              "shape": null,
+              "kind": "ui"
+            }
+          ],
+          "role": "control-plane"
+        },
+        {
+          "id": "__group__hospital-a-ai-zone",
+          "name": "Hospital A AI Zone",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "hospital-a-ai-zone__patient-data-a",
+              "name": "Patient Data A",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "hospital-a-ai-zone__local-model-a",
+              "name": "Local Model A",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "hospital-a-ai-zone__differential-privacy-a",
+              "name": "Differential Privacy A",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__hospital-b-ai-zone",
+          "name": "Hospital B AI Zone",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "hospital-b-ai-zone__patient-data-b",
+              "name": "Patient Data B",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "hospital-b-ai-zone__local-model-b",
+              "name": "Local Model B",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "hospital-b-ai-zone__differential-privacy-b",
+              "name": "Differential Privacy B",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__hospital-c-ai-zone",
+          "name": "Hospital C AI Zone",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "hospital-c-ai-zone__patient-data-c",
+              "name": "Patient Data C",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "hospital-c-ai-zone__local-model-c",
+              "name": "Local Model C",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "hospital-c-ai-zone__differential-privacy-c",
+              "name": "Differential Privacy C",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "edge-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "hospital-a-ai-zone__patient-data-a",
+          "to": "hospital-a-ai-zone__local-model-a",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "hospital-b-ai-zone__patient-data-b",
+          "to": "hospital-b-ai-zone__local-model-b",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "hospital-c-ai-zone__patient-data-c",
+          "to": "hospital-c-ai-zone__local-model-c",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "hospital-a-ai-zone__local-model-a",
+          "to": "hospital-a-ai-zone__differential-privacy-a",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "hospital-b-ai-zone__local-model-b",
+          "to": "hospital-b-ai-zone__differential-privacy-b",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "hospital-c-ai-zone__local-model-c",
+          "to": "hospital-c-ai-zone__differential-privacy-c",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "hospital-a-ai-zone__differential-privacy-a",
+          "to": "nstarx-central-server__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "hospital-b-ai-zone__differential-privacy-b",
+          "to": "nstarx-central-server__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "hospital-c-ai-zone__differential-privacy-c",
+          "to": "nstarx-central-server__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-central-server__secure-aggregator",
+          "to": "nstarx-central-server__global-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-central-server__global-model",
+          "to": "nstarx-central-server__privacy-controller",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-central-server__privacy-controller",
+          "to": "hospital-a-ai-zone__local-model-a",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-central-server__privacy-controller",
+          "to": "hospital-b-ai-zone__local-model-b",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-central-server__privacy-controller",
+          "to": "hospital-c-ai-zone__local-model-c",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-central-server__secure-aggregator",
+          "to": "nstarx-central-server__monitoring-dashboard",
+          "label": "",
+          "style": {}
+        }
+      ]
+    }
+  },
+  {
+    "id": "healthcare-uc2",
+    "industry": "Healthcare & Life Sciences",
+    "icon": "clinical_notes",
+    "title": "Clinical Decision Support System",
+    "challenge": "Physicians spend 2+ hours daily searching medical literature and patient history. Outdated information leads to suboptimal treatment decisions and increased liability.",
+    "solution": "Implement RAG Chat integrated with medical knowledge bases, clinical guidelines, and patient EHR data. Agentic AI assistants provide real-time treatment recommendations with source citations.",
+    "capabilities": [
+      "RAG Chat",
+      "Agentic AI",
+      "LLM Management",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "70% reduction in literature review time",
+      "18% improvement in treatment outcomes",
+      "99.2% physician satisfaction rate",
+      "40% reduction in diagnostic errors"
+    ],
+    "tags": [
+      "rag",
+      "agentic"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__knowledge-sources",
+          "name": "Knowledge Sources",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "knowledge-sources__pubmed",
+              "name": "PubMed",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "knowledge-sources__clinical-guidelines",
+              "name": "Clinical Guidelines",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "knowledge-sources__patient-ehr",
+              "name": "Patient EHR",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "knowledge-sources__drug-database",
+              "name": "Drug Database",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__data-pipeline",
+          "name": "Data Pipeline",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "data-pipeline__document-ingestion",
+              "name": "Document Ingestion",
+              "shape": null,
+              "kind": "pipeline"
+            },
+            {
+              "id": "data-pipeline__chunking-and-parsing",
+              "name": "Chunking and Parsing",
+              "shape": null,
+              "kind": "pipeline"
+            },
+            {
+              "id": "data-pipeline__embedding-generation",
+              "name": "Embedding Generation",
+              "shape": null,
+              "kind": "pipeline"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__vector-store",
+          "name": "Vector Store",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "vector-store__vector-database",
+              "name": "Vector Database",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "vector-store__metadata-index",
+              "name": "Metadata Index",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__rag-engine",
+          "name": "RAG Engine",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "rag-engine__hybrid-retriever",
+              "name": "Hybrid Retriever",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "rag-engine__re-ranker",
+              "name": "Re-ranker",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "rag-engine__context-builder",
+              "name": "Context Builder",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "rag-namespace"
+        },
+        {
+          "id": "__group__agentic-ai",
+          "name": "Agentic AI",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "agentic-ai__diagnosis-agent",
+              "name": "Diagnosis Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "agentic-ai__treatment-agent",
+              "name": "Treatment Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "agentic-ai__drug-interaction-agent",
+              "name": "Drug Interaction Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "agentic-ai__citation-agent",
+              "name": "Citation Agent",
+              "shape": null,
+              "kind": "agent"
+            }
+          ],
+          "role": "agentic-namespace"
+        },
+        {
+          "id": "__group__clinical-interface",
+          "name": "Clinical Interface",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "clinical-interface__chat-interface",
+              "name": "Chat Interface",
+              "shape": null,
+              "kind": "ui"
+            },
+            {
+              "id": "clinical-interface__clinical-dashboard",
+              "name": "Clinical Dashboard",
+              "shape": null,
+              "kind": "ui"
+            },
+            {
+              "id": "clinical-interface__alert-system",
+              "name": "Alert System",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "frontend-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "knowledge-sources__pubmed",
+          "to": "data-pipeline__document-ingestion",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "knowledge-sources__clinical-guidelines",
+          "to": "data-pipeline__document-ingestion",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "knowledge-sources__patient-ehr",
+          "to": "data-pipeline__document-ingestion",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "knowledge-sources__drug-database",
+          "to": "data-pipeline__document-ingestion",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-pipeline__document-ingestion",
+          "to": "data-pipeline__chunking-and-parsing",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "data-pipeline__chunking-and-parsing",
+          "to": "data-pipeline__embedding-generation",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "data-pipeline__embedding-generation",
+          "to": "vector-store__vector-database",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-pipeline__embedding-generation",
+          "to": "vector-store__metadata-index",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "vector-store__vector-database",
+          "to": "rag-engine__hybrid-retriever",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "vector-store__metadata-index",
+          "to": "rag-engine__hybrid-retriever",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "rag-engine__hybrid-retriever",
+          "to": "rag-engine__re-ranker",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "rag-engine__re-ranker",
+          "to": "rag-engine__context-builder",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "rag-engine__context-builder",
+          "to": "agentic-ai__diagnosis-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "rag-engine__context-builder",
+          "to": "agentic-ai__treatment-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "rag-engine__context-builder",
+          "to": "agentic-ai__drug-interaction-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "agentic-ai__diagnosis-agent",
+          "to": "agentic-ai__citation-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "agentic-ai__treatment-agent",
+          "to": "agentic-ai__citation-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "agentic-ai__drug-interaction-agent",
+          "to": "agentic-ai__citation-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "agentic-ai__citation-agent",
+          "to": "clinical-interface__chat-interface",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "agentic-ai__citation-agent",
+          "to": "clinical-interface__clinical-dashboard",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "agentic-ai__citation-agent",
+          "to": "clinical-interface__alert-system",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "healthcare-uc3",
+    "industry": "Healthcare & Life Sciences",
+    "icon": "receipt_long",
+    "title": "Automated Medical Coding & Billing",
+    "challenge": "Manual medical coding results in 15-20% error rates, delayed reimbursements, and $125B annual losses in the US healthcare system due to coding inaccuracies.",
+    "solution": "Deploy AI Workflows that automatically extract clinical information from physician notes, map to ICD-10/CPT codes, and flag anomalies for human review. LLM fine-tuning ensures domain-specific accuracy.",
+    "capabilities": [
+      "AI Workflows",
+      "LLM Fine-tuning",
+      "Document Intelligence",
+      "Converge App"
+    ],
+    "outcomes": [
+      "95% coding accuracy (up from 80%)",
+      "60% faster claim processing",
+      "$4.5M annual revenue recovery",
+      "85% reduction in claim denials"
+    ],
+    "tags": [
+      "workflows",
+      "llm"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__documents",
+          "name": "Documents",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "documents__notes",
+              "name": "Notes",
+              "shape": "page",
+              "kind": "component"
+            },
+            {
+              "id": "documents__reports",
+              "name": "Reports",
+              "shape": "page",
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx",
+          "name": "NStarX",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "nstarx__ocr",
+              "name": "OCR",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx__ner",
+              "name": "NER",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx__llm",
+              "name": "LLM",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx__mapper",
+              "name": "Mapper",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__review",
+          "name": "Review",
+          "fill": "#fef3c7",
+          "nodes": [
+            {
+              "id": "review__queue",
+              "name": "Queue",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "review__feedback",
+              "name": "Feedback",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__output",
+          "name": "Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "output__claims",
+              "name": "Claims",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "output__edi",
+              "name": "EDI",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "documents__notes",
+          "to": "nstarx__ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "documents__reports",
+          "to": "nstarx__ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx__ocr",
+          "to": "nstarx__ner",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx__ner",
+          "to": "nstarx__llm",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx__llm",
+          "to": "nstarx__mapper",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx__mapper",
+          "to": "output__claims",
+          "label": "High",
+          "style": {}
+        },
+        {
+          "from": "nstarx__mapper",
+          "to": "review__queue",
+          "label": "Low {style.stroke-dash: 3}",
+          "style": {}
+        },
+        {
+          "from": "review__queue",
+          "to": "review__feedback",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "review__feedback",
+          "to": "nstarx__llm",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "output__claims",
+          "to": "output__edi",
+          "label": "",
+          "style": {}
+        }
+      ]
+    }
+  },
+  {
+    "id": "healthcare-uc4",
+    "industry": "Healthcare & Life Sciences",
+    "icon": "biotech",
+    "title": "Drug Discovery Collaboration",
+    "challenge": "Pharmaceutical companies want to accelerate drug discovery by sharing molecular insights without revealing proprietary compound data worth billions in R&D investment.",
+    "solution": "Enable cross-organization federated learning for molecular property prediction. Companies train on local compound libraries while contributing to shared models that predict drug efficacy and toxicity.",
+    "capabilities": [
+      "Federated Learning",
+      "Secure Aggregation",
+      "AI Workflows",
+      "Spark Jobs"
+    ],
+    "outcomes": [
+      "30% reduction in drug discovery timeline",
+      "$200M savings per successful drug",
+      "5x larger training dataset without data sharing",
+      "IP protection maintained across competitors"
+    ],
+    "tags": [
+      "federated",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__federated-consortium",
+          "name": "Federated Consortium",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "federated-consortium__nstarx-orchestrator",
+              "name": "NStarX Orchestrator",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "federated-consortium__secure-aggregator",
+              "name": "Secure Aggregator",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "federated-consortium__global-qsar-model",
+              "name": "Global QSAR Model",
+              "shape": null,
+              "kind": "model"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__pharma-company-a",
+          "name": "Pharma Company A",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "pharma-company-a__compound-library-a",
+              "name": "Compound Library A",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "pharma-company-a__local-model-a",
+              "name": "Local Model A",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "pharma-company-a__privacy-layer-a",
+              "name": "Privacy Layer A",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__pharma-company-b",
+          "name": "Pharma Company B",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "pharma-company-b__compound-library-b",
+              "name": "Compound Library B",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "pharma-company-b__local-model-b",
+              "name": "Local Model B",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "pharma-company-b__privacy-layer-b",
+              "name": "Privacy Layer B",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__pharma-company-c",
+          "name": "Pharma Company C",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "pharma-company-c__compound-library-c",
+              "name": "Compound Library C",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "pharma-company-c__local-model-c",
+              "name": "Local Model C",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "pharma-company-c__privacy-layer-c",
+              "name": "Privacy Layer C",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__drug-discovery-apps",
+          "name": "Drug Discovery Apps",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "drug-discovery-apps__toxicity-prediction",
+              "name": "Toxicity Prediction",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "drug-discovery-apps__efficacy-prediction",
+              "name": "Efficacy Prediction",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "drug-discovery-apps__adme-properties",
+              "name": "ADME Properties",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "drug-discovery-apps__virtual-screening",
+              "name": "Virtual Screening",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "frontend-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "pharma-company-a__compound-library-a",
+          "to": "pharma-company-a__local-model-a",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "pharma-company-a__local-model-a",
+          "to": "pharma-company-a__privacy-layer-a",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "pharma-company-a__privacy-layer-a",
+          "to": "federated-consortium__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "pharma-company-b__compound-library-b",
+          "to": "pharma-company-b__local-model-b",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "pharma-company-b__local-model-b",
+          "to": "pharma-company-b__privacy-layer-b",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "pharma-company-b__privacy-layer-b",
+          "to": "federated-consortium__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "pharma-company-c__compound-library-c",
+          "to": "pharma-company-c__local-model-c",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "pharma-company-c__local-model-c",
+          "to": "pharma-company-c__privacy-layer-c",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "pharma-company-c__privacy-layer-c",
+          "to": "federated-consortium__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "federated-consortium__nstarx-orchestrator",
+          "to": "federated-consortium__secure-aggregator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "federated-consortium__secure-aggregator",
+          "to": "federated-consortium__global-qsar-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "federated-consortium__global-qsar-model",
+          "to": "pharma-company-a__local-model-a",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "federated-consortium__global-qsar-model",
+          "to": "pharma-company-b__local-model-b",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "federated-consortium__global-qsar-model",
+          "to": "pharma-company-c__local-model-c",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "federated-consortium__global-qsar-model",
+          "to": "drug-discovery-apps__toxicity-prediction",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "federated-consortium__global-qsar-model",
+          "to": "drug-discovery-apps__efficacy-prediction",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "federated-consortium__global-qsar-model",
+          "to": "drug-discovery-apps__adme-properties",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "federated-consortium__global-qsar-model",
+          "to": "drug-discovery-apps__virtual-screening",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "finance-uc1",
+    "industry": "Financial Services",
+    "icon": "security",
+    "title": "Cross-Institution Fraud Detection",
+    "challenge": "Individual banks see only their portion of fraud patterns. Sophisticated fraud rings exploit this blind spot, causing $32B in annual losses across the banking industry.",
+    "solution": "Deploy federated learning across banking consortium to build fraud detection models that learn from patterns across all institutions without sharing customer transaction data or competitive intelligence.",
+    "capabilities": [
+      "Federated Learning",
+      "Real-time Inference",
+      "AI Workflows",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "45% improvement in fraud detection rate",
+      "60% reduction in false positives",
+      "$180M annual fraud losses prevented",
+      "Sub-100ms detection latency"
+    ],
+    "tags": [
+      "federated",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__banking-consortium-nstarx",
+          "name": "Banking Consortium NStarX",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "banking-consortium-nstarx__fl-orchestrator",
+              "name": "FL Orchestrator",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "banking-consortium-nstarx__secure-aggregator",
+              "name": "Secure Aggregator",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "banking-consortium-nstarx__global-fraud-model",
+              "name": "Global Fraud Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "banking-consortium-nstarx__consortium-dashboard",
+              "name": "Consortium Dashboard",
+              "shape": null,
+              "kind": "ui"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__bank-a-ai-zone",
+          "name": "Bank A AI Zone",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "bank-a-ai-zone__transaction-data-a",
+              "name": "Transaction Data A",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "bank-a-ai-zone__local-fraud-model-a",
+              "name": "Local Fraud Model A",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "bank-a-ai-zone__real-time-inference-a",
+              "name": "Real-time Inference A",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "bank-a-ai-zone__privacy-layer-a",
+              "name": "Privacy Layer A",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__bank-b-ai-zone",
+          "name": "Bank B AI Zone",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "bank-b-ai-zone__transaction-data-b",
+              "name": "Transaction Data B",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "bank-b-ai-zone__local-fraud-model-b",
+              "name": "Local Fraud Model B",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "bank-b-ai-zone__real-time-inference-b",
+              "name": "Real-time Inference B",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "bank-b-ai-zone__privacy-layer-b",
+              "name": "Privacy Layer B",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__bank-c-ai-zone",
+          "name": "Bank C AI Zone",
+          "fill": "#d1fae5",
+          "nodes": [
+            {
+              "id": "bank-c-ai-zone__transaction-data-c",
+              "name": "Transaction Data C",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "bank-c-ai-zone__local-fraud-model-c",
+              "name": "Local Fraud Model C",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "bank-c-ai-zone__real-time-inference-c",
+              "name": "Real-time Inference C",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "bank-c-ai-zone__privacy-layer-c",
+              "name": "Privacy Layer C",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__real-time-detection",
+          "name": "Real-time Detection",
+          "fill": "#dc2626",
+          "nodes": [
+            {
+              "id": "real-time-detection__risk-scoring",
+              "name": "Risk Scoring",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "real-time-detection__alert-engine",
+              "name": "Alert Engine",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "real-time-detection__case-management",
+              "name": "Case Management",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "bank-a-ai-zone__transaction-data-a",
+          "to": "bank-a-ai-zone__local-fraud-model-a",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "bank-b-ai-zone__transaction-data-b",
+          "to": "bank-b-ai-zone__local-fraud-model-b",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "bank-c-ai-zone__transaction-data-c",
+          "to": "bank-c-ai-zone__local-fraud-model-c",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "bank-a-ai-zone__local-fraud-model-a",
+          "to": "bank-a-ai-zone__privacy-layer-a",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "bank-a-ai-zone__privacy-layer-a",
+          "to": "banking-consortium-nstarx__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "bank-b-ai-zone__local-fraud-model-b",
+          "to": "bank-b-ai-zone__privacy-layer-b",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "bank-b-ai-zone__privacy-layer-b",
+          "to": "banking-consortium-nstarx__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "bank-c-ai-zone__local-fraud-model-c",
+          "to": "bank-c-ai-zone__privacy-layer-c",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "bank-c-ai-zone__privacy-layer-c",
+          "to": "banking-consortium-nstarx__secure-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "banking-consortium-nstarx__secure-aggregator",
+          "to": "banking-consortium-nstarx__global-fraud-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "banking-consortium-nstarx__global-fraud-model",
+          "to": "bank-a-ai-zone__local-fraud-model-a",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "banking-consortium-nstarx__global-fraud-model",
+          "to": "bank-b-ai-zone__local-fraud-model-b",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "banking-consortium-nstarx__global-fraud-model",
+          "to": "bank-c-ai-zone__local-fraud-model-c",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "bank-a-ai-zone__local-fraud-model-a",
+          "to": "bank-a-ai-zone__real-time-inference-a",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "bank-b-ai-zone__local-fraud-model-b",
+          "to": "bank-b-ai-zone__real-time-inference-b",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "bank-c-ai-zone__local-fraud-model-c",
+          "to": "bank-c-ai-zone__real-time-inference-c",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "bank-a-ai-zone__real-time-inference-a",
+          "to": "real-time-detection__risk-scoring",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "bank-b-ai-zone__real-time-inference-b",
+          "to": "real-time-detection__risk-scoring",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "bank-c-ai-zone__real-time-inference-c",
+          "to": "real-time-detection__risk-scoring",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "real-time-detection__risk-scoring",
+          "to": "real-time-detection__alert-engine",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "real-time-detection__alert-engine",
+          "to": "real-time-detection__case-management",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "banking-consortium-nstarx__secure-aggregator",
+          "to": "banking-consortium-nstarx__consortium-dashboard",
+          "label": "",
+          "style": {}
+        }
+      ]
+    }
+  },
+  {
+    "id": "finance-uc2",
+    "industry": "Financial Services",
+    "icon": "account_balance_wallet",
+    "title": "Intelligent Wealth Advisory",
+    "challenge": "Wealth advisors manage 150+ client relationships each, spending 60% of time on administrative tasks instead of high-value client interactions and portfolio optimization.",
+    "solution": "Deploy agentic AI assistants that autonomously analyze market conditions, client portfolios, and life events to generate personalized recommendations. RAG integration provides instant access to research and compliance documentation.",
+    "capabilities": [
+      "Agentic AI",
+      "RAG Chat",
+      "LLM Management",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "3x increase in client touchpoints",
+      "25% improvement in portfolio performance",
+      "$50M additional AUM per advisor",
+      "95% compliance accuracy"
+    ],
+    "tags": [
+      "agentic",
+      "rag"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__data-sources",
+          "name": "Data Sources",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "data-sources__crm-data",
+              "name": "CRM Data",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__market-feeds",
+              "name": "Market Feeds",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__research-docs",
+              "name": "Research Docs",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__rag-engine",
+              "name": "RAG Engine",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__agent-orchestrator",
+              "name": "Agent Orchestrator",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__llm-gateway",
+              "name": "LLM Gateway",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__compliance-check",
+              "name": "Compliance Check",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__advisor-tools",
+          "name": "Advisor Tools",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "advisor-tools__recommendations",
+              "name": "Recommendations",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "advisor-tools__reports",
+              "name": "Reports",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "advisor-tools__alerts",
+              "name": "Alerts",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "data-sources__crm-data",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__market-feeds",
+          "to": "nstarx-platform__agent-orchestrator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__research-docs",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__rag-engine",
+          "to": "nstarx-platform__agent-orchestrator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__agent-orchestrator",
+          "to": "nstarx-platform__llm-gateway",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__llm-gateway",
+          "to": "nstarx-platform__compliance-check",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__compliance-check",
+          "to": "advisor-tools__recommendations",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__compliance-check",
+          "to": "advisor-tools__reports",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__compliance-check",
+          "to": "advisor-tools__alerts",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "financial-services-7",
+    "industry": "Financial Services",
+    "icon": null,
+    "title": "Automated Loan Underwriting",
+    "challenge": "Traditional loan underwriting takes 30-45 days, involves 50+ manual document reviews, and results in inconsistent decisions that create regulatory risk and customer dissatisfaction.",
+    "solution": "Implement end-to-end AI workflow for loan processing: document extraction, income verification, risk scoring, and decision generation. Fine-tuned LLMs ensure accurate extraction from diverse document formats.",
+    "capabilities": [
+      "AI Workflows",
+      "LLM Fine-tuning",
+      "Document Intelligence",
+      "Inference Model"
+    ],
+    "outcomes": [
+      "85% reduction in processing time (45 days to 7 days)",
+      "40% lower operational costs",
+      "99.5% document extraction accuracy",
+      "20% increase in loan approval rates"
+    ],
+    "tags": [
+      "llm",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__document-intake",
+          "name": "Document Intake",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "document-intake__application",
+              "name": "Application",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "document-intake__income-documents",
+              "name": "Income Documents",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "document-intake__identity-documents",
+              "name": "Identity Documents",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-ai-workflow",
+          "name": "NStarX AI Workflow",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "nstarx-ai-workflow__document-ocr",
+              "name": "Document OCR",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-ai-workflow__data-extraction",
+              "name": "Data Extraction",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "nstarx-ai-workflow__verification",
+              "name": "Verification",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-ai-workflow__risk-scoring",
+              "name": "Risk Scoring",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-ai-workflow__decision-engine",
+              "name": "Decision Engine",
+              "shape": null,
+              "kind": "service"
+            }
+          ],
+          "role": "agentic-namespace"
+        },
+        {
+          "id": "__group__results",
+          "name": "Results",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "results__approval",
+              "name": "Approval",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "results__review-queue",
+              "name": "Review Queue",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "results__denial-with-reason",
+              "name": "Denial with Reason",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "document-intake__application",
+          "to": "nstarx-ai-workflow__document-ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "document-intake__income-documents",
+          "to": "nstarx-ai-workflow__document-ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "document-intake__identity-documents",
+          "to": "nstarx-ai-workflow__document-ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-ai-workflow__document-ocr",
+          "to": "nstarx-ai-workflow__data-extraction",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-ai-workflow__data-extraction",
+          "to": "nstarx-ai-workflow__verification",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-ai-workflow__verification",
+          "to": "nstarx-ai-workflow__risk-scoring",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-ai-workflow__risk-scoring",
+          "to": "nstarx-ai-workflow__decision-engine",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-ai-workflow__decision-engine",
+          "to": "results__approval",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-ai-workflow__decision-engine",
+          "to": "results__review-queue",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-ai-workflow__decision-engine",
+          "to": "results__denial-with-reason",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "financial-services-8",
+    "industry": "Financial Services",
+    "icon": null,
+    "title": "Regulatory Compliance Assistant",
+    "challenge": "Banks face 200+ regulatory changes annually. Compliance teams struggle to track requirements across jurisdictions, leading to $10B+ in industry fines annually.",
+    "solution": "Deploy RAG-powered compliance assistant that monitors regulatory updates, maps requirements to internal policies, and generates gap analysis reports. Agentic workflows automate policy update recommendations.",
+    "capabilities": [
+      "RAG Chat",
+      "Agentic AI",
+      "AI Workflows",
+      "AI Catalog"
+    ],
+    "outcomes": [
+      "Zero regulatory fines in 18 months",
+      "70% faster compliance assessments",
+      "$8M annual savings in compliance costs",
+      "100% regulatory change coverage"
+    ],
+    "tags": [
+      "rag",
+      "agentic"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__regulatory-sources",
+          "name": "Regulatory Sources",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "regulatory-sources__regulatory-feeds",
+              "name": "Regulatory Feeds",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "regulatory-sources__internal-policies",
+              "name": "Internal Policies",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "regulatory-sources__controls-library",
+              "name": "Controls Library",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__ingestion-pipeline",
+              "name": "Ingestion Pipeline",
+              "shape": null,
+              "kind": "pipeline"
+            },
+            {
+              "id": "nstarx-platform__rag-engine",
+              "name": "RAG Engine",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__compliance-agents",
+              "name": "Compliance Agents",
+              "shape": null,
+              "kind": "policy"
+            },
+            {
+              "id": "nstarx-platform__gap-analyzer",
+              "name": "Gap Analyzer",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__outputs",
+          "name": "Outputs",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "outputs__gap-reports",
+              "name": "Gap Reports",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "outputs__recommendations",
+              "name": "Recommendations",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "outputs__risk-alerts",
+              "name": "Risk Alerts",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "regulatory-sources__regulatory-feeds",
+          "to": "nstarx-platform__ingestion-pipeline",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "regulatory-sources__internal-policies",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "regulatory-sources__controls-library",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__ingestion-pipeline",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__rag-engine",
+          "to": "nstarx-platform__compliance-agents",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__compliance-agents",
+          "to": "nstarx-platform__gap-analyzer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__gap-analyzer",
+          "to": "outputs__gap-reports",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__gap-analyzer",
+          "to": "outputs__recommendations",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__gap-analyzer",
+          "to": "outputs__risk-alerts",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "telecommunications-9",
+    "industry": "Telecommunications",
+    "icon": null,
+    "title": "Network Performance Optimization",
+    "challenge": "Telecom operators manage millions of network elements generating petabytes of telemetry data. Manual optimization is impossible, and centralized AI cannot scale to edge locations.",
+    "solution": "Deploy federated learning across edge nodes for distributed network optimization. Local models predict traffic patterns and optimize bandwidth allocation, while global model aggregates insights across the network.",
+    "capabilities": [
+      "Federated Learning",
+      "AI Zones",
+      "Inference Model",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "35% improvement in network efficiency",
+      "50% reduction in congestion events",
+      "$45M annual bandwidth cost savings",
+      "99.99% network uptime achieved"
+    ],
+    "tags": [
+      "federated",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__edge-ai-zones",
+          "name": "Edge AI Zones",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "edge-ai-zones__edge-node-1",
+              "name": "Edge Node 1",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "edge-ai-zones__edge-node-2",
+              "name": "Edge Node 2",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "edge-ai-zones__edge-node-n",
+              "name": "Edge Node N",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__nstarx-central",
+          "name": "NStarX Central",
+          "fill": "#dbeafe",
+          "nodes": [
+            {
+              "id": "nstarx-central__model-aggregator",
+              "name": "Model Aggregator",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-central__global-model",
+              "name": "Global Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-central__monitoring",
+              "name": "Monitoring",
+              "shape": null,
+              "kind": "observability"
+            }
+          ],
+          "role": "control-plane"
+        },
+        {
+          "id": "__group__network-actions",
+          "name": "Network Actions",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "network-actions__bandwidth-allocation",
+              "name": "Bandwidth Allocation",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "network-actions__qos-adjustment",
+              "name": "QoS Adjustment",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "network-actions__load-balancing",
+              "name": "Load Balancing",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "edge-ai-zones__edge-node-1",
+          "to": "nstarx-central__model-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "edge-ai-zones__edge-node-2",
+          "to": "nstarx-central__model-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "edge-ai-zones__edge-node-n",
+          "to": "nstarx-central__model-aggregator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-central__model-aggregator",
+          "to": "nstarx-central__global-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-central__global-model",
+          "to": "edge-ai-zones__edge-node-1",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-central__global-model",
+          "to": "edge-ai-zones__edge-node-2",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-central__global-model",
+          "to": "edge-ai-zones__edge-node-n",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "edge-ai-zones__edge-node-1",
+          "to": "network-actions__bandwidth-allocation",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "edge-ai-zones__edge-node-2",
+          "to": "network-actions__qos-adjustment",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "edge-ai-zones__edge-node-n",
+          "to": "network-actions__load-balancing",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-central__model-aggregator",
+          "to": "nstarx-central__monitoring",
+          "label": "",
+          "style": {}
+        }
+      ]
+    }
+  },
+  {
+    "id": "telecommunications-10",
+    "industry": "Telecommunications",
+    "icon": null,
+    "title": "Intelligent Customer Service",
+    "challenge": "Call centers handle 50M+ monthly interactions with 40% repeat calls. Agent turnover is 30% annually, and training costs $15K per agent.",
+    "solution": "Implement multi-agent AI system with specialized agents for billing, technical support, and sales. RAG integration provides instant access to product knowledge and customer history for personalized resolution.",
+    "capabilities": [
+      "Agentic AI",
+      "RAG Chat",
+      "LLM Management",
+      "Converge App"
+    ],
+    "outcomes": [
+      "65% of inquiries resolved by AI",
+      "40% reduction in call handling time",
+      "$120M annual customer service savings",
+      "NPS score improved by 25 points"
+    ],
+    "tags": [
+      "agentic",
+      "rag"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__customer-channels",
+          "name": "Customer Channels",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "customer-channels__voice",
+              "name": "Voice",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "customer-channels__chat",
+              "name": "Chat",
+              "shape": null,
+              "kind": "ui"
+            },
+            {
+              "id": "customer-channels__email",
+              "name": "Email",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__intent-router",
+              "name": "Intent Router",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "nstarx-platform__billing-agent",
+              "name": "Billing Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__tech-support-agent",
+              "name": "Tech Support Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__sales-agent",
+              "name": "Sales Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__rag-engine",
+              "name": "RAG Engine",
+              "shape": null,
+              "kind": "service"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__resolution",
+          "name": "Resolution",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "resolution__auto-resolve",
+              "name": "Auto-Resolve",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "resolution__escalate",
+              "name": "Escalate",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "resolution__offer",
+              "name": "Offer",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "customer-channels__voice",
+          "to": "nstarx-platform__intent-router",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "customer-channels__chat",
+          "to": "nstarx-platform__intent-router",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "customer-channels__email",
+          "to": "nstarx-platform__intent-router",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__intent-router",
+          "to": "nstarx-platform__billing-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__intent-router",
+          "to": "nstarx-platform__tech-support-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__intent-router",
+          "to": "nstarx-platform__sales-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__rag-engine",
+          "to": "nstarx-platform__billing-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__rag-engine",
+          "to": "nstarx-platform__tech-support-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__rag-engine",
+          "to": "nstarx-platform__sales-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__billing-agent",
+          "to": "resolution__auto-resolve",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__tech-support-agent",
+          "to": "resolution__escalate",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__sales-agent",
+          "to": "resolution__offer",
+          "label": "",
+          "style": {}
+        }
+      ]
+    }
+  },
+  {
+    "id": "telecommunications-11",
+    "industry": "Telecommunications",
+    "icon": null,
+    "title": "Predictive Churn Prevention",
+    "challenge": "Monthly churn rate of 2% costs $3B annually in lost revenue. By the time customers call to cancel, it's often too late to retain them.",
+    "solution": "Deploy ML workflows that analyze usage patterns, billing history, and service interactions to predict churn 60 days in advance. Agentic systems trigger personalized retention offers automatically.",
+    "capabilities": [
+      "AI Workflows",
+      "Spark Jobs",
+      "Inference Model",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "30% reduction in churn rate",
+      "$450M annual revenue retained",
+      "85% prediction accuracy",
+      "3x ROI on retention campaigns"
+    ],
+    "tags": [
+      "workflows",
+      "llm"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__customer-data",
+          "name": "Customer Data",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "customer-data__usage-patterns",
+              "name": "Usage Patterns",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "customer-data__billing-history",
+              "name": "Billing History",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "customer-data__service-calls",
+              "name": "Service Calls",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__spark-etl",
+              "name": "Spark ETL",
+              "shape": null,
+              "kind": "pipeline"
+            },
+            {
+              "id": "nstarx-platform__feature-store",
+              "name": "Feature Store",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "nstarx-platform__churn-model",
+              "name": "Churn Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__risk-scoring",
+              "name": "Risk Scoring",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__retention-actions",
+          "name": "Retention Actions",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "retention-actions__personalized-offer",
+              "name": "Personalized Offer",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "retention-actions__proactive-call",
+              "name": "Proactive Call",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "retention-actions__plan-upgrade",
+              "name": "Plan Upgrade",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "customer-data__usage-patterns",
+          "to": "nstarx-platform__spark-etl",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "customer-data__billing-history",
+          "to": "nstarx-platform__spark-etl",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "customer-data__service-calls",
+          "to": "nstarx-platform__spark-etl",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__spark-etl",
+          "to": "nstarx-platform__feature-store",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__feature-store",
+          "to": "nstarx-platform__churn-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__churn-model",
+          "to": "nstarx-platform__risk-scoring",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__risk-scoring",
+          "to": "retention-actions__personalized-offer",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__risk-scoring",
+          "to": "retention-actions__proactive-call",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__risk-scoring",
+          "to": "retention-actions__plan-upgrade",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "telecommunications-12",
+    "industry": "Telecommunications",
+    "icon": null,
+    "title": "5G Network Slice Management",
+    "challenge": "5G network slicing promises differentiated services but requires dynamic resource allocation across thousands of slices serving diverse use cases from IoT to AR/VR.",
+    "solution": "Deploy agentic AI for autonomous slice lifecycle management. AI agents monitor SLA compliance, predict demand, and orchestrate resource reallocation in real-time across network domains.",
+    "capabilities": [
+      "Agentic AI",
+      "AI Workflows",
+      "Monitoring",
+      "Deployments"
+    ],
+    "outcomes": [
+      "99.99% SLA compliance across slices",
+      "40% improvement in resource utilization",
+      "$80M new enterprise revenue",
+      "60% faster slice provisioning"
+    ],
+    "tags": [
+      "agentic",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__network-slices",
+          "name": "Network Slices",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "network-slices__iot-slice",
+              "name": "IoT Slice",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "network-slices__ar-vr-slice",
+              "name": "AR/VR Slice",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "network-slices__enterprise-slice",
+              "name": "Enterprise Slice",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-orchestrator",
+          "name": "NStarX Orchestrator",
+          "fill": "#ede9fe",
+          "nodes": [
+            {
+              "id": "nstarx-orchestrator__slice-agents",
+              "name": "Slice Agents",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-orchestrator__sla-monitor",
+              "name": "SLA Monitor",
+              "shape": null,
+              "kind": "observability"
+            },
+            {
+              "id": "nstarx-orchestrator__resource-optimizer",
+              "name": "Resource Optimizer",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-orchestrator__demand-predictor",
+              "name": "Demand Predictor",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__5g-infrastructure",
+          "name": "5G Infrastructure",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "5g-infrastructure__ran-resources",
+              "name": "RAN Resources",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "5g-infrastructure__core-network",
+              "name": "Core Network",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "5g-infrastructure__edge-compute",
+              "name": "Edge Compute",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "network-slices__iot-slice",
+          "to": "nstarx-orchestrator__slice-agents",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "network-slices__ar-vr-slice",
+          "to": "nstarx-orchestrator__slice-agents",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "network-slices__enterprise-slice",
+          "to": "nstarx-orchestrator__slice-agents",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-orchestrator__slice-agents",
+          "to": "nstarx-orchestrator__sla-monitor",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-orchestrator__sla-monitor",
+          "to": "nstarx-orchestrator__resource-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-orchestrator__demand-predictor",
+          "to": "nstarx-orchestrator__resource-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-orchestrator__resource-optimizer",
+          "to": "5g-infrastructure__ran-resources",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-orchestrator__resource-optimizer",
+          "to": "5g-infrastructure__core-network",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-orchestrator__resource-optimizer",
+          "to": "5g-infrastructure__edge-compute",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "manufacturing-13",
+    "industry": "Manufacturing",
+    "icon": null,
+    "title": "Visual Quality Inspection",
+    "challenge": "Manual quality inspection catches only 85% of defects, costs $50 per inspection hour, and creates bottlenecks at 500K units/day production volume.",
+    "solution": "Deploy computer vision workflows for real-time defect detection. Models trained on historical defect images identify anomalies at production speed. Edge inference enables sub-second detection without network latency.",
+    "capabilities": [
+      "AI Workflows",
+      "Inference Model",
+      "AI Zones",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "99.7% defect detection rate",
+      "80% reduction in inspection costs",
+      "50ms inspection time per unit",
+      "$15M annual savings from quality improvements"
+    ],
+    "tags": [
+      "workflows",
+      "llm"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__production-line",
+          "name": "Production Line",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "production-line__cameras",
+              "name": "Cameras",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "production-line__sensors",
+              "name": "Sensors",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-edge-ai-zone",
+          "name": "NStarX Edge AI Zone",
+          "fill": "#ffedd5",
+          "nodes": [
+            {
+              "id": "nstarx-edge-ai-zone__preprocessing",
+              "name": "Preprocessing",
+              "shape": null,
+              "kind": "pipeline"
+            },
+            {
+              "id": "nstarx-edge-ai-zone__vision-model",
+              "name": "Vision Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-edge-ai-zone__defect-detection",
+              "name": "Defect Detection",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-edge-ai-zone__classification",
+              "name": "Classification",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__quality-actions",
+          "name": "Quality Actions",
+          "fill": null,
+          "nodes": [
+            {
+              "id": "quality-actions__pass",
+              "name": "Pass",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "quality-actions__reject",
+              "name": "Reject",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "quality-actions__alert",
+              "name": "Alert",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "production-line__cameras",
+          "to": "nstarx-edge-ai-zone__preprocessing",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "production-line__sensors",
+          "to": "nstarx-edge-ai-zone__preprocessing",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-edge-ai-zone__preprocessing",
+          "to": "nstarx-edge-ai-zone__vision-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-edge-ai-zone__vision-model",
+          "to": "nstarx-edge-ai-zone__defect-detection",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-edge-ai-zone__defect-detection",
+          "to": "nstarx-edge-ai-zone__classification",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-edge-ai-zone__classification",
+          "to": "quality-actions__pass",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-edge-ai-zone__classification",
+          "to": "quality-actions__reject",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-edge-ai-zone__classification",
+          "to": "quality-actions__alert",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "manufacturing-14",
+    "industry": "Manufacturing",
+    "icon": null,
+    "title": "Predictive Maintenance",
+    "challenge": "Unplanned equipment downtime costs $50K/hour. Time-based maintenance schedules waste $1M+ annually in unnecessary part replacements and still miss 25% of failures.",
+    "solution": "Implement federated learning across factory floor sensors to predict equipment failures. Models learn from vibration, temperature, and operational patterns while keeping sensitive production data local.",
+    "capabilities": [
+      "Federated Learning",
+      "Spark Jobs",
+      "AI Workflows",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "45% reduction in unplanned downtime",
+      "30% reduction in maintenance costs",
+      "92% prediction accuracy for failures",
+      "$8M annual operational savings"
+    ],
+    "tags": [
+      "federated",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__equipment-sensors",
+          "name": "Equipment Sensors",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "equipment-sensors__vibration-sensors",
+              "name": "Vibration Sensors",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "equipment-sensors__temperature-monitors",
+              "name": "Temperature Monitors",
+              "shape": null,
+              "kind": "observability"
+            },
+            {
+              "id": "equipment-sensors__operating-data",
+              "name": "Operating Data",
+              "shape": null,
+              "kind": "datastore"
+            }
+          ],
+          "role": "frontend-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ffedd5",
+          "nodes": [
+            {
+              "id": "nstarx-platform__spark-streaming",
+              "name": "Spark Streaming",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__federated-learning",
+              "name": "Federated Learning",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__failure-prediction-model",
+              "name": "Failure Prediction Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__alert-engine",
+              "name": "Alert Engine",
+              "shape": null,
+              "kind": "service"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__maintenance-actions",
+          "name": "Maintenance Actions",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "maintenance-actions__work-orders",
+              "name": "Work Orders",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "maintenance-actions__parts-ordering",
+              "name": "Parts Ordering",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "maintenance-actions__schedule-maintenance",
+              "name": "Schedule Maintenance",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "equipment-sensors__vibration-sensors",
+          "to": "nstarx-platform__spark-streaming",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "equipment-sensors__temperature-monitors",
+          "to": "nstarx-platform__spark-streaming",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "equipment-sensors__operating-data",
+          "to": "nstarx-platform__spark-streaming",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__spark-streaming",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__federated-learning",
+          "to": "nstarx-platform__failure-prediction-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__failure-prediction-model",
+          "to": "nstarx-platform__alert-engine",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__alert-engine",
+          "to": "maintenance-actions__work-orders",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__alert-engine",
+          "to": "maintenance-actions__parts-ordering",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__alert-engine",
+          "to": "maintenance-actions__schedule-maintenance",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "manufacturing-15",
+    "industry": "Manufacturing",
+    "icon": null,
+    "title": "Shop Floor Assistant",
+    "challenge": "Plant operators consult 500+ page manuals and wait hours for engineering support. Average resolution time for production issues is 4 hours, causing significant output losses.",
+    "solution": "Deploy RAG-powered assistant with access to equipment manuals, maintenance history, and tribal knowledge. Agentic capabilities enable guided troubleshooting and automatic work order generation.",
+    "capabilities": [
+      "RAG Chat",
+      "Agentic AI",
+      "Converge App",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "70% reduction in issue resolution time",
+      "40% fewer engineering escalations",
+      "95% operator satisfaction",
+      "$3M annual productivity gains"
+    ],
+    "tags": [
+      "agentic",
+      "rag"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__knowledge-base",
+          "name": "Knowledge Base",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "knowledge-base__equipment-manuals",
+              "name": "Equipment Manuals",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "knowledge-base__maintenance-history",
+              "name": "Maintenance History",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "knowledge-base__tribal-knowledge",
+              "name": "Tribal Knowledge",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ffedd5",
+          "nodes": [
+            {
+              "id": "nstarx-platform__rag-engine",
+              "name": "RAG Engine",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__troubleshooting-agent",
+              "name": "Troubleshooting Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__llm-gateway",
+              "name": "LLM Gateway",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__converge-app",
+              "name": "Converge App",
+              "shape": null,
+              "kind": "ui"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__output-actions",
+          "name": "Output Actions",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "output-actions__guided-resolution",
+              "name": "Guided Resolution",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "output-actions__work-orders",
+              "name": "Work Orders",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "output-actions__escalation",
+              "name": "Escalation",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "knowledge-base__equipment-manuals",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "knowledge-base__maintenance-history",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "knowledge-base__tribal-knowledge",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__rag-engine",
+          "to": "nstarx-platform__troubleshooting-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__troubleshooting-agent",
+          "to": "nstarx-platform__llm-gateway",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__llm-gateway",
+          "to": "nstarx-platform__converge-app",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__converge-app",
+          "to": "output-actions__guided-resolution",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__converge-app",
+          "to": "output-actions__work-orders",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__converge-app",
+          "to": "output-actions__escalation",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "manufacturing-16",
+    "industry": "Manufacturing",
+    "icon": null,
+    "title": "Supply Chain Demand Forecasting",
+    "challenge": "Inaccurate demand forecasts cause $2M monthly in excess inventory and $1.5M in stockouts. Traditional forecasting models fail to adapt to market disruptions.",
+    "solution": "Deploy ML workflows that combine historical sales, market signals, weather data, and economic indicators. LLM analysis of news and social media provides early warning of demand shifts.",
+    "capabilities": [
+      "AI Workflows",
+      "LLM Management",
+      "Spark Jobs",
+      "SQL Lab"
+    ],
+    "outcomes": [
+      "35% improvement in forecast accuracy",
+      "25% reduction in inventory costs",
+      "50% fewer stockout events",
+      "$18M annual working capital freed"
+    ],
+    "tags": [
+      "workflows",
+      "llm"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__data-sources",
+          "name": "Data Sources",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "data-sources__historical-sales",
+              "name": "Historical Sales",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__market-signals",
+              "name": "Market Signals",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__external-data",
+              "name": "External Data",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ffedd5",
+          "nodes": [
+            {
+              "id": "nstarx-platform__spark-processing",
+              "name": "Spark Processing",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__llm-analysis",
+              "name": "LLM Analysis",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__ml-models",
+              "name": "ML Models",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__ensemble-engine",
+              "name": "Ensemble Engine",
+              "shape": null,
+              "kind": "service"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__planning-output",
+          "name": "Planning Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "planning-output__demand-forecast",
+              "name": "Demand Forecast",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "planning-output__inventory-plan",
+              "name": "Inventory Plan",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "planning-output__order-recommendations",
+              "name": "Order Recommendations",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "data-sources__historical-sales",
+          "to": "nstarx-platform__spark-processing",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__market-signals",
+          "to": "nstarx-platform__spark-processing",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__external-data",
+          "to": "nstarx-platform__llm-analysis",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__spark-processing",
+          "to": "nstarx-platform__ml-models",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__llm-analysis",
+          "to": "nstarx-platform__ensemble-engine",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__ml-models",
+          "to": "nstarx-platform__ensemble-engine",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__ensemble-engine",
+          "to": "planning-output__demand-forecast",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "planning-output__demand-forecast",
+          "to": "planning-output__inventory-plan",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "planning-output__demand-forecast",
+          "to": "planning-output__order-recommendations",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "retail-e-commerce-17",
+    "industry": "Retail & E-Commerce",
+    "icon": null,
+    "title": "AI Shopping Assistant",
+    "challenge": "E-commerce conversion rates average 2.5%. Customers abandon 70% of carts due to product confusion and lack of personalized guidance.",
+    "solution": "Deploy conversational AI shopping assistant that understands customer preferences, recommends products through dialogue, and guides purchases. RAG integration enables real-time product knowledge and inventory awareness.",
+    "capabilities": [
+      "Agentic AI",
+      "RAG Chat",
+      "LLM Management",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "40% increase in conversion rate",
+      "25% higher average order value",
+      "60% reduction in cart abandonment",
+      "$35M additional annual revenue"
+    ],
+    "tags": [
+      "agentic",
+      "rag"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__customer-input",
+          "name": "Customer Input",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "customer-input__customer-query",
+              "name": "Customer Query",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "customer-input__customer-preferences",
+              "name": "Customer Preferences",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#cffafe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__shopping-agent",
+              "name": "Shopping Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__product-rag",
+              "name": "Product RAG",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__llm-gateway",
+              "name": "LLM Gateway",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__personalization-engine",
+              "name": "Personalization Engine",
+              "shape": null,
+              "kind": "service"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__commerce-output",
+          "name": "Commerce Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "commerce-output__product-recommendations",
+              "name": "Product Recommendations",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "commerce-output__cart-updates",
+              "name": "Cart Updates",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "commerce-output__checkout",
+              "name": "Checkout",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "customer-input__customer-query",
+          "to": "nstarx-platform__shopping-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "customer-input__customer-preferences",
+          "to": "nstarx-platform__personalization-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__shopping-agent",
+          "to": "nstarx-platform__product-rag",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__product-rag",
+          "to": "nstarx-platform__llm-gateway",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__personalization-engine",
+          "to": "nstarx-platform__llm-gateway",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__llm-gateway",
+          "to": "commerce-output__product-recommendations",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "commerce-output__product-recommendations",
+          "to": "commerce-output__cart-updates",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "commerce-output__cart-updates",
+          "to": "commerce-output__checkout",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "retail-e-commerce-18",
+    "industry": "Retail & E-Commerce",
+    "icon": null,
+    "title": "Dynamic Pricing Optimization",
+    "challenge": "Static pricing leaves $50M+ annual revenue on the table. Competitors change prices hourly, and manual repricing for 500K SKUs is impossible.",
+    "solution": "Implement ML workflows that analyze competitor prices, demand elasticity, inventory levels, and margin targets to recommend optimal prices. Automated workflows execute price changes across channels.",
+    "capabilities": [
+      "AI Workflows",
+      "Spark Jobs",
+      "Inference Model",
+      "SQL Lab"
+    ],
+    "outcomes": [
+      "8% margin improvement",
+      "15% revenue increase from pricing",
+      "Real-time competitive response",
+      "$28M annual profit improvement"
+    ],
+    "tags": [
+      "workflows",
+      "llm"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__market-data",
+          "name": "Market Data",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "market-data__competitor-prices",
+              "name": "Competitor Prices",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "market-data__demand-signals",
+              "name": "Demand Signals",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "market-data__inventory-levels",
+              "name": "Inventory Levels",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#cffafe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__etl-pipeline",
+              "name": "ETL Pipeline",
+              "shape": null,
+              "kind": "pipeline"
+            },
+            {
+              "id": "nstarx-platform__pricing-model",
+              "name": "Pricing Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__price-optimizer",
+              "name": "Price Optimizer",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__business-rules",
+              "name": "Business Rules",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__price-actions",
+          "name": "Price Actions",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "price-actions__web-prices",
+              "name": "Web Prices",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "price-actions__store-prices",
+              "name": "Store Prices",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "price-actions__promotions",
+              "name": "Promotions",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "market-data__competitor-prices",
+          "to": "nstarx-platform__etl-pipeline",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "market-data__demand-signals",
+          "to": "nstarx-platform__etl-pipeline",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "market-data__inventory-levels",
+          "to": "nstarx-platform__etl-pipeline",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__etl-pipeline",
+          "to": "nstarx-platform__pricing-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__pricing-model",
+          "to": "nstarx-platform__price-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__price-optimizer",
+          "to": "nstarx-platform__business-rules",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__business-rules",
+          "to": "price-actions__web-prices",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__business-rules",
+          "to": "price-actions__store-prices",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__business-rules",
+          "to": "price-actions__promotions",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "retail-e-commerce-19",
+    "industry": "Retail & E-Commerce",
+    "icon": null,
+    "title": "Store Inventory Intelligence",
+    "challenge": "Inventory accuracy is 65% at store level. Out-of-stocks cost $1T globally in retail. Store managers spend 20% of time on manual inventory tasks.",
+    "solution": "Deploy federated learning across stores for localized demand prediction. AI agents automate reorder decisions, shelf allocation, and markdown timing based on store-specific patterns.",
+    "capabilities": [
+      "Federated Learning",
+      "Agentic AI",
+      "AI Workflows",
+      "Converge App"
+    ],
+    "outcomes": [
+      "95% inventory accuracy achieved",
+      "40% reduction in out-of-stocks",
+      "20% reduction in overstock markdowns",
+      "$12M annual inventory savings"
+    ],
+    "tags": [
+      "federated",
+      "agentic"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__store-locations",
+          "name": "Store Locations",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "store-locations__store-1",
+              "name": "Store 1",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "store-locations__store-2",
+              "name": "Store 2",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "store-locations__store-n",
+              "name": "Store N",
+              "shape": null,
+              "kind": "datastore"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#cffafe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__federated-learning",
+              "name": "Federated Learning",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__inventory-agent",
+              "name": "Inventory Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__demand-prediction",
+              "name": "Demand Prediction",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__order-engine",
+              "name": "Order Engine",
+              "shape": null,
+              "kind": "service"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__inventory-actions",
+          "name": "Inventory Actions",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "inventory-actions__auto-reorder",
+              "name": "Auto Reorder",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "inventory-actions__shelf-allocation",
+              "name": "Shelf Allocation",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "inventory-actions__markdown-timing",
+              "name": "Markdown Timing",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "store-locations__store-1",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "store-locations__store-2",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "store-locations__store-n",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__federated-learning",
+          "to": "nstarx-platform__inventory-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__inventory-agent",
+          "to": "nstarx-platform__demand-prediction",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__demand-prediction",
+          "to": "nstarx-platform__order-engine",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__order-engine",
+          "to": "inventory-actions__auto-reorder",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__order-engine",
+          "to": "inventory-actions__shelf-allocation",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__order-engine",
+          "to": "inventory-actions__markdown-timing",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "retail-e-commerce-20",
+    "industry": "Retail & E-Commerce",
+    "icon": null,
+    "title": "Product Content Generation",
+    "challenge": "Creating product descriptions for 100K+ SKUs costs $5M annually. Poor content quality impacts SEO rankings and conversion rates.",
+    "solution": "Deploy LLM-powered content generation that creates SEO-optimized product descriptions, titles, and attributes. RAG ensures brand voice consistency and accurate technical specifications.",
+    "capabilities": [
+      "LLM Management",
+      "RAG Chat",
+      "AI Workflows",
+      "AI Catalog"
+    ],
+    "outcomes": [
+      "90% reduction in content creation time",
+      "30% improvement in SEO rankings",
+      "15% increase in organic traffic",
+      "$4M annual content cost savings"
+    ],
+    "tags": [
+      "rag",
+      "llm"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__product-input",
+          "name": "Product Input",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "product-input__specifications",
+              "name": "Specifications",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "product-input__product-images",
+              "name": "Product Images",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "product-input__categories",
+              "name": "Categories",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#cffafe",
+          "nodes": [
+            {
+              "id": "nstarx-platform__brand-voice-rag",
+              "name": "Brand Voice RAG",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__llm-gateway",
+              "name": "LLM Gateway",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__seo-optimizer",
+              "name": "SEO Optimizer",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__quality-validator",
+              "name": "Quality Validator",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__content-output",
+          "name": "Content Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "content-output__product-descriptions",
+              "name": "Product Descriptions",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "content-output__product-titles",
+              "name": "Product Titles",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "content-output__product-attributes",
+              "name": "Product Attributes",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "product-input__specifications",
+          "to": "nstarx-platform__brand-voice-rag",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "product-input__product-images",
+          "to": "nstarx-platform__llm-gateway",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "product-input__categories",
+          "to": "nstarx-platform__brand-voice-rag",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__brand-voice-rag",
+          "to": "nstarx-platform__llm-gateway",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__llm-gateway",
+          "to": "nstarx-platform__seo-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__seo-optimizer",
+          "to": "nstarx-platform__quality-validator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__quality-validator",
+          "to": "content-output__product-descriptions",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__quality-validator",
+          "to": "content-output__product-titles",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__quality-validator",
+          "to": "content-output__product-attributes",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "energy-utilities-21",
+    "industry": "Energy & Utilities",
+    "icon": null,
+    "title": "Smart Grid Load Balancing",
+    "challenge": "Grid operators manage 50M+ endpoints with intermittent renewable generation. Peak demand causes $5B annually in infrastructure investments and $2B in outage costs.",
+    "solution": "Deploy federated learning across smart meters and grid sensors. Local models predict consumption patterns while preserving customer privacy. Central coordination optimizes load distribution in real-time.",
+    "capabilities": [
+      "Federated Learning",
+      "AI Zones",
+      "AI Workflows",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "20% reduction in peak demand",
+      "$500M deferred infrastructure spend",
+      "95% renewable utilization rate",
+      "99.99% grid reliability achieved"
+    ],
+    "tags": [
+      "federated",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__grid-infrastructure",
+          "name": "Grid Infrastructure",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "grid-infrastructure__smart-meters",
+              "name": "Smart Meters",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "grid-infrastructure__grid-sensors",
+              "name": "Grid Sensors",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "grid-infrastructure__renewable-sources",
+              "name": "Renewable Sources",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ecfccb",
+          "nodes": [
+            {
+              "id": "nstarx-platform__federated-learning",
+              "name": "Federated Learning",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__load-prediction",
+              "name": "Load Prediction",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__grid-optimizer",
+              "name": "Grid Optimizer",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__control-system",
+              "name": "Control System",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__grid-actions",
+          "name": "Grid Actions",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "grid-actions__demand-response",
+              "name": "Demand Response",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "grid-actions__storage-dispatch",
+              "name": "Storage Dispatch",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "grid-actions__load-routing",
+              "name": "Load Routing",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "grid-infrastructure__smart-meters",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "grid-infrastructure__grid-sensors",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "grid-infrastructure__renewable-sources",
+          "to": "nstarx-platform__load-prediction",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__federated-learning",
+          "to": "nstarx-platform__load-prediction",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__load-prediction",
+          "to": "nstarx-platform__grid-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__grid-optimizer",
+          "to": "nstarx-platform__control-system",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__control-system",
+          "to": "grid-actions__demand-response",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__control-system",
+          "to": "grid-actions__storage-dispatch",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__control-system",
+          "to": "grid-actions__load-routing",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "energy-utilities-22",
+    "industry": "Energy & Utilities",
+    "icon": null,
+    "title": "Renewable Energy Forecasting",
+    "challenge": "Solar and wind variability causes $1B annually in grid imbalance costs. Inaccurate forecasts result in curtailment of 15% of renewable generation.",
+    "solution": "Deploy agentic AI system that combines weather data, satellite imagery, and historical patterns to predict renewable generation. Autonomous agents coordinate storage dispatch and demand response.",
+    "capabilities": [
+      "Agentic AI",
+      "AI Workflows",
+      "Spark Jobs",
+      "Inference Model"
+    ],
+    "outcomes": [
+      "40% improvement in forecast accuracy",
+      "50% reduction in curtailment",
+      "$200M annual grid cost savings",
+      "25% more renewable integration"
+    ],
+    "tags": [
+      "agentic",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__data-sources",
+          "name": "Data Sources",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "data-sources__weather-data",
+              "name": "Weather Data",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__satellite-imagery",
+              "name": "Satellite Imagery",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__historical-patterns",
+              "name": "Historical Patterns",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ecfccb",
+          "nodes": [
+            {
+              "id": "nstarx-platform__ml-models",
+              "name": "ML Models",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__forecast-agent",
+              "name": "Forecast Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__grid-optimizer",
+              "name": "Grid Optimizer",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__energy-output",
+          "name": "Energy Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "energy-output__generation-forecast",
+              "name": "Generation Forecast",
+              "shape": null,
+              "kind": "pipeline"
+            },
+            {
+              "id": "energy-output__storage-dispatch",
+              "name": "Storage Dispatch",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "energy-output__demand-response",
+              "name": "Demand Response",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "data-sources__weather-data",
+          "to": "nstarx-platform__ml-models",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__satellite-imagery",
+          "to": "nstarx-platform__ml-models",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__historical-patterns",
+          "to": "nstarx-platform__ml-models",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__ml-models",
+          "to": "nstarx-platform__forecast-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__forecast-agent",
+          "to": "nstarx-platform__grid-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__grid-optimizer",
+          "to": "energy-output__generation-forecast",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__grid-optimizer",
+          "to": "energy-output__storage-dispatch",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__grid-optimizer",
+          "to": "energy-output__demand-response",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "energy-utilities-23",
+    "industry": "Energy & Utilities",
+    "icon": null,
+    "title": "Field Service Optimization",
+    "challenge": "Field technicians manage 50K+ equipment types with 500+ failure modes. First-time fix rate is 70%, requiring costly repeat visits and extended outages.",
+    "solution": "Deploy RAG-powered mobile assistant with access to equipment documentation, repair history, and expert knowledge. LLM-powered diagnostics guide troubleshooting and part identification.",
+    "capabilities": [
+      "RAG Chat",
+      "LLM Management",
+      "Converge App",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "92% first-time fix rate",
+      "30% reduction in truck rolls",
+      "50% faster diagnosis time",
+      "$25M annual field service savings"
+    ],
+    "tags": [
+      "rag",
+      "llm"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__knowledge-base",
+          "name": "Knowledge Base",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "knowledge-base__equipment-documentation",
+              "name": "Equipment Documentation",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "knowledge-base__repair-history",
+              "name": "Repair History",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "knowledge-base__expert-knowledge",
+              "name": "Expert Knowledge",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "edge-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ecfccb",
+          "nodes": [
+            {
+              "id": "nstarx-platform__rag-engine",
+              "name": "RAG Engine",
+              "shape": null,
+              "kind": "service"
+            },
+            {
+              "id": "nstarx-platform__llm-diagnostics",
+              "name": "LLM Diagnostics",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__mobile-app",
+              "name": "Mobile App",
+              "shape": null,
+              "kind": "ui"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__field-output",
+          "name": "Field Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "field-output__guided-diagnosis",
+              "name": "Guided Diagnosis",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "field-output__parts-identification",
+              "name": "Parts Identification",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "field-output__repair-instructions",
+              "name": "Repair Instructions",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "knowledge-base__equipment-documentation",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "knowledge-base__repair-history",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "knowledge-base__expert-knowledge",
+          "to": "nstarx-platform__rag-engine",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__rag-engine",
+          "to": "nstarx-platform__llm-diagnostics",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__llm-diagnostics",
+          "to": "nstarx-platform__mobile-app",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__mobile-app",
+          "to": "field-output__guided-diagnosis",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__mobile-app",
+          "to": "field-output__parts-identification",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__mobile-app",
+          "to": "field-output__repair-instructions",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "energy-utilities-24",
+    "industry": "Energy & Utilities",
+    "icon": null,
+    "title": "Carbon Emissions Tracking",
+    "challenge": "Regulatory requirements demand accurate carbon accounting across Scope 1-3 emissions. Manual tracking is error-prone and audits cost $2M annually.",
+    "solution": "Implement AI workflows that automatically collect emissions data across operations, calculate carbon footprints, and generate compliance reports. Agentic systems recommend decarbonization actions.",
+    "capabilities": [
+      "AI Workflows",
+      "Agentic AI",
+      "SQL Lab",
+      "Converge App"
+    ],
+    "outcomes": [
+      "100% emissions visibility",
+      "80% reduction in audit time",
+      "15% emissions reduction identified",
+      "$50M carbon credit optimization"
+    ],
+    "tags": [
+      "workflows",
+      "agentic"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__emissions-sources",
+          "name": "Emissions Sources",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "emissions-sources__scope-1-direct-emissions",
+              "name": "Scope 1 Direct Emissions",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "emissions-sources__scope-2-energy-indirect",
+              "name": "Scope 2 Energy Indirect",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "emissions-sources__scope-3-supply-chain",
+              "name": "Scope 3 Supply Chain",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ecfccb",
+          "nodes": [
+            {
+              "id": "nstarx-platform__data-collector",
+              "name": "Data Collector",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "nstarx-platform__ghg-calculator",
+              "name": "GHG Calculator",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__carbon-agent",
+              "name": "Carbon Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__report-generator",
+              "name": "Report Generator",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__reporting-output",
+          "name": "Reporting Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "reporting-output__emissions-dashboard",
+              "name": "Emissions Dashboard",
+              "shape": null,
+              "kind": "ui"
+            },
+            {
+              "id": "reporting-output__compliance-reports",
+              "name": "Compliance Reports",
+              "shape": null,
+              "kind": "policy"
+            },
+            {
+              "id": "reporting-output__reduction-recommendations",
+              "name": "Reduction Recommendations",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "emissions-sources__scope-1-direct-emissions",
+          "to": "nstarx-platform__data-collector",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "emissions-sources__scope-2-energy-indirect",
+          "to": "nstarx-platform__data-collector",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "emissions-sources__scope-3-supply-chain",
+          "to": "nstarx-platform__data-collector",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__data-collector",
+          "to": "nstarx-platform__ghg-calculator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__ghg-calculator",
+          "to": "nstarx-platform__carbon-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__carbon-agent",
+          "to": "nstarx-platform__report-generator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__report-generator",
+          "to": "reporting-output__emissions-dashboard",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__report-generator",
+          "to": "reporting-output__compliance-reports",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__carbon-agent",
+          "to": "reporting-output__reduction-recommendations",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "government-public-sector-25",
+    "industry": "Government & Public Sector",
+    "icon": null,
+    "title": "Citizen Services Portal",
+    "challenge": "Citizens navigate 200+ government services across multiple agencies. Average service completion takes 3+ weeks with 40% requiring in-person visits.",
+    "solution": "Deploy unified RAG-powered portal that understands citizen needs, guides through service requirements, and pre-fills forms. Agentic workflows coordinate across agencies for seamless service delivery.",
+    "capabilities": [
+      "RAG Chat",
+      "Agentic AI",
+      "Converge App",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "70% reduction in service completion time",
+      "85% digital service adoption",
+      "90% citizen satisfaction rate",
+      "$100M annual operational savings"
+    ],
+    "tags": [
+      "rag",
+      "agentic"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__citizen-input",
+          "name": "Citizen Input",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "citizen-input__service-request",
+              "name": "Service Request",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "citizen-input__supporting-documents",
+              "name": "Supporting Documents",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#e0e7ff",
+          "nodes": [
+            {
+              "id": "nstarx-platform__services-rag",
+              "name": "Services RAG",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__service-agent",
+              "name": "Service Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__form-pre-fill",
+              "name": "Form Pre-fill",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__agency-coordinator",
+              "name": "Agency Coordinator",
+              "shape": null,
+              "kind": "control"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__government-agencies",
+          "name": "Government Agencies",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "government-agencies__agency-1",
+              "name": "Agency 1",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "government-agencies__agency-2",
+              "name": "Agency 2",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "government-agencies__agency-n",
+              "name": "Agency N",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "citizen-input__service-request",
+          "to": "nstarx-platform__services-rag",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "citizen-input__supporting-documents",
+          "to": "nstarx-platform__form-pre-fill",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__services-rag",
+          "to": "nstarx-platform__service-agent",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__service-agent",
+          "to": "nstarx-platform__agency-coordinator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__agency-coordinator",
+          "to": "government-agencies__agency-1",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__agency-coordinator",
+          "to": "government-agencies__agency-2",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__agency-coordinator",
+          "to": "government-agencies__agency-n",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "government-public-sector-26",
+    "industry": "Government & Public Sector",
+    "icon": null,
+    "title": "Cross-Agency Fraud Detection",
+    "challenge": "Benefits fraud costs governments $100B+ annually. Siloed agency data prevents detection of cross-program fraud schemes.",
+    "solution": "Deploy federated learning across agencies to detect fraud patterns without sharing sensitive citizen data. Each agency maintains data sovereignty while contributing to collective fraud intelligence.",
+    "capabilities": [
+      "Federated Learning",
+      "Differential Privacy",
+      "AI Workflows",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "60% improvement in fraud detection",
+      "$5B annual fraud prevented",
+      "100% privacy compliance",
+      "40% reduction in false accusations"
+    ],
+    "tags": [
+      "federated",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__government-agencies",
+          "name": "Government Agencies",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "government-agencies__tax-agency",
+              "name": "Tax Agency",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "government-agencies__benefits-agency",
+              "name": "Benefits Agency",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "government-agencies__health-agency",
+              "name": "Health Agency",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#e0e7ff",
+          "nodes": [
+            {
+              "id": "nstarx-platform__federated-learning",
+              "name": "Federated Learning",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__differential-privacy",
+              "name": "Differential Privacy",
+              "shape": null,
+              "kind": "policy"
+            },
+            {
+              "id": "nstarx-platform__global-model",
+              "name": "Global Model",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__fraud-detector",
+              "name": "Fraud Detector",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__detection-output",
+          "name": "Detection Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "detection-output__fraud-alerts",
+              "name": "Fraud Alerts",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "detection-output__risk-scores",
+              "name": "Risk Scores",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "detection-output__investigation-reports",
+              "name": "Investigation Reports",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "government-agencies__tax-agency",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "government-agencies__benefits-agency",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "government-agencies__health-agency",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__federated-learning",
+          "to": "nstarx-platform__differential-privacy",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__differential-privacy",
+          "to": "nstarx-platform__global-model",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__global-model",
+          "to": "nstarx-platform__fraud-detector",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__fraud-detector",
+          "to": "detection-output__fraud-alerts",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__fraud-detector",
+          "to": "detection-output__risk-scores",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__fraud-detector",
+          "to": "detection-output__investigation-reports",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "government-public-sector-27",
+    "industry": "Government & Public Sector",
+    "icon": null,
+    "title": "Policy Impact Analysis",
+    "challenge": "Policy makers lack tools to simulate impacts of proposed legislation. Unintended consequences cost $50B+ annually in policy corrections.",
+    "solution": "Deploy LLM-powered policy analysis that simulates economic, social, and environmental impacts. AI workflows integrate multiple data sources to model policy scenarios and stakeholder effects.",
+    "capabilities": [
+      "LLM Management",
+      "AI Workflows",
+      "Spark Jobs",
+      "SQL Lab"
+    ],
+    "outcomes": [
+      "50% better policy outcome prediction",
+      "70% faster impact assessment",
+      "$10B avoided in policy corrections",
+      "Increased legislative transparency"
+    ],
+    "tags": [
+      "llm",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__policy-input",
+          "name": "Policy Input",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "policy-input__policy-draft",
+              "name": "Policy Draft",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "policy-input__historical-data",
+              "name": "Historical Data",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "policy-input__economic-models",
+              "name": "Economic Models",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#e0e7ff",
+          "nodes": [
+            {
+              "id": "nstarx-platform__llm-analysis",
+              "name": "LLM Analysis",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__scenario-simulator",
+              "name": "Scenario Simulator",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__spark-processing",
+              "name": "Spark Processing",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__impact-scorer",
+              "name": "Impact Scorer",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__analysis-output",
+          "name": "Analysis Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "analysis-output__impact-assessment",
+              "name": "Impact Assessment",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "analysis-output__stakeholder-effects",
+              "name": "Stakeholder Effects",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "analysis-output__policy-recommendations",
+              "name": "Policy Recommendations",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "policy-input__policy-draft",
+          "to": "nstarx-platform__llm-analysis",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "policy-input__historical-data",
+          "to": "nstarx-platform__spark-processing",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "policy-input__economic-models",
+          "to": "nstarx-platform__scenario-simulator",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__llm-analysis",
+          "to": "nstarx-platform__scenario-simulator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__spark-processing",
+          "to": "nstarx-platform__scenario-simulator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__scenario-simulator",
+          "to": "nstarx-platform__impact-scorer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__impact-scorer",
+          "to": "analysis-output__impact-assessment",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__impact-scorer",
+          "to": "analysis-output__stakeholder-effects",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__impact-scorer",
+          "to": "analysis-output__policy-recommendations",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "government-public-sector-28",
+    "industry": "Government & Public Sector",
+    "icon": null,
+    "title": "Emergency Response Coordination",
+    "challenge": "Emergency response involves 50+ agencies with different systems. Coordination delays cost lives and increase disaster recovery costs by 30%.",
+    "solution": "Deploy multi-agent AI system that coordinates emergency response across agencies. RAG integration provides instant access to response protocols and resource availability.",
+    "capabilities": [
+      "Agentic AI",
+      "RAG Chat",
+      "AI Workflows",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "40% faster emergency response",
+      "25% reduction in casualties",
+      "$2B reduced disaster costs",
+      "95% resource utilization"
+    ],
+    "tags": [
+      "agentic",
+      "rag"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__emergency-event",
+          "name": "Emergency Event",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "emergency-event__incident-report",
+              "name": "Incident Report",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "emergency-event__location-data",
+              "name": "Location Data",
+              "shape": null,
+              "kind": "datastore"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#e0e7ff",
+          "nodes": [
+            {
+              "id": "nstarx-platform__response-agent",
+              "name": "Response Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__protocol-rag",
+              "name": "Protocol RAG",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__agency-coordinator",
+              "name": "Agency Coordinator",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "nstarx-platform__resource-optimizer",
+              "name": "Resource Optimizer",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__response-teams",
+          "name": "Response Teams",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "response-teams__fire-department",
+              "name": "Fire Department",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "response-teams__medical-services",
+              "name": "Medical Services",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "response-teams__police",
+              "name": "Police",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "response-teams__utilities",
+              "name": "Utilities",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "emergency-event__incident-report",
+          "to": "nstarx-platform__response-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "emergency-event__location-data",
+          "to": "nstarx-platform__response-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__response-agent",
+          "to": "nstarx-platform__protocol-rag",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__protocol-rag",
+          "to": "nstarx-platform__agency-coordinator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__agency-coordinator",
+          "to": "nstarx-platform__resource-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__resource-optimizer",
+          "to": "response-teams__fire-department",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__resource-optimizer",
+          "to": "response-teams__medical-services",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__resource-optimizer",
+          "to": "response-teams__police",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__resource-optimizer",
+          "to": "response-teams__utilities",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "logistics-transportation-29",
+    "industry": "Logistics & Transportation",
+    "icon": null,
+    "title": "Dynamic Route Optimization",
+    "challenge": "Fleet operators manage 10K+ vehicles with dynamic delivery requirements. Static routing wastes 20% of fuel and fails to adapt to real-time conditions.",
+    "solution": "Deploy agentic AI that continuously optimizes routes based on traffic, weather, delivery windows, and vehicle capacity. AI agents coordinate fleet-wide to minimize total miles and maximize on-time delivery.",
+    "capabilities": [
+      "Agentic AI",
+      "AI Workflows",
+      "Inference Model",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "25% reduction in fuel costs",
+      "99% on-time delivery rate",
+      "30% more deliveries per route",
+      "$40M annual transportation savings"
+    ],
+    "tags": [
+      "agentic",
+      "workflows"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__real-time-input",
+          "name": "Real-time Input",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "real-time-input__traffic-data",
+              "name": "Traffic Data",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "real-time-input__weather-conditions",
+              "name": "Weather Conditions",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "real-time-input__delivery-orders",
+              "name": "Delivery Orders",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ccfbf1",
+          "nodes": [
+            {
+              "id": "nstarx-platform__route-agent",
+              "name": "Route Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__route-optimizer",
+              "name": "Route Optimizer",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__fleet-coordinator",
+              "name": "Fleet Coordinator",
+              "shape": null,
+              "kind": "control"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__fleet-output",
+          "name": "Fleet Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "fleet-output__optimized-routes",
+              "name": "Optimized Routes",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "fleet-output__driver-dispatch",
+              "name": "Driver Dispatch",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "fleet-output__live-tracking",
+              "name": "Live Tracking",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "real-time-input__traffic-data",
+          "to": "nstarx-platform__route-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "real-time-input__weather-conditions",
+          "to": "nstarx-platform__route-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "real-time-input__delivery-orders",
+          "to": "nstarx-platform__route-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__route-agent",
+          "to": "nstarx-platform__route-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__route-optimizer",
+          "to": "nstarx-platform__fleet-coordinator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__fleet-coordinator",
+          "to": "fleet-output__optimized-routes",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__fleet-coordinator",
+          "to": "fleet-output__driver-dispatch",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__fleet-coordinator",
+          "to": "fleet-output__live-tracking",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "logistics-transportation-30",
+    "industry": "Logistics & Transportation",
+    "icon": null,
+    "title": "Warehouse Automation",
+    "challenge": "Distribution centers process 100K+ items daily with 5% picking errors. Labor costs represent 65% of warehouse expenses with 100% seasonal variation.",
+    "solution": "Implement AI-orchestrated warehouse operations with federated learning across facilities. Models optimize pick paths, predict demand, and coordinate human-robot collaboration.",
+    "capabilities": [
+      "Federated Learning",
+      "AI Workflows",
+      "Inference Model",
+      "Monitoring"
+    ],
+    "outcomes": [
+      "99.9% picking accuracy",
+      "50% increase in throughput",
+      "35% reduction in labor costs",
+      "$15M annual operational savings"
+    ],
+    "tags": [
+      "federated",
+      "llm"
+    ],
+    "topology": {
+      "direction": "down",
+      "groups": [
+        {
+          "id": "__group__warehouse-facilities",
+          "name": "Warehouse Facilities",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "warehouse-facilities__warehouse-1",
+              "name": "Warehouse 1",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "warehouse-facilities__warehouse-2",
+              "name": "Warehouse 2",
+              "shape": null,
+              "kind": "datastore"
+            },
+            {
+              "id": "warehouse-facilities__warehouse-n",
+              "name": "Warehouse N",
+              "shape": null,
+              "kind": "datastore"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ccfbf1",
+          "nodes": [
+            {
+              "id": "nstarx-platform__federated-learning",
+              "name": "Federated Learning",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__pick-optimizer",
+              "name": "Pick Optimizer",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__robot-coordinator",
+              "name": "Robot Coordinator",
+              "shape": null,
+              "kind": "control"
+            },
+            {
+              "id": "nstarx-platform__demand-predictor",
+              "name": "Demand Predictor",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__operations-output",
+          "name": "Operations Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "operations-output__pick-paths",
+              "name": "Pick Paths",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "operations-output__resource-allocation",
+              "name": "Resource Allocation",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "operations-output__inventory-slotting",
+              "name": "Inventory Slotting",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "warehouse-facilities__warehouse-1",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "warehouse-facilities__warehouse-2",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "warehouse-facilities__warehouse-n",
+          "to": "nstarx-platform__federated-learning",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__federated-learning",
+          "to": "nstarx-platform__pick-optimizer",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__federated-learning",
+          "to": "nstarx-platform__demand-predictor",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__pick-optimizer",
+          "to": "nstarx-platform__robot-coordinator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__robot-coordinator",
+          "to": "operations-output__pick-paths",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__robot-coordinator",
+          "to": "operations-output__resource-allocation",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__demand-predictor",
+          "to": "operations-output__inventory-slotting",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "logistics-transportation-31",
+    "industry": "Logistics & Transportation",
+    "icon": null,
+    "title": "Supply Chain Visibility",
+    "challenge": "Global supply chains span 1000+ suppliers across 50+ countries. Lack of visibility causes $500B annually in supply disruptions and excess inventory.",
+    "solution": "Deploy agentic AI that monitors supply chain events, predicts disruptions, and recommends mitigation actions. RAG integration enables natural language queries across supply chain data.",
+    "capabilities": [
+      "Agentic AI",
+      "RAG Chat",
+      "AI Workflows",
+      "Integration Hub"
+    ],
+    "outcomes": [
+      "100% end-to-end visibility",
+      "70% faster disruption response",
+      "40% reduction in safety stock",
+      "$80M annual inventory savings"
+    ],
+    "tags": [
+      "rag",
+      "agentic"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__data-sources",
+          "name": "Data Sources",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "data-sources__supplier-data",
+              "name": "Supplier Data",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__shipping-data",
+              "name": "Shipping Data",
+              "shape": "cylinder",
+              "kind": "datastore"
+            },
+            {
+              "id": "data-sources__erp-systems",
+              "name": "ERP Systems",
+              "shape": "cylinder",
+              "kind": "datastore"
+            }
+          ],
+          "role": "data-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ccfbf1",
+          "nodes": [
+            {
+              "id": "nstarx-platform__supply-chain-agent",
+              "name": "Supply Chain Agent",
+              "shape": null,
+              "kind": "agent"
+            },
+            {
+              "id": "nstarx-platform__supply-chain-rag",
+              "name": "Supply Chain RAG",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__disruption-predictor",
+              "name": "Disruption Predictor",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__control-tower",
+              "name": "Control Tower",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__visibility-output",
+          "name": "Visibility Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "visibility-output__end-to-end-visibility",
+              "name": "End-to-End Visibility",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "visibility-output__disruption-alerts",
+              "name": "Disruption Alerts",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "visibility-output__mitigation-plans",
+              "name": "Mitigation Plans",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "data-sources__supplier-data",
+          "to": "nstarx-platform__supply-chain-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__shipping-data",
+          "to": "nstarx-platform__supply-chain-agent",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "data-sources__erp-systems",
+          "to": "nstarx-platform__supply-chain-rag",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__supply-chain-agent",
+          "to": "nstarx-platform__disruption-predictor",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__supply-chain-rag",
+          "to": "nstarx-platform__control-tower",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__disruption-predictor",
+          "to": "nstarx-platform__control-tower",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__control-tower",
+          "to": "visibility-output__end-to-end-visibility",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__control-tower",
+          "to": "visibility-output__disruption-alerts",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__control-tower",
+          "to": "visibility-output__mitigation-plans",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "logistics-transportation-32",
+    "industry": "Logistics & Transportation",
+    "icon": null,
+    "title": "Customs & Compliance Automation",
+    "challenge": "International shipments require 30+ documents per transaction. Manual compliance checking delays 15% of shipments and incurs $1M+ in annual penalties.",
+    "solution": "Implement AI workflows for automated document processing, tariff classification, and compliance checking. LLMs extract information from unstructured documents and validate against regulations.",
+    "capabilities": [
+      "AI Workflows",
+      "LLM Management",
+      "Document Intelligence",
+      "Converge App"
+    ],
+    "outcomes": [
+      "99.5% document accuracy",
+      "80% reduction in clearance time",
+      "Zero compliance penalties",
+      "$5M annual processing savings"
+    ],
+    "tags": [
+      "workflows",
+      "llm"
+    ],
+    "topology": {
+      "direction": "right",
+      "groups": [
+        {
+          "id": "__group__trade-documents",
+          "name": "Trade Documents",
+          "fill": "#f1f5f9",
+          "nodes": [
+            {
+              "id": "trade-documents__commercial-invoices",
+              "name": "Commercial Invoices",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "trade-documents__bills-of-lading",
+              "name": "Bills of Lading",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "trade-documents__origin-certificates",
+              "name": "Origin Certificates",
+              "shape": null,
+              "kind": "component"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__nstarx-platform",
+          "name": "NStarX Platform",
+          "fill": "#ccfbf1",
+          "nodes": [
+            {
+              "id": "nstarx-platform__document-ocr",
+              "name": "Document OCR",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__llm-extractor",
+              "name": "LLM Extractor",
+              "shape": null,
+              "kind": "model"
+            },
+            {
+              "id": "nstarx-platform__tariff-classifier",
+              "name": "Tariff Classifier",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "nstarx-platform__compliance-validator",
+              "name": "Compliance Validator",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "workload-namespace"
+        },
+        {
+          "id": "__group__customs-output",
+          "name": "Customs Output",
+          "fill": "#dcfce7",
+          "nodes": [
+            {
+              "id": "customs-output__customs-declaration",
+              "name": "Customs Declaration",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "customs-output__clearance-status",
+              "name": "Clearance Status",
+              "shape": null,
+              "kind": "component"
+            },
+            {
+              "id": "customs-output__audit-trail",
+              "name": "Audit Trail",
+              "shape": null,
+              "kind": "policy"
+            }
+          ],
+          "role": "workload-namespace"
+        }
+      ],
+      "edges": [
+        {
+          "from": "trade-documents__commercial-invoices",
+          "to": "nstarx-platform__document-ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "trade-documents__bills-of-lading",
+          "to": "nstarx-platform__document-ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "trade-documents__origin-certificates",
+          "to": "nstarx-platform__document-ocr",
+          "label": "",
+          "style": {
+            "style.animated": "true"
+          }
+        },
+        {
+          "from": "nstarx-platform__document-ocr",
+          "to": "nstarx-platform__llm-extractor",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__llm-extractor",
+          "to": "nstarx-platform__tariff-classifier",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__tariff-classifier",
+          "to": "nstarx-platform__compliance-validator",
+          "label": "",
+          "style": {}
+        },
+        {
+          "from": "nstarx-platform__compliance-validator",
+          "to": "customs-output__customs-declaration",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__compliance-validator",
+          "to": "customs-output__clearance-status",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        },
+        {
+          "from": "nstarx-platform__compliance-validator",
+          "to": "customs-output__audit-trail",
+          "label": "",
+          "style": {
+            "style.stroke-dash": "3"
+          }
+        }
+      ]
+    }
+  }
+]

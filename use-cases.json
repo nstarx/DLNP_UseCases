@@ -15,8 +15,7 @@
     "outcomes": [
       "25% improvement in early detection accuracy",
       "100% HIPAA compliance maintained",
-      "15+ hospitals collaborating securely",
-      "$12M annual savings in preventable treatments"
+      "15+ hospitals collaborating securely"
     ],
     "tags": [
       "federated",
@@ -595,7 +594,6 @@
     "outcomes": [
       "95% coding accuracy (up from 80%)",
       "60% faster claim processing",
-      "$4.5M annual revenue recovery",
       "85% reduction in claim denials"
     ],
     "tags": [
@@ -783,7 +781,6 @@
     ],
     "outcomes": [
       "30% reduction in drug discovery timeline",
-      "$200M savings per successful drug",
       "5x larger training dataset without data sharing",
       "IP protection maintained across competitors"
     ],
@@ -1085,7 +1082,6 @@
     "outcomes": [
       "45% improvement in fraud detection rate",
       "60% reduction in false positives",
-      "$180M annual fraud losses prevented",
       "Sub-100ms detection latency"
     ],
     "tags": [
@@ -1426,7 +1422,6 @@
     "outcomes": [
       "3x increase in client touchpoints",
       "25% improvement in portfolio performance",
-      "$50M additional AUM per advisor",
       "95% compliance accuracy"
     ],
     "tags": [
@@ -1800,7 +1795,6 @@
     "outcomes": [
       "Zero regulatory fines in 18 months",
       "70% faster compliance assessments",
-      "$8M annual savings in compliance costs",
       "100% regulatory change coverage"
     ],
     "tags": [
@@ -1981,7 +1975,6 @@
     "outcomes": [
       "35% improvement in network efficiency",
       "50% reduction in congestion events",
-      "$45M annual bandwidth cost savings",
       "99.99% network uptime achieved"
     ],
     "tags": [
@@ -2174,7 +2167,6 @@
     "outcomes": [
       "65% of inquiries resolved by AI",
       "40% reduction in call handling time",
-      "$120M annual customer service savings",
       "NPS score improved by 25 points"
     ],
     "tags": [
@@ -2376,7 +2368,6 @@
     ],
     "outcomes": [
       "30% reduction in churn rate",
-      "$450M annual revenue retained",
       "85% prediction accuracy",
       "3x ROI on retention campaigns"
     ],
@@ -2558,7 +2549,6 @@
     "outcomes": [
       "99.99% SLA compliance across slices",
       "40% improvement in resource utilization",
-      "$80M new enterprise revenue",
       "60% faster slice provisioning"
     ],
     "tags": [
@@ -2739,8 +2729,7 @@
     "outcomes": [
       "99.7% defect detection rate",
       "80% reduction in inspection costs",
-      "50ms inspection time per unit",
-      "$15M annual savings from quality improvements"
+      "50ms inspection time per unit"
     ],
     "tags": [
       "workflows",
@@ -2906,8 +2895,7 @@
     "outcomes": [
       "45% reduction in unplanned downtime",
       "30% reduction in maintenance costs",
-      "92% prediction accuracy for failures",
-      "$8M annual operational savings"
+      "92% prediction accuracy for failures"
     ],
     "tags": [
       "federated",
@@ -3087,8 +3075,7 @@
     "outcomes": [
       "70% reduction in issue resolution time",
       "40% fewer engineering escalations",
-      "95% operator satisfaction",
-      "$3M annual productivity gains"
+      "95% operator satisfaction"
     ],
     "tags": [
       "agentic",
@@ -3268,8 +3255,7 @@
     "outcomes": [
       "35% improvement in forecast accuracy",
       "25% reduction in inventory costs",
-      "50% fewer stockout events",
-      "$18M annual working capital freed"
+      "50% fewer stockout events"
     ],
     "tags": [
       "workflows",
@@ -3447,8 +3433,7 @@
     "outcomes": [
       "40% increase in conversion rate",
       "25% higher average order value",
-      "60% reduction in cart abandonment",
-      "$35M additional annual revenue"
+      "60% reduction in cart abandonment"
     ],
     "tags": [
       "agentic",
@@ -3612,8 +3597,7 @@
     "outcomes": [
       "8% margin improvement",
       "15% revenue increase from pricing",
-      "Real-time competitive response",
-      "$28M annual profit improvement"
+      "Real-time competitive response"
     ],
     "tags": [
       "workflows",
@@ -3793,8 +3777,7 @@
     "outcomes": [
       "95% inventory accuracy achieved",
       "40% reduction in out-of-stocks",
-      "20% reduction in overstock markdowns",
-      "$12M annual inventory savings"
+      "20% reduction in overstock markdowns"
     ],
     "tags": [
       "federated",
@@ -3974,8 +3957,7 @@
     "outcomes": [
       "90% reduction in content creation time",
       "30% improvement in SEO rankings",
-      "15% increase in organic traffic",
-      "$4M annual content cost savings"
+      "15% increase in organic traffic"
     ],
     "tags": [
       "rag",
@@ -4154,7 +4136,6 @@
     ],
     "outcomes": [
       "20% reduction in peak demand",
-      "$500M deferred infrastructure spend",
       "95% renewable utilization rate",
       "99.99% grid reliability achieved"
     ],
@@ -4336,7 +4317,6 @@
     "outcomes": [
       "40% improvement in forecast accuracy",
       "50% reduction in curtailment",
-      "$200M annual grid cost savings",
       "25% more renewable integration"
     ],
     "tags": [
@@ -4505,8 +4485,7 @@
     "outcomes": [
       "92% first-time fix rate",
       "30% reduction in truck rolls",
-      "50% faster diagnosis time",
-      "$25M annual field service savings"
+      "50% faster diagnosis time"
     ],
     "tags": [
       "rag",
@@ -4674,8 +4653,7 @@
     "outcomes": [
       "100% emissions visibility",
       "80% reduction in audit time",
-      "15% emissions reduction identified",
-      "$50M carbon credit optimization"
+      "15% emissions reduction identified"
     ],
     "tags": [
       "workflows",
@@ -4855,8 +4833,7 @@
     "outcomes": [
       "70% reduction in service completion time",
       "85% digital service adoption",
-      "90% citizen satisfaction rate",
-      "$100M annual operational savings"
+      "90% citizen satisfaction rate"
     ],
     "tags": [
       "rag",
@@ -5015,7 +4992,6 @@
     ],
     "outcomes": [
       "60% improvement in fraud detection",
-      "$5B annual fraud prevented",
       "100% privacy compliance",
       "40% reduction in false accusations"
     ],
@@ -5197,7 +5173,6 @@
     "outcomes": [
       "50% better policy outcome prediction",
       "70% faster impact assessment",
-      "$10B avoided in policy corrections",
       "Increased legislative transparency"
     ],
     "tags": [
@@ -5378,7 +5353,6 @@
     "outcomes": [
       "40% faster emergency response",
       "25% reduction in casualties",
-      "$2B reduced disaster costs",
       "95% resource utilization"
     ],
     "tags": [
@@ -5559,8 +5533,7 @@
     "outcomes": [
       "25% reduction in fuel costs",
       "99% on-time delivery rate",
-      "30% more deliveries per route",
-      "$40M annual transportation savings"
+      "30% more deliveries per route"
     ],
     "tags": [
       "agentic",
@@ -5728,8 +5701,7 @@
     "outcomes": [
       "99.9% picking accuracy",
       "50% increase in throughput",
-      "35% reduction in labor costs",
-      "$15M annual operational savings"
+      "35% reduction in labor costs"
     ],
     "tags": [
       "federated",
@@ -5909,8 +5881,7 @@
     "outcomes": [
       "100% end-to-end visibility",
       "70% faster disruption response",
-      "40% reduction in safety stock",
-      "$80M annual inventory savings"
+      "40% reduction in safety stock"
     ],
     "tags": [
       "rag",
@@ -6090,8 +6061,7 @@
     "outcomes": [
       "99.5% document accuracy",
       "80% reduction in clearance time",
-      "Zero compliance penalties",
-      "$5M annual processing savings"
+      "Zero compliance penalties"
     ],
     "tags": [
       "workflows",
